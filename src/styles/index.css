@@ -1,0 +1,134 @@
+@import './fonts.css';
+@import './tailwind.css';
+@import './theme.css';
+
+/* ─── BUTTON WIPE EFFECT ─── */
+.btn-wipe {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-wipe::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--wipe-bg, #1a1c18);
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-wipe:hover::before {
+  transform: scaleX(1);
+}
+
+.btn-wipe-primary {
+  --wipe-bg: #1a1c18;
+}
+
+.btn-wipe-primary:hover {
+  color: #a5cd38 !important;
+}
+
+.btn-wipe-dark {
+  --wipe-bg: #a5cd38;
+}
+
+.btn-wipe-dark:hover {
+  color: #1a1c18 !important;
+}
+
+.btn-wipe-outline {
+  --wipe-bg: #a5cd38;
+}
+
+.btn-wipe-outline:hover {
+  color: #1a1c18 !important;
+  border-color: #a5cd38 !important;
+}
+
+/* ─── INFINITE MARQUEE ANIMATION ─── */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Homepage mosaic rhythm, extended into uninterrupted gallery cycles. */
+.gallery-mosaic {
+  --gallery-period: 34;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-rows: calc(var(--spacing) * 5);
+  gap: calc(var(--spacing) * 2);
+}
+
+.gallery-mosaic-tile {
+  grid-column: var(--tile-column);
+  grid-row: calc(var(--gallery-cycle) * var(--gallery-period) + var(--tile-start)) /
+    calc(var(--gallery-cycle) * var(--gallery-period) + var(--tile-end));
+}
+
+.gallery-mosaic-t1  { --tile-column: 1 / 4;   --tile-start: 3;  --tile-end: 11; }
+.gallery-mosaic-t2  { --tile-column: 1 / 4;   --tile-start: 12; --tile-end: 22; }
+.gallery-mosaic-t3  { --tile-column: 1 / 3;   --tile-start: 23; --tile-end: 35; }
+.gallery-mosaic-t4  { --tile-column: 4 / 8;   --tile-start: 1;  --tile-end: 13; }
+.gallery-mosaic-t5  { --tile-column: 4 / 8;   --tile-start: 14; --tile-end: 20; }
+.gallery-mosaic-t6  { --tile-column: 4 / 7;   --tile-start: 21; --tile-end: 35; }
+.gallery-mosaic-t7  { --tile-column: 8 / 11;  --tile-start: 4;  --tile-end: 14; }
+.gallery-mosaic-t8  { --tile-column: 8 / 11;  --tile-start: 15; --tile-end: 35; }
+.gallery-mosaic-t9  { --tile-column: 11 / 13; --tile-start: 2;  --tile-end: 11; }
+.gallery-mosaic-t10 { --tile-column: 11 / 13; --tile-start: 12; --tile-end: 35; }
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .gallery-mosaic {
+    --gallery-period: 30;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+  .gallery-mosaic-t1  { --tile-column: 1 / 4; --tile-start: 3;  --tile-end: 10; }
+  .gallery-mosaic-t2  { --tile-column: 1 / 4; --tile-start: 11; --tile-end: 20; }
+  .gallery-mosaic-t3  { --tile-column: 1 / 3; --tile-start: 21; --tile-end: 31; }
+  .gallery-mosaic-t4  { --tile-column: 4 / 7; --tile-start: 1;  --tile-end: 12; }
+  .gallery-mosaic-t5  { --tile-column: 4 / 7; --tile-start: 13; --tile-end: 19; }
+  .gallery-mosaic-t6  { --tile-column: 4 / 7; --tile-start: 20; --tile-end: 31; }
+  .gallery-mosaic-t7  { --tile-column: 7 / 9; --tile-start: 4;  --tile-end: 12; }
+  .gallery-mosaic-t8  { --tile-column: 7 / 9; --tile-start: 13; --tile-end: 23; }
+  .gallery-mosaic-t9  { --tile-column: 7 / 9; --tile-start: 24; --tile-end: 27; }
+  .gallery-mosaic-t10 { --tile-column: 7 / 9; --tile-start: 28; --tile-end: 31; }
+}
+
+@media (max-width: 767px) {
+  .gallery-mosaic {
+    --gallery-period: 51;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .gallery-mosaic-t1  { --tile-column: 1 / 2; --tile-start: 1;  --tile-end: 9; }
+  .gallery-mosaic-t2  { --tile-column: 2 / 3; --tile-start: 3;  --tile-end: 13; }
+  .gallery-mosaic-t3  { --tile-column: 1 / 2; --tile-start: 10; --tile-end: 17; }
+  .gallery-mosaic-t4  { --tile-column: 2 / 3; --tile-start: 14; --tile-end: 25; }
+  .gallery-mosaic-t5  { --tile-column: 1 / 2; --tile-start: 18; --tile-end: 24; }
+  .gallery-mosaic-t6  { --tile-column: 1 / 2; --tile-start: 25; --tile-end: 36; }
+  .gallery-mosaic-t7  { --tile-column: 2 / 3; --tile-start: 26; --tile-end: 34; }
+  .gallery-mosaic-t8  { --tile-column: 2 / 3; --tile-start: 35; --tile-end: 46; }
+  .gallery-mosaic-t9  { --tile-column: 1 / 2; --tile-start: 37; --tile-end: 43; }
+  .gallery-mosaic-t10 { --tile-column: 1 / 2; --tile-start: 44; --tile-end: 52; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-mosaic-tile img { transition: none; transform: none; }
+}
