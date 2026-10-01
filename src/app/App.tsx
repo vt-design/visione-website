@@ -21,9 +21,9 @@ import { Avatar, AvatarImage, AvatarFallback } from "./components/ui/avatar";
 // ─── DATA & CONSTANTS ────────────────────────────────────────────────────────
 
 const HERO_IMAGES = [
-  "https://images.unsplash.com/photo-1551520692-7cdc7dc041b1?w=1920&h=1080&fit=crop&auto=format",
-  "https://images.unsplash.com/photo-1608126841830-53832c4b326f?w=1920&h=1080&fit=crop&auto=format",
-  "https://images.unsplash.com/photo-1779614800682-0c0cea8e0cd5?w=1920&h=1080&fit=crop&auto=format",
+  "src/assets/images/imagen-hero-1.webp",
+  "src/assets/images/imagen-hero-2.webp",
+  "src/assets/images/imagen-hero-3.webp",
 ];
 
 const CLIENT_LOGOS = [
@@ -43,7 +43,7 @@ const SERVICE_CARDS = [
     title: "FABRICACIÓN DE CARTELES",
     desc: "Desde letras corpóreas hasta monumentales de gran formato. Aluminio, acero, acrílico y tecnología LED para máxima visibilidad corporativa.",
     tags: "METAL · ACRÍLICO · DIMENSIONAL · LED",
-    photo: "https://images.unsplash.com/photo-1780385187604-4663a1d7c6e6?w=700&h=950&fit=crop&auto=format",
+    photo: "src/assets/images/imagen-servicio-carteleria.webp",
     page: "carteleria",
   },
   {
@@ -51,7 +51,7 @@ const SERVICE_CARDS = [
     title: "REVESTIMIENTO DE METAL",
     desc: "Paneles de aluminio compuesto (ACM) y fachadas ventiladas. Soluciones estructurales de vanguardia con alta resistencia al clima.",
     tags: "FACHADAS · ACM · ESTRUCTURA · RESISTENTE",
-    photo: "https://images.unsplash.com/photo-1608126841830-53832c4b326f?w=700&h=950&fit=crop&auto=format",
+    photo: "src/assets/images/imagen-servicio-revestimiento.webp",
     page: "revestimientos",
   },
   {
@@ -59,7 +59,7 @@ const SERVICE_CARDS = [
     title: "GRÁFICA CORPORATIVA",
     desc: "Impresión de alta resolución, vinilos de seguridad, microperforados y decoración de vidrieras para puntos de venta e industrias.",
     tags: "VINILOS · MICROS · MARCA · VEHÍCULOS",
-    photo: "https://images.unsplash.com/photo-1780565081532-0f68d721e44a?w=700&h=950&fit=crop&auto=format",
+    photo: "src/assets/images/imagen-servicio-grafica.webp",
     page: "grafica",
   },
 ];
@@ -120,27 +120,27 @@ const MOSAIC_TILES = [
 const REVIEWS = [
   {
     quote:
-      "El trabajo de Visione transformó por completo la presencia de nuestra sede corporativa. La calidad del aluminio y la luz LED son impecables.",
-    name: "Alejandro Méndez",
-    company: "Grupo Meridian S.A.",
-    role: "Director de Infraestructura",
-    photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=520&fit=crop&crop=faces&auto=format",
+      "Exclente trabajo!! Hemos hecho trabajos con Visione desde el año 2009, siempre excelente y este ultimo recien instalado muestra una empresa con amplia experiencia y profesionalismo. Lo mejor, no solo cumplen los plazos sino que ademas los mejoran. Gracias Cristian por tu impecable atención y trabajo.",
+    name: "Sebastián",
+    company: "Todo Tartas",
+    role: "",
+    photo: "src/assets/images/imagen-review-1.webp",
   },
   {
     quote:
-      "Trabajamos con ellos para toda la cartelería de nuestra red de locales. Puntualidad en la entrega y terminaciones que destacan sobre la competencia.",
-    name: "Valentina Torres",
-    company: "Franquicias Nordeste",
-    role: "Gerente de Expansión",
-    photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=520&fit=crop&crop=faces&auto=format",
+      "Excelente servicio y calidad. Hace años que realizamos trabajos con Visione y cumplen con todo en tiempo y forma. De primera la atención de Cristian y de Ariel, lo recomendamos.",
+    name: "Martín",
+    company: "Hus Realty",
+    role: "",
+    photo: "src/assets/images/imagen-review-2.webp",
   },
   {
     quote:
-      "Desde el render preliminar hasta el montaje final en altura, el profesionalismo fue total. El revestimiento quedó exactamente como lo diseñamos.",
-    name: "Carlos Ibáñez",
-    company: "Desarrolladora Palermo",
-    role: "Socio Gerente",
-    photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=520&fit=crop&crop=faces&auto=format",
+      "Excepcional servicio como siempre. Completamente agradecidos por el trabajo realizado en nuestra nueva oficina. ¡Muchas gracias Visione Publicidad!",
+    name: "Tomas Toler",
+    company: "Salaya Romera",
+    role: "",
+    photo: "src/assets/images/imagen-review-3.webp",
   },
 ];
 

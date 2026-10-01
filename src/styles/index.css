@@ -132,3 +132,42 @@
 @media (prefers-reduced-motion: reduce) {
   .gallery-mosaic-tile img { transition: none; transform: none; }
 }
+
+/* External platform brand colors are intentionally distinct from Visione. */
+:root {
+  --brand-instagram-gold: #f58529;
+  --brand-instagram-pink: #c13584;
+  --brand-instagram-purple: #833ab4;
+  --brand-facebook: #0866ff;
+  --brand-wetransfer: #409fff;
+}
+
+.contact-platform {
+  --wipe-bg: rgb(0 0 0 / 14%);
+  background: var(--platform-background);
+  color: var(--platform-foreground);
+}
+
+.contact-platform:hover,
+.contact-platform:focus-visible {
+  background: var(--platform-background);
+  color: var(--platform-foreground);
+}
+
+.contact-platform-instagram {
+  --platform-background: linear-gradient(115deg,
+    var(--brand-instagram-gold) -45%,
+    var(--brand-instagram-pink) 35%,
+    var(--brand-instagram-purple) 100%);
+  --platform-foreground: var(--card);
+}
+
+.contact-platform-facebook {
+  --platform-background: var(--brand-facebook);
+  --platform-foreground: var(--card);
+}
+
+.contact-platform-wetransfer {
+  --platform-background: var(--brand-wetransfer);
+  --platform-foreground: var(--foreground);
+}
