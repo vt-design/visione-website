@@ -120,10 +120,9 @@ const MOSAIC_TILES = [
 const REVIEWS = [
   {
     quote:
-      "Exclente trabajo!! Hemos hecho trabajos con Visione desde el año 2009, siempre excelente y este ultimo recien instalado muestra una empresa con amplia experiencia y profesionalismo. Lo mejor, no solo cumplen los plazos sino que ademas los mejoran. Gracias Cristian por tu impecable atención y trabajo.",
+      "Exclente trabajo!! Hemos hecho trabajos con Visione desde el año 2009, siempre excelente y este ultimo recien instalado muestra una empresa con amplia experiencia y profesionalismo. Lo mejor, no solo cumplen los plazos sino que los mejoran. Gracias Cristian por tu impecable atención y trabajo.",
     name: "Sebastián",
     company: "Todo Tartas",
-    role: "",
     photo: "src/assets/images/imagen-review-1.webp",
   },
   {
@@ -131,15 +130,13 @@ const REVIEWS = [
       "Excelente servicio y calidad. Hace años que realizamos trabajos con Visione y cumplen con todo en tiempo y forma. De primera la atención de Cristian y de Ariel, lo recomendamos.",
     name: "Martín",
     company: "Hus Realty",
-    role: "",
     photo: "src/assets/images/imagen-review-2.webp",
   },
   {
     quote:
       "Excepcional servicio como siempre. Completamente agradecidos por el trabajo realizado en nuestra nueva oficina. ¡Muchas gracias Visione Publicidad!",
-    name: "Tomas Toler",
+    name: "Tomas",
     company: "Salaya Romera",
-    role: "",
     photo: "src/assets/images/imagen-review-3.webp",
   },
 ];
@@ -620,7 +617,7 @@ export default function App() {
                   {REVIEWS[reviewIndex].name}
                 </p>
                 <p className="text-xs text-[#637f1d] font-semibold">
-                  {REVIEWS[reviewIndex].role} · {REVIEWS[reviewIndex].company}
+                  {REVIEWS[reviewIndex].company}
                 </p>
               </div>
 
