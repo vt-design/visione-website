@@ -27,14 +27,17 @@ const HERO_IMAGES = [
 ];
 
 const CLIENT_LOGOS = [
-  { name: "VISIONE S.A.", src: logoImg },
-  { name: "MERIDIAN S.A.", src: logoImg },
-  { name: "NORDESTE CORP", src: logoImg },
-  { name: "PALERMO DESARROLLOS", src: logoImg },
-  { name: "CONSTRUCTORA SUR", src: logoImg },
-  { name: "BANCO CAPITAL", src: logoImg },
-  { name: "AERO BUENOS AIRES", src: logoImg },
-  { name: "INDUSTRIAS GLOBAL", src: logoImg },
+  { name: "ADIDAS", src: "src/assets/images/imagenes-clientes/adidas-com-logo.png" },
+  { name: "BAYER S.A.", src: "src/assets/images/imagenes-clientes/bayer-com-logo.png" },
+  { name: "MERCEDES BENZ", src: "src/assets/images/imagenes-clientes/mbfs-com-logo.png" },
+  { name: "ANDREANI", src: "src/assets/images/imagenes-clientes/andreani-com-logo.png" },
+  { name: "GALENO", src: "src/assets/images/imagenes-clientes/galeno-com-ar-logo.png" },
+  { name: "HONDA", src: "src/assets/images/imagenes-clientes/honda-motorcycles-gr-logo.png" },
+  { name: "ICBC", src: "src/assets/images/imagenes-clientes/icbc-com-ar-logo.png" },
+  { name: "MARKOVA", src: "src/assets/images/imagenes-clientes/markova-com-logo.png" },
+  { name: "RENAULT", src: "src/assets/images/imagenes-clientes/renault-co-za-logo.png" },
+  { name: "SUZUKI", src: "src/assets/images/imagenes-clientes/suzuki-com-tr-logo.png" },
+  { name: "TOYOTA", src: "src/assets/images/imagenes-clientes/toyota-europe-com-logo.png" },
 ];
 
 const SERVICE_CARDS = [
@@ -112,7 +115,7 @@ const MOSAIC_TILES = [
   },
   {
     id: "t10",
-    url: "src/assets/images/mosaic-images/mosaic-image-2.webp",
+    url: "src/assets/images/mosaic-images/imagen-mosaico-2.webp",
     alt: "Croque Madame",
   },
 ];
