@@ -21,9 +21,9 @@ import { Avatar, AvatarImage, AvatarFallback } from "./components/ui/avatar";
 // ─── DATA & CONSTANTS ────────────────────────────────────────────────────────
 
 const HERO_IMAGES = [
-  "src/assets/images/imagen-hero-1.webp",
-  "src/assets/images/imagen-hero-2.webp",
-  "src/assets/images/imagen-hero-3.webp",
+  "src/assets/images/test-hero/test-hero-1.webp",
+  "src/assets/images/test-hero/test-hero-2.webp",
+  "src/assets/images/test-hero/test-hero-3.webp",
 ];
 
 const CLIENT_LOGOS = [
