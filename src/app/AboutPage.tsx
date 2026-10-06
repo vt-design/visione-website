@@ -86,7 +86,7 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
                 Proceso Riguroso
               </span>
               <h2 className="ff-display font-['Audiowide'] text-2xl md:text-4xl font-bold tracking-tight text-[#1a1c18] uppercase">
-                Cómo Trabajamos
+                Cómo Transformamos
               </h2>
               <div className="w-12 h-1 bg-[#637f1d] mx-auto"></div>
               <p className="text-[#1a1c18]/70 text-sm">
