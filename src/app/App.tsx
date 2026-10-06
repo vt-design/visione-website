@@ -21,9 +21,9 @@ import { Avatar, AvatarImage, AvatarFallback } from "./components/ui/avatar";
 // ─── DATA & CONSTANTS ────────────────────────────────────────────────────────
 
 const HERO_IMAGES = [
-  "src/assets/images/test-hero/test-hero-1.webp",
-  "src/assets/images/test-hero/test-hero-2.webp",
-  "src/assets/images/test-hero/test-hero-3.webp",
+  "src/assets/images/image-hero-1.webp",
+  "src/assets/images/image-hero-2.webp",
+  "src/assets/images/image-hero-3.webp",
 ];
 
 const CLIENT_LOGOS = [
@@ -67,53 +67,53 @@ const SERVICE_CARDS = [
 const MOSAIC_TILES = [
   {
     id: "t1",
-    url: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&h=520&fit=crop&auto=format",
-    alt: "Family portrait",
+    url: "src/assets/images/mosaic-images/imagen-mosaico-1.webp",
+    alt: "Casa China",
   },
   {
     id: "t2",
-    url: "https://images.unsplash.com/photo-1511895426328-dc8714191011?w=800&h=540&fit=crop&auto=format",
-    alt: "Family outdoors",
+    url: "src/assets/images/mosaic-images/imagen-mosaico-10.webp",
+    alt: "Continental",
   },
   {
     id: "t3",
-    url: "https://images.unsplash.com/photo-1575793762813-5a94a5f6800a?w=600&h=500&fit=crop&auto=format",
-    alt: "People gathering",
+    url: "src/assets/images/mosaic-images/imagen-mosaico-3.webp",
+    alt: "Voge",
   },
   {
     id: "t4",
-    url: "https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=800&h=800&fit=crop&auto=format",
-    alt: "Team at workplace",
+    url: "src/assets/images/mosaic-images/imagen-mosaico-4.webp",
+    alt: "Galeno día",
   },
   {
     id: "t5",
-    url: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=900&h=520&fit=crop&auto=format",
-    alt: "Professional at work",
+    url: "src/assets/images/mosaic-images/imagen-mosaico-5.webp",
+    alt: "Royale Enfield",
   },
   {
     id: "t6",
-    url: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&h=900&fit=crop&auto=format",
-    alt: "Portrait tall",
+    url: "src/assets/images/mosaic-images/imagen-mosaico-6.webp",
+    alt: "Galeno noche",
   },
   {
     id: "t7",
-    url: "https://images.unsplash.com/photo-1551836022-4c4c79ecde51?w=700&h=520&fit=crop&auto=format",
-    alt: "Group scene",
+    url: "src/assets/images/mosaic-images/imagen-mosaico-7.webp",
+    alt: "Universidad Católica Argentina",
   },
   {
     id: "t8",
-    url: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&h=900&fit=crop&auto=format",
-    alt: "Portrait tall",
+    url: "src/assets/images/mosaic-images/imagen-mosaico-8.webp",
+    alt: "Tecmaco",
   },
   {
     id: "t9",
-    url: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=700&h=420&fit=crop&auto=format",
-    alt: "Office landscape",
+    url: "src/assets/images/mosaic-images/imagen-mosaico-9.webp",
+    alt: "Crónica",
   },
   {
     id: "t10",
-    url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=700&fit=crop&auto=format",
-    alt: "Person portrait",
+    url: "src/assets/images/mosaic-images/mosaic-image-2.webp",
+    alt: "Croque Madame",
   },
 ];
 
