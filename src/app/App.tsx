@@ -75,7 +75,7 @@ const MOSAIC_TILES = [
   },
   {
     id: "t2",
-    url: "src/assets/images/mosaic-images/imagen-mosaico-10.webp",
+    url: "src/assets/images/mosaic-images/imagen-mosaico-ex10.webp",
     alt: "Continental",
   },
   {
@@ -100,7 +100,7 @@ const MOSAIC_TILES = [
   },
   {
     id: "t7",
-    url: "src/assets/images/mosaic-images/imagen-mosaico-7.webp",
+    url: "src/assets/images/mosaic-images/imagen-mosaico-ex7.webp",
     alt: "Universidad Católica Argentina",
   },
   {
@@ -110,7 +110,7 @@ const MOSAIC_TILES = [
   },
   {
     id: "t9",
-    url: "src/assets/images/mosaic-images/imagen-mosaico-9.webp",
+    url: "src/assets/images/mosaic-images/imagen-mosaico-ex9.webp",
     alt: "Crónica",
   },
   {
