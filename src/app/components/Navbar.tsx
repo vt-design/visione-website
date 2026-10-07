@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
-import logoImg from "../../assets/logo-visione.png";
+import logoImg from "/images/logo-visione.png";
 
 export interface NavbarProps {
   activePage: string;

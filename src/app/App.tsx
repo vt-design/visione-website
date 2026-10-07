@@ -15,29 +15,29 @@ import AboutPage from "./AboutPage";
 import GalleryPage from "./GalleryPage";
 import ContactPage from "./ContactPage";
 import NotFoundPage from "./NotFoundPage";
-import logoImg from "../assets/logo-visione.png";
+// import logoImg from "../assets/logo-visione.png";
 import { Avatar, AvatarImage, AvatarFallback } from "./components/ui/avatar";
 
 // ─── DATA & CONSTANTS ────────────────────────────────────────────────────────
 
 const HERO_IMAGES = [
-  "src/assets/images/imagen-hero-1-uca.webp",
-  "src/assets/images/imagen-hero-2-cronica.webp",
-  "src/assets/images/imagen-hero-3-continental.webp",
+  "/images/imagen-hero-1-uca.webp",
+  "/images/imagen-hero-2-cronica.webp",
+  "/images/imagen-hero-3-continental.webp",
 ];
 
 const CLIENT_LOGOS = [
-  { name: "ADIDAS", src: "src/assets/images/imagenes-clientes/adidas-com-logo.png" },
-  { name: "BAYER S.A.", src: "src/assets/images/imagenes-clientes/bayer-com-logo.png" },
-  { name: "MERCEDES BENZ", src: "src/assets/images/imagenes-clientes/mbfs-com-logo.png" },
-  { name: "ANDREANI", src: "src/assets/images/imagenes-clientes/andreani-com-logo.png" },
-  { name: "GALENO", src: "src/assets/images/imagenes-clientes/galeno-com-ar-logo.png" },
-  { name: "HONDA", src: "src/assets/images/imagenes-clientes/honda-motorcycles-gr-logo.png" },
-  { name: "ICBC", src: "src/assets/images/imagenes-clientes/icbc-com-ar-logo.png" },
-  { name: "MARKOVA", src: "src/assets/images/imagenes-clientes/markova-com-logo.png" },
-  { name: "RENAULT", src: "src/assets/images/imagenes-clientes/renault-co-za-logo.png" },
-  { name: "SUZUKI", src: "src/assets/images/imagenes-clientes/suzuki-com-tr-logo.png" },
-  { name: "TOYOTA", src: "src/assets/images/imagenes-clientes/toyota-europe-com-logo.png" },
+  { name: "ADIDAS", src: "/images/imagenes-clientes/adidas-com-logo.png" },
+  { name: "BAYER S.A.", src: "/images/imagenes-clientes/bayer-com-logo.png" },
+  { name: "MERCEDES BENZ", src: "/images/imagenes-clientes/mbfs-com-logo.png" },
+  { name: "ANDREANI", src: "/images/imagenes-clientes/andreani-com-logo.png" },
+  { name: "GALENO", src: "/images/imagenes-clientes/galeno-com-ar-logo.png" },
+  { name: "HONDA", src: "/images/imagenes-clientes/honda-motorcycles-gr-logo.png" },
+  { name: "ICBC", src: "/images/imagenes-clientes/icbc-com-ar-logo.png" },
+  { name: "MARKOVA", src: "/images/imagenes-clientes/markova-com-logo.png" },
+  { name: "RENAULT", src: "/images/imagenes-clientes/renault-co-za-logo.png" },
+  { name: "SUZUKI", src: "/images/imagenes-clientes/suzuki-com-tr-logo.png" },
+  { name: "TOYOTA", src: "/images/imagenes-clientes/toyota-europe-com-logo.png" },
 ];
 
 const SERVICE_CARDS = [
@@ -46,7 +46,7 @@ const SERVICE_CARDS = [
     title: "FABRICACIÓN DE CARTELES",
     desc: "Desde letras corpóreas hasta monumentales de gran formato. Aluminio, acero, acrílico y tecnología LED para máxima visibilidad corporativa.",
     tags: "METAL · ACRÍLICO · DIMENSIONAL · LED",
-    photo: "src/assets/images/imagen-servicio-carteleria.webp",
+    photo: "/images/imagen-servicio-carteleria.webp",
     page: "carteleria",
   },
   {
@@ -54,7 +54,7 @@ const SERVICE_CARDS = [
     title: "REVESTIMIENTO DE METAL",
     desc: "Paneles de aluminio compuesto (ACM) y fachadas ventiladas. Soluciones estructurales de vanguardia con alta resistencia al clima.",
     tags: "FACHADAS · ACM · ESTRUCTURA · RESISTENTE",
-    photo: "src/assets/images/imagen-servicio-revestimiento.webp",
+    photo: "/images/imagen-servicio-revestimiento.webp",
     page: "revestimientos",
   },
   {
@@ -62,7 +62,7 @@ const SERVICE_CARDS = [
     title: "GRÁFICA CORPORATIVA",
     desc: "Impresión de alta resolución, vinilos de seguridad, microperforados y decoración de vidrieras para puntos de venta e industrias.",
     tags: "VINILOS · MICROS · MARCA · VEHÍCULOS",
-    photo: "src/assets/images/imagen-servicio-grafica.webp",
+    photo: "/images/imagen-servicio-grafica.webp",
     page: "grafica",
   },
 ];
@@ -70,52 +70,52 @@ const SERVICE_CARDS = [
 const MOSAIC_TILES = [
   {
     id: "t1",
-    url: "src/assets/images/mosaic-images/imagen-mosaico-1.webp",
+    url: "/images/mosaic-images/imagen-mosaico-1.webp",
     alt: "Casa China",
   },
   {
     id: "t2",
-    url: "src/assets/images/mosaic-images/imagen-mosaico-ex10.webp",
+    url: "/images/mosaic-images/imagen-mosaico-ex10.webp",
     alt: "Continental",
   },
   {
     id: "t3",
-    url: "src/assets/images/mosaic-images/imagen-mosaico-3.webp",
+    url: "/images/mosaic-images/imagen-mosaico-3.webp",
     alt: "Voge",
   },
   {
     id: "t4",
-    url: "src/assets/images/mosaic-images/imagen-mosaico-4.webp",
+    url: "/images/mosaic-images/imagen-mosaico-4.webp",
     alt: "Galeno día",
   },
   {
     id: "t5",
-    url: "src/assets/images/mosaic-images/imagen-mosaico-5.webp",
+    url: "/images/mosaic-images/imagen-mosaico-5.webp",
     alt: "Royale Enfield",
   },
   {
     id: "t6",
-    url: "src/assets/images/mosaic-images/imagen-mosaico-6.webp",
+    url: "/images/mosaic-images/imagen-mosaico-6.webp",
     alt: "Galeno noche",
   },
   {
     id: "t7",
-    url: "src/assets/images/mosaic-images/imagen-mosaico-ex7.webp",
+    url: "/images/mosaic-images/imagen-mosaico-ex7.webp",
     alt: "Universidad Católica Argentina",
   },
   {
     id: "t8",
-    url: "src/assets/images/mosaic-images/imagen-mosaico-8.webp",
+    url: "/images/mosaic-images/imagen-mosaico-8.webp",
     alt: "Tecmaco",
   },
   {
     id: "t9",
-    url: "src/assets/images/mosaic-images/imagen-mosaico-ex9.webp",
+    url: "/images/mosaic-images/imagen-mosaico-ex9.webp",
     alt: "Crónica",
   },
   {
     id: "t10",
-    url: "src/assets/images/mosaic-images/imagen-mosaico-2.webp",
+    url: "/images/mosaic-images/imagen-mosaico-2.webp",
     alt: "Croque Madame",
   },
 ];
@@ -126,21 +126,21 @@ const REVIEWS = [
       "Exclente trabajo!! Hemos hecho trabajos con Visione desde el año 2009, siempre excelente y este ultimo recien instalado muestra una empresa con amplia experiencia y profesionalismo. Lo mejor, no solo cumplen los plazos sino que los mejoran. Gracias Cristian por tu impecable atención y trabajo.",
     name: "Sebastián",
     company: "Todo Tartas",
-    photo: "src/assets/images/imagen-review-1.webp",
+    photo: "/images/imagen-review-1.webp",
   },
   {
     quote:
       "Excelente servicio y calidad. Hace años que realizamos trabajos con Visione y cumplen con todo en tiempo y forma. De primera la atención de Cristian y de Ariel, lo recomendamos.",
     name: "Martín",
     company: "Hus Realty",
-    photo: "src/assets/images/imagen-review-2.webp",
+    photo: "/images/imagen-review-2.webp",
   },
   {
     quote:
       "Excepcional servicio como siempre. Completamente agradecidos por el trabajo realizado en nuestra nueva oficina. ¡Muchas gracias Visione Publicidad!",
     name: "Tomas",
     company: "Salaya Romera",
-    photo: "src/assets/images/imagen-review-3.webp",
+    photo: "/images/imagen-review-3.webp",
   },
 ];
 
