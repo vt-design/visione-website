@@ -30,14 +30,15 @@ const CLIENT_LOGOS = [
   { name: "ADIDAS", src: "/images/imagenes-clientes/adidas-com-logo.png" },
   { name: "BAYER S.A.", src: "/images/imagenes-clientes/bayer-com-logo.png" },
   { name: "MERCEDES BENZ", src: "/images/imagenes-clientes/mbfs-com-logo.png" },
-  { name: "ANDREANI", src: "/images/imagenes-clientes/andreani-com-logo.png" },
-  { name: "GALENO", src: "/images/imagenes-clientes/galeno-com-ar-logo.png" },
-  { name: "HONDA", src: "/images/imagenes-clientes/honda-motorcycles-gr-logo.png" },
-  { name: "ICBC", src: "/images/imagenes-clientes/icbc-com-ar-logo.png" },
-  { name: "MARKOVA", src: "/images/imagenes-clientes/markova-com-logo.png" },
-  { name: "RENAULT", src: "/images/imagenes-clientes/renault-co-za-logo.png" },
-  { name: "SUZUKI", src: "/images/imagenes-clientes/suzuki-com-tr-logo.png" },
-  { name: "TOYOTA", src: "/images/imagenes-clientes/toyota-europe-com-logo.png" },
+  { name: "BRIDGESTONE", src: "/images/imagenes-clientes/logo-bridgestone.png" },
+  { name: "GALENO", src: "/images/imagenes-clientes/logo-galeno.webp" },
+  { name: "RENAULT", src: "public/images/imagenes-clientes/logo-renault.png" },
+  { name: "ROYAL ENFIELD", src: "/images/imagenes-clientes/logo-royal-enfield.webp" },
+  { name: "MARKOVA", src: "/images/imagenes-clientes/logo-markova.svg" },
+  { name: "ICBC", src: "/images/imagenes-clientes/logo-icbc.svg" },
+  { name: "LEVIS", src: "/images/imagenes-clientes/logo-levis.svg" },
+  { name: "SAO", src: "/images/imagenes-clientes/sao-logo.svg" },
+  { name: "MONTAGNE", src: "/images/imagenes-clientes/montagne-logo.svg" },
 ];
 
 const SERVICE_CARDS = [
