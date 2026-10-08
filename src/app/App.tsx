@@ -2,11 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import {
   ArrowRight,
   ChevronLeft,
-  ChevronRight,
-  ShieldCheck,
-  Building,
-  Factory,
-  Layers,
+  ChevronRight
 } from "lucide-react";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
@@ -32,7 +28,7 @@ const CLIENT_LOGOS = [
   { name: "MERCEDES BENZ", src: "/images/imagenes-clientes/mbfs-com-logo.png" },
   { name: "BRIDGESTONE", src: "/images/imagenes-clientes/logo-bridgestone.png" },
   { name: "GALENO", src: "/images/imagenes-clientes/logo-galeno.webp" },
-  { name: "RENAULT", src: "public/images/imagenes-clientes/logo-renault.png" },
+  { name: "RENAULT", src: "/images/imagenes-clientes/logo-renault.png" },
   { name: "ROYAL ENFIELD", src: "/images/imagenes-clientes/logo-royal-enfield.webp" },
   { name: "MARKOVA", src: "/images/imagenes-clientes/logo-markova.svg" },
   { name: "ICBC", src: "/images/imagenes-clientes/logo-icbc.svg" },
@@ -256,8 +252,12 @@ function PhotoMosaicSection({ onNavigate }: { onNavigate: (page: string) => void
     return () => observers.forEach((o) => o.disconnect());
   }, []);
 
+  /**
+   * bg-[#1a1c18]
+   * text-white
+   */
   return (
-    <section className="bg-[#1a1c18] text-white py-20 lg:py-28 border-t border-white/10">
+    <section className="bg-[#F8F9FA] text-[#1a1c18] py-20 lg:py-28 border-t border-white/10">
       <style>{`
         .mosaic-grid {
           display: grid;
@@ -320,11 +320,18 @@ function PhotoMosaicSection({ onNavigate }: { onNavigate: (page: string) => void
           <span className="text-xs font-mono font-bold text-[#a5cd38] uppercase tracking-widest">
             Obras Realizadas
           </span>
-          <h2 className="font-['Audiowide'] text-3xl md:text-5xl font-bold tracking-tight text-white uppercase">
+          {/**
+           * text-white
+           */}
+          <h2 className="font-['Audiowide'] text-3xl md:text-5xl font-bold tracking-tight text-[#1a1c18] uppercase">
             Nuestra Galería
           </h2>
           <div className="w-16 h-1 bg-[#a5cd38] mx-auto" />
-          <p className="text-white/70 text-base md:text-lg font-light">
+          {/**
+           * text-white/70
+           * font-light
+           */}
+          <p className="text-[#1a1c18]/80 text-base md:text-lg">
             Proyectos de cartelería, gráfica y revestimiento entregados en todo el país.
           </p>
         </div>
@@ -422,6 +429,13 @@ export default function App() {
     );
   }
 
+  /* 
+    gradiente del hero
+
+    <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/40 to-transparent" />
+    <div className="absolute inset-0 bg-gradient-to-t from-[#1a1c18] via-transparent to-black/30" />
+  */
+
   return (
     <div className="min-h-screen bg-[#F8F9FA] text-[#1a1c18] ff-body selection:bg-[#a5cd38] selection:text-[#1a1c18] flex flex-col justify-between">
       <div>
@@ -456,14 +470,15 @@ export default function App() {
             )}
           </div>
 
-          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/40 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1a1c18] via-transparent to-black/30" />
+          { /* acá iba el gradiente */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/10 to-transparent" />
+          
 
           <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full pt-16">
             <div className="max-w-3xl space-y-6">
-              <span className="inline-block px-3.5 py-1.5 bg-[#a5cd38]/20 border border-[#a5cd38]/50 text-[#a5cd38] text-xs font-mono font-bold tracking-widest uppercase rounded">
+              { /*<span className="inline-block px-3.5 py-1.5 bg-[#a5cd38]/20 border border-[#a5cd38]/50 text-[#a5cd38] text-xs font-mono font-bold tracking-widest uppercase rounded">
                 FABRICANTE INDUSTRIAL EN BUENOS AIRES
-              </span>
+              </span> */}
 
               <h1 className="ff-display font-['Audiowide'] text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white uppercase leading-[1.05]">
                 VISIONE <br />
