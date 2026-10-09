@@ -20,7 +20,7 @@ export function Footer({ onNavigate }: FooterProps) {
             onClick={(e) => handleNav("home", e)}
             className="ff-display font-['Audiowide'] text-2xl font-bold tracking-wider text-white hover:text-[#a5cd38] transition-colors text-left"
           >
-            VISIONE
+            <img alt="logo visione" src= "/images/imagenes-clientes/visione-cliente-nuevos/texto-logo-visione.png" className="w-3/4"></img>
           </button>
           <p className="text-sm text-white/60 leading-relaxed">
             Fabricación industrial de cartelería, revestimientos metálicos y soluciones gráficas de alta precisión en Buenos Aires.

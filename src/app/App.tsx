@@ -257,7 +257,7 @@ function PhotoMosaicSection({ onNavigate }: { onNavigate: (page: string) => void
    * text-white
    */
   return (
-    <section className="bg-[#F8F9FA] text-[#1a1c18] py-20 lg:py-28 border-t border-white/10">
+    <section className="bg-white text-[#1a1c18] py-20 lg:py-28 border-t border-white/10">
       <style>{`
         .mosaic-grid {
           display: grid;
@@ -317,9 +317,9 @@ function PhotoMosaicSection({ onNavigate }: { onNavigate: (page: string) => void
 
       <div className="max-w-7xl mx-auto px-[48px] space-y-12">
         <div className="text-center max-w-2xl mx-auto space-y-3">
-          <span className="text-xs font-mono font-bold text-[#a5cd38] uppercase tracking-widest">
+          {/*<span className="text-xs font-mono font-bold text-[#a5cd38] uppercase tracking-widest">
             Obras Realizadas
-          </span>
+          </span>*/}
           {/**
            * text-white
            */}
@@ -481,12 +481,12 @@ export default function App() {
               </span> */}
 
               <h1 className="ff-display font-['Audiowide'] text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white uppercase leading-[1.05]">
-                VISIONE <br />
-                <span className="text-[#a5cd38]">INGENIERÍA</span> VISUAL
+                MÁS DE <br />
+                <span className="text-[#a5cd38]">25 AÑOS</span> DE EXPERIENCIA
               </h1>
 
               <p className="text-base sm:text-xl text-white/90 leading-relaxed font-light max-w-2xl">
-                Diseñamos, fabricamos e instalamos cartelería monumental, revestimientos de aluminio y gráfica corporativa para grandes empresas y marcas.
+                Diseñamos, fabricamos e instalamos cartelería, revestimientos de aluminio y gráfica corporativa en todo el país.
               </p>
 
               <div className="pt-4 flex flex-wrap items-center gap-4">
@@ -518,17 +518,18 @@ export default function App() {
         {/* TRUST BAR */}
         <section className="bg-white border-y border-black/10 py-8 shadow-sm overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 md:px-12 mb-4 text-center">
-            <span className="text-[11px] font-mono font-bold text-[#637f1d] uppercase tracking-widest">
+            {/*<span className="text-[11px] font-mono font-bold text-[#637f1d] uppercase tracking-widest">
               CONFIAN EN NUESTRA INGENIERÍA VISUAL
-            </span>
+            </span>*/}
           </div>
 
           <div className="relative w-full overflow-hidden">
             <div className="animate-marquee flex items-center gap-12 md:gap-16">
+              {/*filter grayscale hover:grayscale-0 opacity-75 hover:opacity-100 transition-all duration-300 shrink-0 */}
               {[...CLIENT_LOGOS, ...CLIENT_LOGOS, ...CLIENT_LOGOS].map((logo, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center justify-center p-3 bg-[#F8F9FA] border border-black/10 rounded-sm filter grayscale hover:grayscale-0 opacity-75 hover:opacity-100 transition-all duration-300 shrink-0 cursor-pointer max-w-[180px] max-h-[90px] h-20 w-44"
+                  className="flex items-center justify-center p-3 bg-[#F8F9FA] border border-black/10 rounded-sm cursor-pointer max-w-[180px] max-h-[90px] h-20 w-44"
                 >
                   <img
                     src={logo.src}
@@ -544,9 +545,9 @@ export default function App() {
         {/* SERVICIOS DESTACADOS SECTION */}
         <section className="py-24 max-w-7xl mx-auto px-6 md:px-12 space-y-16">
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <span className="text-xs font-mono font-bold text-[#637f1d] uppercase tracking-wider">
+            {/*<span className="text-xs font-mono font-bold text-[#637f1d] uppercase tracking-wider">
               Soluciones Especializadas
-            </span>
+            </span>*/}
             <h2 className="ff-display font-['Audiowide'] text-3xl md:text-5xl font-bold tracking-tight text-[#1a1c18] uppercase">
               Nuestros Servicios
             </h2>
@@ -599,15 +600,19 @@ export default function App() {
           </div>
         </section>
 
+        <hr></hr>
+
         {/* GALERÍA / PHOTO MOSAIC */}
         <PhotoMosaicSection onNavigate={handleNavigate} />
+
+        <hr></hr>
 
         {/* TESTIMONIOS CAROUSEL */}
         <section className="py-24 max-w-7xl mx-auto px-6 md:px-12 space-y-12">
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <span className="text-xs font-mono font-bold text-[#637f1d] uppercase tracking-wider">
+            {/*<span className="text-xs font-mono font-bold text-[#637f1d] uppercase tracking-wider">
               Confianza Empresarial
-            </span>
+            </span>*/}
             <h2 className="ff-display font-['Audiowide'] text-3xl md:text-4xl font-bold text-[#1a1c18] uppercase">
               Lo que dicen nuestros clientes
             </h2>

@@ -62,9 +62,6 @@ export default function GalleryPage({ onNavigate }: GalleryPageProps) {
         {/* COMPACT HERO HEADER SECTION */}
         <section className="relative pt-28 pb-10 bg-[#1a1c18] text-white border-b border-white/10">
           <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-3">
-            <span className="inline-block px-3 py-0.5 bg-[#a5cd38]/20 border border-[#a5cd38]/40 text-[#a5cd38] text-[11px] font-mono font-bold tracking-widest uppercase rounded">
-              PORTAFOLIO DE OBRAS
-            </span>
             <h1 className="ff-display font-['Audiowide'] text-3xl sm:text-5xl font-bold tracking-tight text-white uppercase leading-tight max-w-4xl">
               Galería
             </h1>

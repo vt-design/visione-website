@@ -63,9 +63,6 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
         {/* COMPACT HERO HEADER SECTION */}
         <section className="relative pt-28 pb-10 bg-[#1a1c18] text-white border-b border-white/10">
           <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-3">
-            <span className="inline-block px-3 py-0.5 bg-[#a5cd38]/20 border border-[#a5cd38]/40 text-[#a5cd38] text-[11px] font-mono font-bold tracking-widest uppercase rounded">
-              ATENCIÓN B2B DIRECTA
-            </span>
             <h1 className="ff-display font-['Audiowide'] text-3xl sm:text-5xl font-bold tracking-tight text-white uppercase leading-tight max-w-4xl">
               Contacto & Presupuestos
             </h1>
@@ -225,7 +222,8 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
           </div>
 
           {/* Full-width map below both contact columns. */}
-          <div className="w-full h-80 md:h-96 bg-card p-2 border border-border rounded-sm shadow-lg overflow-hidden">
+          <div className="w-full h-auto gap-8 flex">
+            <div className="w-1/2 h-80 md:h-96 bg-card p-2 border border-border rounded-sm shadow-lg overflow-hidden">
             <iframe
               title="Ubicación Visione Buenos Aires"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.874776774225!2d-58.47590652409925!3d-34.58203495635373!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb6728626288b%3A0xbadc5a9c36254ab4!2sVisione%20Publicidad!5e0!3m2!1sen!2sar!4v1790878845736!5m2!1sen!2sar"
@@ -234,6 +232,17 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
+          </div>
+          <div className="w-1/2 h-80 md:h-96 bg-card p-2 border border-border rounded-sm shadow-lg overflow-hidden">
+            <iframe
+              title="Ubicación Visione Buenos Aires"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d16875496.2079892!2d-79.51978000579972!3d-43.098717870479966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccaf5f5fdc667%3A0x3d2f77992af00fa8!2sArgentina!5e0!3m2!1sen!2sar!4v1791579766728!5m2!1sen!2sar"
+              className="block w-full h-full border-0"
+              allowFullScreen={false}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
           </div>
         </section>
       </div>

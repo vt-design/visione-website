@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
-import logoImg from "/images/logo-visione.png";
+import logoImg from "/images/imagenes-clientes/visione-cliente-nuevos/logo-visione-compuesto.png";
 
 export interface NavbarProps {
   activePage: string;
@@ -60,12 +60,15 @@ export function Navbar({ activePage, onNavigate }: NavbarProps) {
             <img
               src={logoImg}
               alt="Visione Logo"
-              className="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+              className="h-full w-auto object-contain"
             />
           </div>
+          {/*
+          group-hover:scale-105 transition-transform duration-300
           <span className="ff-display font-['Audiowide'] text-xl font-bold tracking-wider text-white group-hover:text-[#a5cd38] transition-colors">
             VISIONE
           </span>
+          */}
         </button>
 
         {/* DESKTOP NAV */}

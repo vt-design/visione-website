@@ -32,9 +32,6 @@ export function ServicePage({ title, subtitle, heroImg, features, onNavigate }: 
           <div className="absolute inset-0 bg-gradient-to-t from-[#1a1c18] via-[#1a1c18]/40 to-[#1a1c18]/70" />
 
           <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-12 text-center text-white space-y-6">
-            <span className="inline-block px-4 py-1.5 bg-[#a5cd38]/20 border border-[#a5cd38]/40 text-[#a5cd38] text-xs font-mono font-bold tracking-widest uppercase rounded">
-              SERVICIOS ESPECIALIZADOS
-            </span>
             <h1 className="ff-display font-['Audiowide'] text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white uppercase leading-tight">
               {title}
             </h1>

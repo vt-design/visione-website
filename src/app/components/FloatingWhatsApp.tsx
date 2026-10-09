@@ -13,7 +13,7 @@ export function FloatingWhatsApp() {
         aria-label="Contactar a Visione por WhatsApp (abre una nueva pestaña)"
         title="Hablemos por WhatsApp"
         onClick={() => window.open(WHATSAPP_URL, "_blank", "noopener,noreferrer")}
-        className="btn-wipe btn-wipe-primary size-14 md:size-16 rounded-full bg-primary text-primary-foreground shadow-xl border border-primary hover:bg-primary focus-visible:ring-primary"
+        className="btn-wipe btn-wipe-primary size-14 md:size-16 rounded-full bg-primary text-primary-foreground shadow-2xl border border-primary hover:bg-primary focus-visible:ring-primary"
       >
         <WhatsAppIcon className="size-7" />
       </Button>
