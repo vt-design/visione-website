@@ -360,7 +360,7 @@ function PhotoMosaicSection({ onNavigate }: { onNavigate: (page: string) => void
         <div className="text-center pt-4">
           <button
             onClick={() => onNavigate("galeria")}
-            className="btn-wipe btn-wipe-primary px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs tracking-wider uppercase rounded-xs shadow-lg inline-flex items-center gap-3"
+            className="btn-wipe btn-wipe-primary px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs tracking-wider uppercase rounded-xs shadow-lg inline-flex items-center gap-3 cursor-pointer"
           >
             <span>Ver Galería Completa</span>
             <ArrowRight size={16} />
@@ -492,7 +492,7 @@ export default function App() {
               <div className="pt-4 flex flex-wrap items-center gap-4">
                 <button
                   onClick={() => handleNavigate("contacto")}
-                  className="btn-wipe btn-wipe-primary px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs tracking-wider uppercase rounded-xs shadow-lg flex items-center gap-3"
+                  className="btn-wipe btn-wipe-primary px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs tracking-wider uppercase rounded-xs shadow-lg flex items-center gap-3 cursor-pointer"
                 >
                   <span>Solicitar Cotización</span>
                   <ArrowRight size={16} />
@@ -551,7 +551,7 @@ export default function App() {
             <h2 className="ff-display font-['Audiowide'] text-3xl md:text-5xl font-bold tracking-tight text-[#1a1c18] uppercase">
               Nuestros Servicios
             </h2>
-            <div className="w-16 h-1 bg-[#637f1d] mx-auto"></div>
+            <div className="w-16 h-1 bg-[#a5cd38] mx-auto"></div>
             <p className="text-[#1a1c18]/80 text-base md:text-lg">
               Ofrecemos soluciones integrales de señalética corporativa, fachadas y gráfica industrial de alta precisión.
             </p>
@@ -616,7 +616,7 @@ export default function App() {
             <h2 className="ff-display font-['Audiowide'] text-3xl md:text-4xl font-bold text-[#1a1c18] uppercase">
               Lo que dicen nuestros clientes
             </h2>
-            <div className="w-16 h-1 bg-[#637f1d] mx-auto"></div>
+            <div className="w-16 h-1 bg-[#a5cd38] mx-auto"></div>
           </div>
 
           <div className="max-w-4xl mx-auto bg-card p-6 md:p-10 border border-border rounded-sm shadow-lg relative flex items-start gap-4 md:gap-8">
@@ -650,14 +650,14 @@ export default function App() {
                   onClick={() =>
                     setReviewIndex((prev) => (prev === 0 ? REVIEWS.length - 1 : prev - 1))
                   }
-                  className="p-2 border border-black/15 hover:bg-[#a5cd38] hover:border-[#a5cd38] text-[#1a1c18] transition-colors rounded-xs"
+                  className="p-2 border border-black/15 hover:bg-[#a5cd38] hover:border-[#a5cd38] text-[#1a1c18] transition-colors rounded-xs cursor-pointer"
                   aria-label="Anterior"
                 >
                   <ChevronLeft size={18} />
                 </button>
                 <button
                   onClick={() => setReviewIndex((prev) => (prev + 1) % REVIEWS.length)}
-                  className="p-2 border border-black/15 hover:bg-[#a5cd38] hover:border-[#a5cd38] text-[#1a1c18] transition-colors rounded-xs"
+                  className="p-2 border border-black/15 hover:bg-[#a5cd38] hover:border-[#a5cd38] text-[#1a1c18] transition-colors rounded-xs cursor-pointer"
                   aria-label="Siguiente"
                 >
                   <ChevronRight size={18} />

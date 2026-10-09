@@ -41,7 +41,7 @@ export function ServicePage({ title, subtitle, heroImg, features, onNavigate }: 
             <div className="pt-6">
               <button
                 onClick={() => onNavigate("contacto")}
-                className="btn-wipe btn-wipe-primary px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-sm tracking-wider uppercase rounded-xs shadow-lg inline-flex items-center gap-3"
+                className="btn-wipe btn-wipe-primary px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-sm tracking-wider uppercase rounded-xs shadow-lg inline-flex items-center gap-3 cursor-pointer"
               >
                 <span>Solicitar Presupuesto para este Servicio</span>
                 <ArrowRight size={18} />
@@ -56,7 +56,7 @@ export function ServicePage({ title, subtitle, heroImg, features, onNavigate }: 
             <h2 className="ff-display font-['Audiowide'] text-2xl md:text-4xl font-bold tracking-tight text-[#1a1c18] uppercase">
               Capacidades & Características
             </h2>
-            <div className="w-16 h-1 bg-[#637f1d] mx-auto"></div>
+            <div className="w-16 h-1 bg-[#a5cd38] mx-auto"></div>
             <p className="text-[#1a1c18]/70 text-base">
               Conocé en detalle la tecnología, materiales y estándares de ejecución que aplicamos en cada proyecto.
             </p>
@@ -80,9 +80,7 @@ export function ServicePage({ title, subtitle, heroImg, features, onNavigate }: 
                     />
                   </div>
                   <div className="w-full md:w-1/2 space-y-5">
-                    <span className="text-xs font-mono font-bold text-[#637f1d] bg-[#a5cd38]/20 px-3 py-1 rounded tracking-wider uppercase">
-                      {item.tag}
-                    </span>
+                    
                     <h3 className="ff-display font-['Audiowide'] text-2xl md:text-3xl font-bold text-[#1a1c18] uppercase leading-snug">
                       {item.title}
                     </h3>
@@ -91,10 +89,10 @@ export function ServicePage({ title, subtitle, heroImg, features, onNavigate }: 
                     </p>
                     <div className="pt-2">
                       <button
-                        onClick={() => onNavigate("contacto")}
-                        className="text-xs font-bold tracking-wider uppercase text-[#637f1d] hover:text-[#1a1c18] inline-flex items-center gap-2 border-b-2 border-[#637f1d] pb-1 transition-colors"
+                        onClick={() => onNavigate("galeria")}
+                        className="text-xs font-bold tracking-wider uppercase text-[#a5cd38] hover:text-[#a5cd38] inline-flex items-center gap-2 border-b-2 border-[#a5cd38] pb-1 transition-colors cursor-pointer"
                       >
-                        <span>Consultar por esta especificación</span>
+                        <span>Ver más fotos</span>
                         <ArrowRight size={14} />
                       </button>
                     </div>
@@ -118,7 +116,7 @@ export function ServicePage({ title, subtitle, heroImg, features, onNavigate }: 
             </div>
             <button
               onClick={() => onNavigate("contacto")}
-              className="btn-wipe btn-wipe-primary px-8 py-3.5 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs tracking-wider uppercase rounded-xs shadow-md whitespace-nowrap"
+              className="btn-wipe btn-wipe-primary px-8 py-3.5 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs tracking-wider uppercase rounded-xs shadow-md whitespace-nowrap cursor-pointer"
             >
               Contactar Asesor Técnico
             </button>

@@ -123,7 +123,7 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
                   <select
                     value={servicio}
                     onChange={(e) => setServicio(e.target.value)}
-                    className="w-full px-4 py-2.5 bg-[#F8F9FA] border border-black/15 rounded-xs text-sm focus:outline-none focus:border-[#637f1d] transition-colors"
+                    className="w-full px-4 py-2.5 bg-[#F8F9FA] border border-black/15 rounded-xs text-sm focus:outline-none focus:border-[#637f1d] transition-colors cursor-pointer"
                   >
                     <option value="Cartelería">Cartelería Industrial / LED</option>
                     <option value="Gráfica">Gráfica Corporativa / Vinilos</option>
@@ -147,7 +147,7 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
 
                 <button
                   type="submit"
-                  className="btn-wipe btn-wipe-primary w-full py-3.5 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs uppercase tracking-wider rounded-xs shadow-md flex items-center justify-center gap-3"
+                  className="btn-wipe btn-wipe-primary w-full py-3.5 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs uppercase tracking-wider rounded-xs shadow-md flex items-center justify-center gap-3  cursor-pointer"
                 >
                   <WhatsAppSVG size={18} />
                   <span>Enviar Consulta Directa a WhatsApp</span>
@@ -208,7 +208,7 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
                     variant="outline"
                     aria-label={`Abrir ${label} en una nueva pestaña`}
                     onClick={() => window.open(url, "_blank", "noopener,noreferrer")}
-                    className={`btn-wipe contact-platform contact-platform-${brand} w-full h-auto justify-between items-center px-5 py-4 border-0 rounded-sm shadow-lg ${brand === "wetransfer" ? "flex-1 min-h-24" : "shrink-0"}`}
+                    className={`btn-wipe contact-platform contact-platform-${brand} w-full h-auto justify-between items-center px-5 py-4 border-0 rounded-sm shadow-lg cursor-pointer ${brand === "wetransfer" ? "flex-1 min-h-24" : "shrink-0"}`}
                   >
                     <span className="flex items-center gap-4 text-base font-bold">
                       <PlatformLogo brand={brand as "instagram" | "facebook" | "wetransfer"} />

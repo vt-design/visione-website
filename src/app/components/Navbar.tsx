@@ -60,7 +60,7 @@ export function Navbar({ activePage, onNavigate }: NavbarProps) {
             <img
               src={logoImg}
               alt="Visione Logo"
-              className="h-full w-auto object-contain"
+              className="h-full w-5/6 object-contain"
             />
           </div>
           {/*
@@ -75,7 +75,7 @@ export function Navbar({ activePage, onNavigate }: NavbarProps) {
         <nav className="hidden md:flex items-center gap-8">
           <button
             onClick={(e) => handleNavClick("home", e)}
-            className={`text-sm font-medium tracking-wide transition-colors duration-200 ${
+            className={`text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer ${
               activePage === "home" ? "text-[#a5cd38]" : "text-white/80 hover:text-[#a5cd38]"
             }`}
           >
@@ -86,7 +86,7 @@ export function Navbar({ activePage, onNavigate }: NavbarProps) {
           <div className="relative" ref={dropRef}>
             <button
               onClick={() => setServDropOpen(!servDropOpen)}
-              className={`flex items-center gap-1.5 text-sm font-medium tracking-wide transition-colors duration-200 ${
+              className={`flex items-center gap-1.5 text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer ${
                 ["carteleria", "grafica", "revestimientos"].includes(activePage)
                   ? "text-[#a5cd38]"
                   : "text-white/80 hover:text-[#a5cd38]"
@@ -105,7 +105,7 @@ export function Navbar({ activePage, onNavigate }: NavbarProps) {
                   <button
                     key={sub.page}
                     onClick={(e) => handleNavClick(sub.page, e)}
-                    className={`w-full text-left px-4 py-2.5 text-sm font-medium transition-colors hover:bg-white/5 flex items-center justify-between ${
+                    className={`w-full text-left px-4 py-2.5 text-sm font-medium transition-colors hover:bg-white/5 flex items-center justify-between cursor-pointer ${
                       activePage === sub.page ? "text-[#a5cd38] bg-white/5" : "text-white/80 hover:text-[#a5cd38]"
                     }`}
                   >
@@ -119,7 +119,7 @@ export function Navbar({ activePage, onNavigate }: NavbarProps) {
 
           <button
             onClick={(e) => handleNavClick("galeria", e)}
-            className={`text-sm font-medium tracking-wide transition-colors duration-200 ${
+            className={`text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer ${
               activePage === "galeria" ? "text-[#a5cd38]" : "text-white/80 hover:text-[#a5cd38]"
             }`}
           >
@@ -128,7 +128,7 @@ export function Navbar({ activePage, onNavigate }: NavbarProps) {
 
           <button
             onClick={(e) => handleNavClick("nosotros", e)}
-            className={`text-sm font-medium tracking-wide transition-colors duration-200 ${
+            className={`text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer ${
               activePage === "nosotros" ? "text-[#a5cd38]" : "text-white/80 hover:text-[#a5cd38]"
             }`}
           >
@@ -138,7 +138,7 @@ export function Navbar({ activePage, onNavigate }: NavbarProps) {
           {/* BUTTON WITH L-R WIPE HOVER EFFECT */}
           <button
             onClick={(e) => handleNavClick("contacto", e)}
-            className="btn-wipe btn-wipe-primary px-5 py-2.5 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs tracking-wider uppercase rounded-xs shadow-md"
+            className="btn-wipe btn-wipe-primary px-5 py-2.5 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs tracking-wider uppercase rounded-xs shadow-md cursor-pointer"
           >
             Contacto
           </button>

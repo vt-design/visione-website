@@ -79,13 +79,11 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
         <section className="py-20 bg-white border-b border-black/5">
           <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-12">
             <div className="text-center max-w-2xl mx-auto space-y-2">
-              <span className="text-xs font-mono font-bold text-[#637f1d] uppercase tracking-wider">
-                Proceso Riguroso
-              </span>
+
               <h2 className="ff-display font-['Audiowide'] text-2xl md:text-4xl font-bold tracking-tight text-[#1a1c18] uppercase">
                 Cómo Transformamos
               </h2>
-              <div className="w-12 h-1 bg-[#637f1d] mx-auto"></div>
+              <div className="w-12 h-1 bg-[#a5cd38] mx-auto"></div>
               <p className="text-[#1a1c18]/70 text-sm">
                 De la idea inicial en plano hasta el último tornillo en altura, garantizamos un flujo de trabajo estructurado.
               </p>
@@ -115,22 +113,19 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
         {/* TIMELINE SECTION */}
         <section className="py-20 max-w-7xl mx-auto px-6 md:px-12 space-y-12">
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="text-xs font-mono font-bold text-[#637f1d] uppercase tracking-wider">
-              Nuestra Historia
-            </span>
             <h2 className="ff-display font-['Audiowide'] text-2xl md:text-4xl font-bold tracking-tight text-[#1a1c18] uppercase">
               Línea de Tiempo
             </h2>
-            <div className="w-12 h-1 bg-[#637f1d] mx-auto"></div>
+            <div className="w-12 h-1 bg-primary mx-auto"></div>
           </div>
 
           <div className="relative border-l-2 border-[#637f1d]/30 ml-4 md:ml-32 space-y-8 py-2">
             {TIMELINE.map((item, idx) => (
               <div key={idx} className="relative pl-6 md:pl-10 group">
-                <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-[#637f1d] border-4 border-[#F8F9FA] group-hover:scale-125 transition-transform duration-300"></div>
+                <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-primary border-4 border-[#F8F9FA] group-hover:scale-125 transition-transform duration-300"></div>
 
                 <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6 bg-white p-6 rounded-sm border border-black/10 shadow-sm">
-                  <span className="ff-display font-['Audiowide'] text-xl font-bold text-[#637f1d] min-w-[110px]">
+                  <span className="ff-display font-['Audiowide'] text-xl font-bold text-primary min-w-[110px]">
                     {item.year}
                   </span>
                   <div className="space-y-1">

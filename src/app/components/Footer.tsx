@@ -39,17 +39,17 @@ export function Footer({ onNavigate }: FooterProps) {
           </h4>
           <ul className="space-y-2.5 text-sm text-white/70">
             <li>
-              <button onClick={(e) => handleNav("carteleria", e)} className="text-start hover:text-[#a5cd38] transition-colors">
+              <button onClick={(e) => handleNav("carteleria", e)} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
                 Cartelería Industrial & LED
               </button>
             </li>
             <li>
-              <button onClick={(e) => handleNav("grafica", e)} className="text-start hover:text-[#a5cd38] transition-colors">
+              <button onClick={(e) => handleNav("grafica", e)} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
                 Gráfica Corporativa & Vinilos
               </button>
             </li>
             <li>
-              <button onClick={(e) => handleNav("revestimientos", e)} className="text-start hover:text-[#a5cd38] transition-colors">
+              <button onClick={(e) => handleNav("revestimientos", e)} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
                 Revestimientos de Metal & Fachadas
               </button>
             </li>
@@ -63,22 +63,22 @@ export function Footer({ onNavigate }: FooterProps) {
           </h4>
           <ul className="space-y-2.5 text-sm text-white/70">
             <li>
-              <button onClick={(e) => handleNav("home", e)} className="hover:text-[#a5cd38] transition-colors">
+              <button onClick={(e) => handleNav("home", e)} className="cursor-pointer hover:text-[#a5cd38] transition-colors">
                 Inicio
               </button>
             </li>
             <li>
-              <button onClick={(e) => handleNav("galeria", e)} className="hover:text-[#a5cd38] transition-colors">
+              <button onClick={(e) => handleNav("galeria", e)} className="cursor-pointer hover:text-[#a5cd38] transition-colors">
                 Galería de Trabajos
               </button>
             </li>
             <li>
-              <button onClick={(e) => handleNav("nosotros", e)} className="hover:text-[#a5cd38] transition-colors">
+              <button onClick={(e) => handleNav("nosotros", e)} className="cursor-pointer hover:text-[#a5cd38] transition-colors">
                 Sobre Nosotros
               </button>
             </li>
             <li>
-              <button onClick={(e) => handleNav("contacto", e)} className="hover:text-[#a5cd38] transition-colors">
+              <button onClick={(e) => handleNav("contacto", e)} className="cursor-pointer hover:text-[#a5cd38] transition-colors">
                 Contacto Directo
               </button>
             </li>
@@ -91,10 +91,10 @@ export function Footer({ onNavigate }: FooterProps) {
             Contacto & Planta
           </h4>
           <p className="text-sm text-white/70">
-            Av. Del Libertador 4800, Buenos Aires
+            Av. Triunvirato 3686, CABA, Argentina
           </p>
           <p className="text-sm text-white/70">
-            Atención Lunes a Viernes: 08:00 - 18:00 hs
+            Atención Lunes a Viernes: 10:00 hs - 17:00 hs
           </p>
           <div className="pt-1">
             <a
@@ -110,7 +110,7 @@ export function Footer({ onNavigate }: FooterProps) {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-white/40 gap-4">
-        <p>© {new Date().getFullYear()} VISIONE Cartelería & Gráfica. Todos los derechos reservados.</p>
+        <p>© {new Date().getFullYear()} VISIONE PUBLICIDAD. Todos los derechos reservados.</p>
         <p className="font-mono">INGENIERÍA VISUAL Y FABRICACIÓN</p>
       </div>
     </footer>

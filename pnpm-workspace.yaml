@@ -3,6 +3,7 @@ packages:
 allowBuilds:
   '@tailwindcss/oxide': false
   esbuild: false
+  pnpm: set this to true or false
 supportedArchitectures:
   os:
     - linux
