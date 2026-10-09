@@ -613,7 +613,7 @@ export default function App() {
             {/*<span className="text-xs font-mono font-bold text-[#637f1d] uppercase tracking-wider">
               Confianza Empresarial
             </span>*/}
-            <h2 className="ff-display font-['Audiowide'] text-3xl md:text-4xl font-bold text-[#1a1c18] uppercase">
+            <h2 className="ff-display font-['Audiowide'] text-3xl md:text-5xl font-bold text-[#1a1c18] uppercase">
               Lo que dicen nuestros clientes
             </h2>
             <div className="w-16 h-1 bg-[#a5cd38] mx-auto"></div>

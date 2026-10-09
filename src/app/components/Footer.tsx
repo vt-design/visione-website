@@ -111,7 +111,7 @@ export function Footer({ onNavigate }: FooterProps) {
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-white/40 gap-4">
         <p>© {new Date().getFullYear()} VISIONE PUBLICIDAD. Todos los derechos reservados.</p>
-        <p className="font-mono">INGENIERÍA VISUAL Y FABRICACIÓN</p>
+        <p className="font-mono">desarrollo: vt.design.contact@gmail.com</p>
       </div>
     </footer>
   );
