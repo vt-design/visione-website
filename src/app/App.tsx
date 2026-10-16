@@ -68,55 +68,46 @@ const MOSAIC_TILES = [
   {
     id: "t1",
     url: "/images/mosaic-images/imagen-mosaico-1.webp",
-    alt: "Casa China",
+    alt: "Cartelería exterior iluminada",
+    points: "0,0 900,0 790,320 0,250",
+    frame: { x: 0, y: 0, width: 900, height: 320 },
   },
   {
     id: "t2",
-    url: "/images/mosaic-images/imagen-mosaico-ex10.webp",
-    alt: "Continental",
+    url: "/images/mosaic-images/imagen-mosaico-2.webp",
+    alt: "Fachada comercial revestida",
+    points: "900,0 1600,0 1600,400 790,320",
+    frame: { x: 790, y: 0, width: 810, height: 400 },
   },
   {
     id: "t3",
     url: "/images/mosaic-images/imagen-mosaico-3.webp",
-    alt: "Voge",
+    alt: "Montaje de estructura industrial",
+    points: "0,250 790,320 650,740 0,810",
+    frame: { x: 0, y: 250, width: 790, height: 560 },
   },
   {
     id: "t4",
     url: "/images/mosaic-images/imagen-mosaico-4.webp",
-    alt: "Galeno día",
+    alt: "Gráfica aplicada en espacio comercial",
+    points: "790,320 1600,400 1600,650 650,740",
+    frame: { x: 650, y: 320, width: 950, height: 420 },
   },
   {
     id: "t5",
     url: "/images/mosaic-images/imagen-mosaico-5.webp",
-    alt: "Royale Enfield",
+    alt: "Señalética urbana de gran formato",
+    points: "0,810 650,740 560,1000 0,1000",
+    frame: { x: 0, y: 740, width: 650, height: 260 },
   },
   {
     id: "t6",
     url: "/images/mosaic-images/imagen-mosaico-6.webp",
-    alt: "Galeno noche",
-  },
-  {
-    id: "t7",
-    url: "/images/mosaic-images/imagen-mosaico-ex7.webp",
-    alt: "Universidad Católica Argentina",
-  },
-  {
-    id: "t8",
-    url: "/images/mosaic-images/imagen-mosaico-8.webp",
-    alt: "Tecmaco",
-  },
-  {
-    id: "t9",
-    url: "/images/mosaic-images/imagen-mosaico-ex9.webp",
-    alt: "Crónica",
-  },
-  {
-    id: "t10",
-    url: "/images/mosaic-images/imagen-mosaico-2.webp",
-    alt: "Croque Madame",
+    alt: "Revestimiento arquitectónico contemporáneo",
+    points: "650,740 1600,650 1600,1000 560,1000",
+    frame: { x: 560, y: 650, width: 1040, height: 350 },
   },
 ];
-
 const REVIEWS = [
   {
     quote:
@@ -224,32 +215,39 @@ const VALID_PAGES = ["home", "carteleria", "grafica", "revestimientos", "nosotro
 // ─── PHOTO MOSAIC SECTION ────────────────────────────────────────────────────
 
 function PhotoMosaicSection({ onNavigate }: { onNavigate: (page: string) => void }) {
-  const tileRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const mosaicRef = useRef<SVGSVGElement | null>(null);
   const [visible, setVisible] = useState<boolean[]>(new Array(MOSAIC_TILES.length).fill(false));
 
   useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-    tileRefs.current.forEach((ref, i) => {
-      if (!ref) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
+    const mosaic = mosaicRef.current;
+    if (!mosaic) return;
+
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+
+        MOSAIC_TILES.forEach((_, i) => {
+          timers.push(
             setTimeout(() => {
-              setVisible((prev) => {
-                const next = [...prev];
+              setVisible((previous) => {
+                const next = [...previous];
                 next[i] = true;
                 return next;
               });
-            }, i * 75);
-            obs.disconnect();
-          }
-        },
-        { threshold: 0.05 }
-      );
-      obs.observe(ref);
-      observers.push(obs);
-    });
-    return () => observers.forEach((o) => o.disconnect());
+            }, i * 110),
+          );
+        });
+        observer.disconnect();
+      },
+      { threshold: 0.12 },
+    );
+
+    observer.observe(mosaic);
+    return () => {
+      observer.disconnect();
+      timers.forEach(clearTimeout);
+    };
   }, []);
 
   /**
@@ -257,105 +255,70 @@ function PhotoMosaicSection({ onNavigate }: { onNavigate: (page: string) => void
    * text-white
    */
   return (
-    <section className="bg-white text-[#1a1c18] py-20 lg:py-28 border-t border-white/10">
-      <style>{`
-        .mosaic-grid {
-          display: grid;
-          grid-template-columns: repeat(12, 1fr);
-          grid-auto-rows: 20px;
-          gap: 8px;
-          max-height: 590px;
-          overflow: hidden;
-        }
-        .mosaic-t1  { grid-column: 1 / 4;  grid-row: 3 / 11;  }
-        .mosaic-t2  { grid-column: 1 / 4;  grid-row: 12 / 22; }
-        .mosaic-t3  { grid-column: 1 / 3;  grid-row: 23 / 33; }
-        .mosaic-t4  { grid-column: 4 / 8;  grid-row: 1 / 13;  }
-        .mosaic-t5  { grid-column: 4 / 8;  grid-row: 14 / 20; }
-        .mosaic-t6  { grid-column: 4 / 7;  grid-row: 21 / 35; }
-        .mosaic-t7  { grid-column: 8 / 11; grid-row: 4 / 14;  }
-        .mosaic-t8  { grid-column: 8 / 11; grid-row: 15 / 35; }
-        .mosaic-t9  { grid-column: 11 / 13; grid-row: 2 / 7;  }
-        .mosaic-t10 { grid-column: 11 / 13; grid-row: 12 / 20; }
-
-        @media (max-width: 1023px) and (min-width: 768px) {
-          .mosaic-grid {
-            grid-template-columns: repeat(8, 1fr);
-            max-height: none;
-            overflow: visible;
-          }
-          .mosaic-t1  { grid-column: 1 / 4;  grid-row: 3 / 10;  }
-          .mosaic-t2  { grid-column: 1 / 4;  grid-row: 11 / 20; }
-          .mosaic-t3  { grid-column: 1 / 3;  grid-row: 21 / 29; }
-          .mosaic-t4  { grid-column: 4 / 7;  grid-row: 1 / 12;  }
-          .mosaic-t5  { grid-column: 4 / 7;  grid-row: 13 / 19; }
-          .mosaic-t6  { grid-column: 4 / 7;  grid-row: 20 / 30; }
-          .mosaic-t7  { grid-column: 7 / 9;  grid-row: 4 / 12;  }
-          .mosaic-t8  { grid-column: 7 / 9;  grid-row: 13 / 24; }
-          .mosaic-t9  { grid-column: 3 / 4;  grid-row: 20 / 25; }
-          .mosaic-t10 { grid-column: 3 / 5;  grid-row: 25 / 31; }
-        }
-
-        @media (max-width: 767px) {
-          .mosaic-grid {
-            grid-template-columns: repeat(2, 1fr);
-            max-height: none;
-            overflow: visible;
-          }
-          .mosaic-t1  { grid-column: 1 / 2; grid-row: 1 / 9;   }
-          .mosaic-t2  { grid-column: 2 / 3; grid-row: 3 / 13;  }
-          .mosaic-t3  { grid-column: 1 / 2; grid-row: 10 / 17; }
-          .mosaic-t4  { grid-column: 2 / 3; grid-row: 14 / 25; }
-          .mosaic-t5  { grid-column: 1 / 2; grid-row: 18 / 24; }
-          .mosaic-t6  { grid-column: 1 / 2; grid-row: 25 / 36; }
-          .mosaic-t7  { grid-column: 2 / 3; grid-row: 26 / 34; }
-          .mosaic-t8  { grid-column: 2 / 3; grid-row: 35 / 46; }
-          .mosaic-t9  { grid-column: 1 / 2; grid-row: 37 / 43; }
-          .mosaic-t10 { grid-column: 1 / 2; grid-row: 44 / 52; }
-        }
-      `}</style>
-
-      <div className="max-w-7xl mx-auto px-[48px] space-y-12">
+    <section className="bg-[#f8f9fa] text-white py-20 lg:py-28 border-t border-white/10 w-full flex justify-center">
+      <div className="w-full px-[48px] space-y-12 max-w-7xl">
         <div className="text-center max-w-2xl mx-auto space-y-3">
-          {/*<span className="text-xs font-mono font-bold text-[#a5cd38] uppercase tracking-widest">
+          {/* <span className="text-xs font-mono font-bold text-[#a5cd38] uppercase tracking-widest">
             Obras Realizadas
-          </span>*/}
-          {/**
-           * text-white
-           */}
-          <h2 className="font-['Audiowide'] text-3xl md:text-5xl font-bold tracking-tight text-[#1a1c18] uppercase">
+          </span> */}
+          <h2 className="font-['Audiowide'] text-3xl md:text-5xl font-bold tracking-tight uppercase text-[#1a1c18]">
             Nuestra Galería
           </h2>
           <div className="w-16 h-1 bg-[#a5cd38] mx-auto" />
-          {/**
-           * text-white/70
-           * font-light
-           */}
-          <p className="text-[#1a1c18]/80 text-base md:text-lg">
+          <p className="text-[#1a1c18]/70 text-base md:text-lg font-light">
             Proyectos de cartelería, gráfica y revestimiento entregados en todo el país.
           </p>
         </div>
 
-        <div className="mosaic-grid">
+        <svg
+          ref={mosaicRef}
+          className="home-collage"
+          viewBox="0 0 1600 1000"
+          role="img"
+          aria-labelledby="home-collage-title"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <title id="home-collage-title">Selección de obras realizadas</title>
+          <defs>
+            {MOSAIC_TILES.map((tile) => (
+              <clipPath key={tile.id} id={`home-collage-clip-${tile.id}`} clipPathUnits="userSpaceOnUse">
+                <polygon points={tile.points} />
+              </clipPath>
+            ))}
+          </defs>
+
           {MOSAIC_TILES.map((tile, i) => (
-            <div
+            <g
               key={tile.id}
-              ref={(el) => { tileRefs.current[i] = el; }}
-              className={`mosaic-${tile.id} transition-all duration-700 ease-out ${
-                visible[i] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
-              }`}
-              style={{ transitionDelay: visible[i] ? "0ms" : `${i * 50}ms` }}
+              role="img"
+              aria-label={tile.alt}
+              className={`home-collage-tile ${visible[i]
+                  ? "home-collage-visible"
+                  : i % 2 === 0
+                    ? "home-collage-enter-left"
+                    : "home-collage-enter-right"
+                }`}
             >
-              <img
-                src={tile.url}
-                alt={tile.alt}
-                className="w-full h-full object-cover block"
-                loading="lazy"
-                draggable={false}
+              <image
+                href={tile.url}
+                x={tile.frame.x}
+                y={tile.frame.y}
+                width={tile.frame.width}
+                height={tile.frame.height}
+                preserveAspectRatio="xMidYMid slice"
+                clipPath={`url(#home-collage-clip-${tile.id})`}
               />
-            </div>
+              <polygon
+                className="home-collage-outline"
+                points={tile.points}
+                fill="none"
+                stroke="#f8f9fa"
+                strokeWidth="18"
+                strokeLinejoin="round"
+              />
+            </g>
           ))}
-        </div>
+        </svg>
 
         <div className="text-center pt-4">
           <button
@@ -367,8 +330,7 @@ function PhotoMosaicSection({ onNavigate }: { onNavigate: (page: string) => void
           </button>
         </div>
       </div>
-    </section>
-  );
+    </section>)
 }
 
 // ─── MAIN APP COMPONENT ───────────────────────────────────────────────────────
@@ -472,7 +434,7 @@ export default function App() {
 
           { /* acá iba el gradiente */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/10 to-transparent" />
-          
+
 
           <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full pt-16">
             <div className="max-w-3xl space-y-6">
@@ -506,9 +468,8 @@ export default function App() {
               <button
                 key={i}
                 onClick={() => setHeroIndex(i)}
-                className={`h-2 transition-all rounded-full ${
-                  heroIndex === i ? "w-8 bg-[#a5cd38]" : "w-2 bg-white/40 hover:bg-white/70"
-                }`}
+                className={`h-2 transition-all rounded-full ${heroIndex === i ? "w-8 bg-[#a5cd38]" : "w-2 bg-white/40 hover:bg-white/70"
+                  }`}
                 aria-label={`Slide ${i + 1}`}
               />
             ))}
@@ -631,39 +592,39 @@ export default function App() {
               </AvatarFallback>
             </Avatar>
             <div className="min-w-0 flex-1">
-            <p className="text-lg md:text-xl text-[#1a1c18]/90 font-light italic leading-relaxed mb-8">
-              "{REVIEWS[reviewIndex].quote}"
-            </p>
+              <p className="text-lg md:text-xl text-[#1a1c18]/90 font-light italic leading-relaxed mb-8">
+                "{REVIEWS[reviewIndex].quote}"
+              </p>
 
-            <div className="flex flex-wrap items-center justify-between gap-4 border-t border-black/10 pt-6">
-              <div>
-                <p className="ff-display font-['Audiowide'] text-base font-bold text-[#1a1c18]">
-                  {REVIEWS[reviewIndex].name}
-                </p>
-                <p className="text-xs text-[#637f1d] font-semibold">
-                  {REVIEWS[reviewIndex].company}
-                </p>
-              </div>
+              <div className="flex flex-wrap items-center justify-between gap-4 border-t border-black/10 pt-6">
+                <div>
+                  <p className="ff-display font-['Audiowide'] text-base font-bold text-[#1a1c18]">
+                    {REVIEWS[reviewIndex].name}
+                  </p>
+                  <p className="text-xs text-[#637f1d] font-semibold">
+                    {REVIEWS[reviewIndex].company}
+                  </p>
+                </div>
 
-              <div className="flex gap-2">
-                <button
-                  onClick={() =>
-                    setReviewIndex((prev) => (prev === 0 ? REVIEWS.length - 1 : prev - 1))
-                  }
-                  className="p-2 border border-black/15 hover:bg-[#a5cd38] hover:border-[#a5cd38] text-[#1a1c18] transition-colors rounded-xs cursor-pointer"
-                  aria-label="Anterior"
-                >
-                  <ChevronLeft size={18} />
-                </button>
-                <button
-                  onClick={() => setReviewIndex((prev) => (prev + 1) % REVIEWS.length)}
-                  className="p-2 border border-black/15 hover:bg-[#a5cd38] hover:border-[#a5cd38] text-[#1a1c18] transition-colors rounded-xs cursor-pointer"
-                  aria-label="Siguiente"
-                >
-                  <ChevronRight size={18} />
-                </button>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() =>
+                      setReviewIndex((prev) => (prev === 0 ? REVIEWS.length - 1 : prev - 1))
+                    }
+                    className="p-2 border border-black/15 hover:bg-[#a5cd38] hover:border-[#a5cd38] text-[#1a1c18] transition-colors rounded-xs cursor-pointer"
+                    aria-label="Anterior"
+                  >
+                    <ChevronLeft size={18} />
+                  </button>
+                  <button
+                    onClick={() => setReviewIndex((prev) => (prev + 1) % REVIEWS.length)}
+                    className="p-2 border border-black/15 hover:bg-[#a5cd38] hover:border-[#a5cd38] text-[#1a1c18] transition-colors rounded-xs cursor-pointer"
+                    aria-label="Siguiente"
+                  >
+                    <ChevronRight size={18} />
+                  </button>
+                </div>
               </div>
-            </div>
             </div>
           </div>
         </section>
