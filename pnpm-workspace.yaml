@@ -9,9 +9,13 @@ allowBuilds:
   unix-dgram: true
 supportedArchitectures:
   os:
+    - current
     - linux
+    - win32
   cpu:
+    - current
     - x64
     - arm64
   libc:
+    - current
     - glibc
