@@ -2,25 +2,32 @@ import React from "react";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { ArrowRight } from "lucide-react";
+import { useParams } from "react-router-dom";
+import servicePageData from '@/data/servicios.json'
 
-interface ServicePageProps {
-  title: string;
-  subtitle: string;
-  heroImg: string;
-  features: Array<{
-    title: string;
-    description: string;
-    image: string;
-    tag: string;
-  }>;
-  onNavigate: (page: string) => void;
-}
+// interface ServicePageProps {
+//   title: string;
+//   subtitle: string;
+//   heroImg: string;
+//   features: Array<{
+//     title: string;
+//     description: string;
+//     image: string;
+//     tag: string;
+//   }>;
+//   onNavigate: (page: string) => void;
+// } { title, subtitle, heroImg, features, onNavigate }: ServicePageProps
 
-export function ServicePage({ title, subtitle, heroImg, features, onNavigate }: ServicePageProps) {
+export function ServicePage() {
+
+  const onNavigate = () => {}
+  const { servicio } = useParams();
+  const { title, subtitle, heroImg, features } = servicePageData[servicio];
+
   return (
     <div className="min-h-screen bg-[#F8F9FA] text-[#1a1c18] ff-body flex flex-col justify-between">
       <div>
-        <Navbar activePage="" onNavigate={onNavigate} />
+        <Navbar activePage="servicios" onNavigate={onNavigate} />
 
         {/* FULL SCREEN HERO WITH BACKGROUND PHOTO */}
         <section className="relative h-screen flex items-center justify-center bg-[#1a1c18] overflow-hidden">

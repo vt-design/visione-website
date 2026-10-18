@@ -1,0 +1,77 @@
+{
+  "carteleria": {
+    "title": "Cartelería Industrial & LED",
+    "subtitle": "Diseño, ingeniería y fabricación de carteles corpóreos, marquesinas y señalética de gran formato.",
+    "heroImg": "https://images.unsplash.com/photo-1780385187604-4663a1d7c6e6?w=1920&h=1080&fit=crop&auto=format",
+    "features": [
+      {
+        "title": "Corpóreos en Acero & Acrílico",
+        "description": "Letras en relieve en acero inoxidable, chapa galvanizada o acrílico con iluminación frontal, posterior (halo light) o combinada con matrices LED de alta durabilidad.",
+        "image": "https://images.unsplash.com/photo-1780385187604-4663a1d7c6e6?w=900&h=700&fit=crop&auto=format",
+        "tag": "CORPÓREOS 3D"
+      },
+      {
+        "title": "Marquesinas & Totems Monumentales",
+        "description": "Estructuras de gran porte para estaciones de servicio, parques industriales y shoppings. Cálculos estructurales homologados e ingeniería antiviento.",
+        "image": "https://images.unsplash.com/photo-1779614800682-0c0cea8e0cd5?w=900&h=700&fit=crop&auto=format",
+        "tag": "GRAN FORMATO"
+      },
+      {
+        "title": "Iluminación LED de Alta Eficiencia",
+        "description": "Módulos LED sellados con protección IP67 para exterior, fuentes con protección térmica y bajo consumo energético sostenido.",
+        "image": "https://images.unsplash.com/photo-1780565081532-0f68d721e44a?w=900&h=700&fit=crop&auto=format",
+        "tag": "TECNOLOGÍA LED"
+      }
+    ]
+  },
+  "grafica": {
+    "title": "Gráfica Corporativa & Vinilos",
+    "subtitle": "Soluciones de impresión digital de alta fidelidad, vinilos decorativos y rotulación de vehículos.",
+    "heroImg": "https://images.unsplash.com/photo-1608126841830-53832c4b326f?w=1920&h=1080&fit=crop&auto=format",
+    "features": [
+      {
+        "title": "Rotulación & Ploteo de Flotas",
+        "description": "Transformamos vehículos corporativos e industriales en vehículos publicitarios con vinilos autoadhesivos de alta durabilidad y resistencia UV.",
+        "image": "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?w=900&h=700&fit=crop&auto=format",
+        "tag": "FLOTAS & VEHÍCULOS"
+      },
+      {
+        "title": "Vinilos Decorativos & Esmerilados",
+        "description": "Privacidad y diseño para oficinas, salas de reunión y vidrieras comerciales mediante vinilos de corte, esmerilados y microperforados.",
+        "image": "https://images.unsplash.com/photo-1608126841830-53832c4b326f?w=900&h=700&fit=crop&auto=format",
+        "tag": "OFICINAS & VIDRIERAS"
+      },
+      {
+        "title": "Impresión Gigantografía Gran Formato",
+        "description": "Lonas de alta resistencia para frentes de obra, banners publicitarios y vallas con tintas ecológicas de secado UV.",
+        "image": "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=900&h=700&fit=crop&auto=format",
+        "tag": "IMPRESIÓN GIGANTE"
+      }
+    ]
+  },
+  "revestimientos": {
+    "title": "Revestimientos Metal & Fachadas",
+    "subtitle": "Paneles de Aluminio Compuesto (ACM), chapa perforada y fachadas arquitectónicas modernas.",
+    "heroImg": "https://images.unsplash.com/photo-1551520692-7cdc7dc041b1?w=1920&h=1080&fit=crop&auto=format",
+    "features": [
+      {
+        "title": "Paneles de Aluminio Compuesto (ACM)",
+        "description": "Placas rígidas y livianas para renovación de fachadas comerciales. Acabados mate, metalizados y textura madera con nulo mantenimiento.",
+        "image": "https://images.unsplash.com/photo-1760787545864-b468b6fe2c92?w=900&h=700&fit=crop&auto=format",
+        "tag": "FACHADAS ACM"
+      },
+      {
+        "title": "Chapa Perforada & Metal Desplegado",
+        "description": "Parasoles, cerramientos decorativos y revestimientos industriales con corte láser computarizado a medida según plano de arquitectura.",
+        "image": "https://images.unsplash.com/photo-1551520692-7cdc7dc041b1?w=900&h=700&fit=crop&auto=format",
+        "tag": "DISEÑO A MEDIDA"
+      },
+      {
+        "title": "Montaje & Estructuras Portantes",
+        "description": "Subestructuras de tubo de acero galvanizado, cálculo de cargas de viento e instalación con equipos de elevación en altura.",
+        "image": "https://images.unsplash.com/photo-1564182842834-681b7be6de4b?w=900&h=700&fit=crop&auto=format",
+        "tag": "INGENIERÍA ESTRUCTURAL"
+      }
+    ]
+  }
+}
