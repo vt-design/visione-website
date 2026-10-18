@@ -2,16 +2,21 @@ import React from "react";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { ArrowLeft, AlertTriangle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-interface NotFoundPageProps {
-  onNavigate: (page: string) => void;
-}
 
-export default function NotFoundPage({ onNavigate }: NotFoundPageProps) {
+
+export default function NotFoundPage() {
+   const navigate = useNavigate();
+  const handleNav = (page: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    navigate(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <div className="min-h-screen bg-[#F8F9FA] text-[#1a1c18] ff-body flex flex-col justify-between">
       <div>
-        <Navbar activePage="" onNavigate={onNavigate} />
+        <Navbar activePage=""  />
 
         {/* MAIN 404 HERO CONTENT */}
         <section className="relative pt-36 pb-24 bg-[#1a1c18] text-white border-b border-white/10 min-h-[70vh] flex items-center justify-center">
@@ -34,8 +39,8 @@ export default function NotFoundPage({ onNavigate }: NotFoundPageProps) {
 
             <div className="pt-6">
               <button
-                onClick={() => onNavigate("home")}
-                className="btn-wipe btn-wipe-dark px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs uppercase tracking-wider rounded-xs shadow-xl inline-flex items-center gap-3"
+                onClick={(e) => handleNav("/", e)}
+                className="btn-wipe btn-wipe-primery px-8 py-4 bg-[#a5cd38] text-[#1a1c18] hover:text-[#a5cd38] font-bold text-xs uppercase tracking-wider rounded-xs shadow-xl inline-flex items-center gap-3"
               >
                 <ArrowLeft size={16} />
                 <span>Volver a la Página Principal</span>
@@ -45,7 +50,7 @@ export default function NotFoundPage({ onNavigate }: NotFoundPageProps) {
         </section>
       </div>
 
-      <Footer onNavigate={onNavigate} />
+      <Footer />
     </div>
   );
 }

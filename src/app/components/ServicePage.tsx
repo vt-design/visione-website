@@ -2,7 +2,7 @@ import React from "react";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { ArrowRight } from "lucide-react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import servicePageData from '@/data/servicios.json'
 
 // interface ServicePageProps {
@@ -20,14 +20,14 @@ import servicePageData from '@/data/servicios.json'
 
 export function ServicePage() {
 
-  const onNavigate = () => {}
+  const navigate = useNavigate();
   const { servicio } = useParams();
   const { title, subtitle, heroImg, features } = servicePageData[servicio];
 
   return (
     <div className="min-h-screen bg-[#F8F9FA] text-[#1a1c18] ff-body flex flex-col justify-between">
       <div>
-        <Navbar activePage="servicios" onNavigate={onNavigate} />
+        <Navbar activePage={servicio} />
 
         {/* FULL SCREEN HERO WITH BACKGROUND PHOTO */}
         <section className="relative h-screen flex items-center justify-center bg-[#1a1c18] overflow-hidden">
@@ -47,7 +47,7 @@ export function ServicePage() {
             </p>
             <div className="pt-6">
               <button
-                onClick={() => onNavigate("contacto")}
+                onClick={() => navigate("/contacto")}
                 className="btn-wipe btn-wipe-primary px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-sm tracking-wider uppercase rounded-xs shadow-lg inline-flex items-center gap-3 cursor-pointer"
               >
                 <span>Solicitar Presupuesto para este Servicio</span>
@@ -96,7 +96,7 @@ export function ServicePage() {
                     </p>
                     <div className="pt-2">
                       <button
-                        onClick={() => onNavigate("galeria")}
+                        onClick={() => navigate("/galeria")}
                         className="text-xs font-bold tracking-wider uppercase text-[#a5cd38] hover:text-[#a5cd38] inline-flex items-center gap-2 border-b-2 border-[#a5cd38] pb-1 transition-colors cursor-pointer"
                       >
                         <span>Ver más fotos</span>
@@ -122,7 +122,7 @@ export function ServicePage() {
               </p>
             </div>
             <button
-              onClick={() => onNavigate("contacto")}
+              onClick={() => navigate("/contacto")}
               className="btn-wipe btn-wipe-primary px-8 py-3.5 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs tracking-wider uppercase rounded-xs shadow-md whitespace-nowrap cursor-pointer"
             >
               Contactar Asesor Técnico
@@ -131,7 +131,7 @@ export function ServicePage() {
         </section>
       </div>
 
-      <Footer onNavigate={onNavigate} />
+      <Footer />
     </div>
   );
 }

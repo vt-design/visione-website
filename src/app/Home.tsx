@@ -13,6 +13,7 @@ import ContactPage from "./ContactPage";
 import NotFoundPage from "./NotFoundPage";
 // import logoImg from "../assets/logo-visione.png";
 import { Avatar, AvatarImage, AvatarFallback } from "./components/ui/avatar";
+import { useNavigate } from "react-router-dom";
 
 // ─── DATA & CONSTANTS ────────────────────────────────────────────────────────
 
@@ -44,7 +45,7 @@ const SERVICE_CARDS = [
     desc: "Desde letras corpóreas hasta monumentales de gran formato. Aluminio, acero, acrílico y tecnología LED para máxima visibilidad corporativa.",
     tags: "METAL · ACRÍLICO · DIMENSIONAL · LED",
     photo: "/images/imagen-servicio-carteleria.webp",
-    page: "carteleria",
+    page: "/servicios/carteleria",
   },
   {
     num: "02",
@@ -52,7 +53,7 @@ const SERVICE_CARDS = [
     desc: "Paneles de aluminio compuesto (ACM) y fachadas ventiladas. Soluciones estructurales de vanguardia con alta resistencia al clima.",
     tags: "FACHADAS · ACM · ESTRUCTURA · RESISTENTE",
     photo: "/images/imagen-servicio-revestimiento.webp",
-    page: "revestimientos",
+    page: "/servicios/revestimientos",
   },
   {
     num: "03",
@@ -60,7 +61,7 @@ const SERVICE_CARDS = [
     desc: "Impresión de alta resolución, vinilos de seguridad, microperforados y decoración de vidrieras para puntos de venta e industrias.",
     tags: "VINILOS · MICROS · MARCA · VEHÍCULOS",
     photo: "/images/imagen-servicio-grafica.webp",
-    page: "grafica",
+    page: "/servicios/grafica",
   },
 ];
 
@@ -108,6 +109,7 @@ const MOSAIC_TILES = [
     frame: { x: 560, y: 650, width: 1040, height: 350 },
   },
 ];
+
 const REVIEWS = [
   {
     quote:
@@ -132,91 +134,20 @@ const REVIEWS = [
   },
 ];
 
-const SERVICE_PAGES_DATA = {
-  carteleria: {
-    title: "Cartelería Industrial & LED",
-    subtitle: "Diseño, ingeniería y fabricación de carteles corpóreos, marquesinas y señalética de gran formato.",
-    heroImg: "https://images.unsplash.com/photo-1780385187604-4663a1d7c6e6?w=1920&h=1080&fit=crop&auto=format",
-    features: [
-      {
-        title: "Corpóreos en Acero & Acrílico",
-        description: "Letras en relieve en acero inoxidable, chapa galvanizada o acrílico con iluminación frontal, posterior (halo light) o combinada con matrices LED de alta durabilidad.",
-        image: "https://images.unsplash.com/photo-1780385187604-4663a1d7c6e6?w=900&h=700&fit=crop&auto=format",
-        tag: "CORPÓREOS 3D",
-      },
-      {
-        title: "Marquesinas & Totems Monumentales",
-        description: "Estructuras de gran porte para estaciones de servicio, parques industriales y shoppings. Cálculos estructurales homologados e ingeniería antiviento.",
-        image: "https://images.unsplash.com/photo-1779614800682-0c0cea8e0cd5?w=900&h=700&fit=crop&auto=format",
-        tag: "GRAN FORMATO",
-      },
-      {
-        title: "Iluminación LED de Alta Eficiencia",
-        description: "Módulos LED sellados con protección IP67 para exterior, fuentes con protección térmica y bajo consumo energético sostenido.",
-        image: "https://images.unsplash.com/photo-1780565081532-0f68d721e44a?w=900&h=700&fit=crop&auto=format",
-        tag: "TECNOLOGÍA LED",
-      },
-    ],
-  },
-  grafica: {
-    title: "Gráfica Corporativa & Vinilos",
-    subtitle: "Soluciones de impresión digital de alta fidelidad, vinilos decorativos y rotulación de vehículos.",
-    heroImg: "https://images.unsplash.com/photo-1608126841830-53832c4b326f?w=1920&h=1080&fit=crop&auto=format",
-    features: [
-      {
-        title: "Rotulación & Ploteo de Flotas",
-        description: "Transformamos vehículos corporativos e industriales en vehículos publicitarios con vinilos autoadhesivos de alta durabilidad y resistencia UV.",
-        image: "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?w=900&h=700&fit=crop&auto=format",
-        tag: "FLOTAS & VEHÍCULOS",
-      },
-      {
-        title: "Vinilos Decorativos & Esmerilados",
-        description: "Privacidad y diseño para oficinas, salas de reunión y vidrieras comerciales mediante vinilos de corte, esmerilados y microperforados.",
-        image: "https://images.unsplash.com/photo-1608126841830-53832c4b326f?w=900&h=700&fit=crop&auto=format",
-        tag: "OFICINAS & VIDRIERAS",
-      },
-      {
-        title: "Impresión Gigantografía Gran Formato",
-        description: "Lonas de alta resistencia para frentes de obra, banners publicitarios y vallas con tintas ecológicas de secado UV.",
-        image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=900&h=700&fit=crop&auto=format",
-        tag: "IMPRESIÓN GIGANTE",
-      },
-    ],
-  },
-  revestimientos: {
-    title: "Revestimientos Metal & Fachadas",
-    subtitle: "Paneles de Aluminio Compuesto (ACM), chapa perforada y fachadas arquitectónicas modernas.",
-    heroImg: "https://images.unsplash.com/photo-1551520692-7cdc7dc041b1?w=1920&h=1080&fit=crop&auto=format",
-    features: [
-      {
-        title: "Paneles de Aluminio Compuesto (ACM)",
-        description: "Placas rígidas y livianas para renovación de fachadas comerciales. Acabados mate, metalizados y textura madera con nulo mantenimiento.",
-        image: "https://images.unsplash.com/photo-1760787545864-b468b6fe2c92?w=900&h=700&fit=crop&auto=format",
-        tag: "FACHADAS ACM",
-      },
-      {
-        title: "Chapa Perforada & Metal Desplegado",
-        description: "Parasoles, cerramientos decorativos y revestimientos industriales con corte láser computarizado a medida según plano de arquitectura.",
-        image: "https://images.unsplash.com/photo-1551520692-7cdc7dc041b1?w=900&h=700&fit=crop&auto=format",
-        tag: "DISEÑO A MEDIDA",
-      },
-      {
-        title: "Montaje & Estructuras Portantes",
-        description: "Subestructuras de tubo de acero galvanizado, cálculo de cargas de viento e instalación con equipos de elevación en altura.",
-        image: "https://images.unsplash.com/photo-1564182842834-681b7be6de4b?w=900&h=700&fit=crop&auto=format",
-        tag: "INGENIERÍA ESTRUCTURAL",
-      },
-    ],
-  },
-};
-
 const VALID_PAGES = ["home", "carteleria", "grafica", "revestimientos", "nosotros", "galeria", "contacto"];
 
 // ─── PHOTO MOSAIC SECTION ────────────────────────────────────────────────────
 
-function PhotoMosaicSection({ onNavigate }: { onNavigate: (page: string) => void }) {
+function PhotoMosaicSection() {
   const mosaicRef = useRef<SVGSVGElement | null>(null);
   const [visible, setVisible] = useState<boolean[]>(new Array(MOSAIC_TILES.length).fill(false));
+  const navigate = useNavigate();
+
+  const handleNav = (page: string, e: React.MouseEvent) => {
+      e.preventDefault();
+      navigate(page);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
 
   useEffect(() => {
     const mosaic = mosaicRef.current;
@@ -249,6 +180,8 @@ function PhotoMosaicSection({ onNavigate }: { onNavigate: (page: string) => void
       timers.forEach(clearTimeout);
     };
   }, []);
+
+
 
   /**
    * bg-[#1a1c18]
@@ -322,7 +255,7 @@ function PhotoMosaicSection({ onNavigate }: { onNavigate: (page: string) => void
 
         <div className="text-center pt-4">
           <button
-            onClick={() => onNavigate("galeria")}
+            onClick={(e) => handleNav("/galeria", e)}
             className="btn-wipe btn-wipe-primary px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs tracking-wider uppercase rounded-xs shadow-lg inline-flex items-center gap-3 cursor-pointer"
           >
             <span>Ver Galería Completa</span>
@@ -336,14 +269,21 @@ function PhotoMosaicSection({ onNavigate }: { onNavigate: (page: string) => void
 // ─── MAIN APP COMPONENT ───────────────────────────────────────────────────────
 
 export default function HomePage() {
-  const [activePage, setActivePage] = useState("home");
+  // const [activePage, setActivePage] = useState("home");
   const [heroIndex, setHeroIndex] = useState(0);
   const [reviewIndex, setReviewIndex] = useState(0);
   const [incoming, setIncoming] = useState<{ idx: number; key: number } | null>(null);
   const heroIndexRef = useRef(0);
 
+  const navigate = useNavigate();
+  const handleNav = (page: string, e: React.MouseEvent) => {
+      e.preventDefault();
+      navigate(page);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
   useEffect(() => {
-    if (activePage !== "home") return;
+    // if (activePage !== "home") return;
     const interval = setInterval(() => {
       const next = (heroIndexRef.current + 1) % HERO_IMAGES.length;
       setIncoming({ idx: next, key: Date.now() });
@@ -354,43 +294,9 @@ export default function HomePage() {
       }, 850);
     }, 3800);
     return () => clearInterval(interval);
-  }, [activePage]);
+  }, []);
 
-  const handleNavigate = (page: string) => {
-    setActivePage(page);
-    window.scrollTo({ top: 0, behavior: "instant" });
-  };
-
-  // ROUTING & FALLBACK TO 404
-  if (!VALID_PAGES.includes(activePage)) {
-    return <NotFoundPage onNavigate={handleNavigate} />;
-  }
-
-  if (activePage === "contacto") {
-    return <ContactPage onNavigate={handleNavigate} />;
-  }
-
-  if (activePage === "nosotros") {
-    return <AboutPage onNavigate={handleNavigate} />;
-  }
-
-  if (activePage === "galeria") {
-    return <GalleryPage onNavigate={handleNavigate} />;
-  }
-
-  if (["carteleria", "grafica", "revestimientos"].includes(activePage)) {
-    const data = SERVICE_PAGES_DATA[activePage as keyof typeof SERVICE_PAGES_DATA];
-    return (
-      <ServicePage
-        title={data.title}
-        subtitle={data.subtitle}
-        heroImg={data.heroImg}
-        features={data.features}
-        onNavigate={handleNavigate}
-      />
-    );
-  }
-
+  
   /* 
     gradiente del hero
 
@@ -401,7 +307,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#F8F9FA] text-[#1a1c18] ff-body selection:bg-[#a5cd38] selection:text-[#1a1c18] flex flex-col justify-between">
       <div>
-        <Navbar activePage="home" onNavigate={handleNavigate} />
+        <Navbar activePage="home" />
 
         {/* HERO SECTION */}
         <section className="relative h-screen bg-[#1a1c18] overflow-hidden flex items-center">
@@ -453,7 +359,7 @@ export default function HomePage() {
 
               <div className="pt-4 flex flex-wrap items-center gap-4">
                 <button
-                  onClick={() => handleNavigate("contacto")}
+                  onClick={(e) => handleNav("/contacto", e)}
                   className="btn-wipe btn-wipe-primary px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs tracking-wider uppercase rounded-xs shadow-lg flex items-center gap-3 cursor-pointer"
                 >
                   <span>Solicitar Cotización</span>
@@ -522,7 +428,7 @@ export default function HomePage() {
             {SERVICE_CARDS.map((card, idx) => (
               <div
                 key={idx}
-                onClick={() => handleNavigate(card.page)}
+                onClick={(e) => handleNav(card.page, e)}
                 className="group bg-white border border-black/10 rounded-sm overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between cursor-pointer"
               >
                 <div>
@@ -564,7 +470,7 @@ export default function HomePage() {
         <hr></hr>
 
         {/* GALERÍA / PHOTO MOSAIC */}
-        <PhotoMosaicSection onNavigate={handleNavigate} />
+        <PhotoMosaicSection />
 
         <hr></hr>
 
@@ -640,7 +546,7 @@ export default function HomePage() {
             </p>
             <div className="pt-4">
               <button
-                onClick={() => handleNavigate("contacto")}
+                onClick={(e) => handleNav("/contacto", e)}
                 className="btn-wipe btn-wipe-primary px-9 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs uppercase tracking-wider rounded-xs shadow-xl"
               >
                 Contactar a Asesor Comercial
@@ -650,7 +556,7 @@ export default function HomePage() {
         </section>
       </div>
 
-      <Footer onNavigate={handleNavigate} />
+      <Footer />
     </div>
   );
 }

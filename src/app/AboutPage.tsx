@@ -2,9 +2,6 @@ import React from "react";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 
-interface AboutPageProps {
-  onNavigate: (page: string) => void;
-}
 
 const STEPS = [
   {
@@ -57,11 +54,12 @@ const TIMELINE = [
   },
 ];
 
-export default function AboutPage({ onNavigate }: AboutPageProps) {
+export default function AboutPage() {
+
   return (
     <div className="min-h-screen bg-[#F8F9FA] text-[#1a1c18] ff-body flex flex-col justify-between">
       <div>
-        <Navbar activePage="nosotros" onNavigate={onNavigate} />
+        <Navbar activePage="nosotros" />
 
         {/* COMPACT HERO HEADER SECTION */}
         <section className="relative pt-28 pb-10 bg-[#1a1c18] text-white border-b border-white/10">
@@ -170,7 +168,7 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
         </section>
       </div>
 
-      <Footer onNavigate={onNavigate} />
+      <Footer  />
     </div>
   );
 }

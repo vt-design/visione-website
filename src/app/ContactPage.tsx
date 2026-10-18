@@ -11,9 +11,6 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 
-interface ContactPageProps {
-  onNavigate: (page: string) => void;
-}
 
 function WhatsAppSVG({ size = 20 }: { size?: number }) {
   return (
@@ -35,7 +32,7 @@ function PlatformLogo({ brand }: { brand: "instagram" | "facebook" | "wetransfer
   );
 }
 
-export default function ContactPage({ onNavigate }: ContactPageProps) {
+export default function ContactPage() {
   const [nombre, setNombre] = useState("");
   const [empresa, setEmpresa] = useState("");
   const [consulta, setConsulta] = useState("");
@@ -58,7 +55,7 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
   return (
     <div className="min-h-screen bg-[#F8F9FA] text-[#1a1c18] ff-body flex flex-col justify-between">
       <div>
-        <Navbar activePage="contacto" onNavigate={onNavigate} />
+        <Navbar activePage="contacto" />
 
         {/* COMPACT HERO HEADER SECTION */}
         <section className="relative pt-28 pb-10 bg-[#1a1c18] text-white border-b border-white/10">
@@ -247,7 +244,7 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
         </section>
       </div>
 
-      <Footer onNavigate={onNavigate} />
+      <Footer />
     </div>
   );
 }

@@ -1,23 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-export interface FooterProps {
-  onNavigate: (page: string) => void;
-}
-
-export function Footer({ onNavigate }: FooterProps) {
+export function Footer() {
+  const navigate = useNavigate();
   const handleNav = (page: string, e: React.MouseEvent) => {
     e.preventDefault();
-    onNavigate(page);
+    navigate(page);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
+  
   return (
     <footer className="bg-[#1a1c18] text-white pt-16 pb-12 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
         {/* BRAND COLUMN */}
         <div className="space-y-4 md:col-span-1">
           <button
-            onClick={(e) => handleNav("home", e)}
+            onClick={(e) => handleNav("/", e)}
             className="ff-display font-['Audiowide'] text-2xl font-bold tracking-wider text-white hover:text-[#a5cd38] transition-colors text-left"
           >
             <img alt="logo visione" src= "/images/imagenes-clientes/visione-cliente-nuevos/texto-logo-visione.png" className="w-3/4"></img>
@@ -39,17 +37,17 @@ export function Footer({ onNavigate }: FooterProps) {
           </h4>
           <ul className="space-y-2.5 text-sm text-white/70">
             <li>
-              <button onClick={(e) => handleNav("carteleria", e)} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
+              <button onClick={(e) => handleNav("/servicios/carteleria", e)} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
                 Cartelería Industrial & LED
               </button>
             </li>
             <li>
-              <button onClick={(e) => handleNav("grafica", e)} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
+              <button onClick={(e) => handleNav("/servicios/grafica", e)} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
                 Gráfica Corporativa & Vinilos
               </button>
             </li>
             <li>
-              <button onClick={(e) => handleNav("revestimientos", e)} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
+              <button onClick={(e) => handleNav("/servicios/revestimientos", e)} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
                 Revestimientos de Metal & Fachadas
               </button>
             </li>
@@ -63,22 +61,22 @@ export function Footer({ onNavigate }: FooterProps) {
           </h4>
           <ul className="space-y-2.5 text-sm text-white/70">
             <li>
-              <button onClick={(e) => handleNav("home", e)} className="cursor-pointer hover:text-[#a5cd38] transition-colors">
+              <button onClick={(e) => handleNav("/", e)} className="cursor-pointer hover:text-[#a5cd38] transition-colors">
                 Inicio
               </button>
             </li>
             <li>
-              <button onClick={(e) => handleNav("galeria", e)} className="cursor-pointer hover:text-[#a5cd38] transition-colors">
+              <button onClick={(e) => handleNav("/galeria", e)} className="cursor-pointer hover:text-[#a5cd38] transition-colors">
                 Galería de Trabajos
               </button>
             </li>
             <li>
-              <button onClick={(e) => handleNav("nosotros", e)} className="cursor-pointer hover:text-[#a5cd38] transition-colors">
+              <button onClick={(e) => handleNav("/sobre-nosotros", e)} className="cursor-pointer hover:text-[#a5cd38] transition-colors">
                 Sobre Nosotros
               </button>
             </li>
             <li>
-              <button onClick={(e) => handleNav("contacto", e)} className="cursor-pointer hover:text-[#a5cd38] transition-colors">
+              <button onClick={(e) => handleNav("/contacto", e)} className="cursor-pointer hover:text-[#a5cd38] transition-colors">
                 Contacto Directo
               </button>
             </li>

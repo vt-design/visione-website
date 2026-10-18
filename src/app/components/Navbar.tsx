@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'
 
 export interface NavbarProps {
   activePage: string;
-  onNavigate: (page: string) => void;
 }
 
 const SERVICIOS_LINKS = [
@@ -14,7 +13,7 @@ const SERVICIOS_LINKS = [
   { label: "Revestimientos", page: "/servicios/revestimientos" },
 ];
 
-export function Navbar({ activePage, onNavigate }: NavbarProps) {
+export function Navbar({ activePage }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [servDropOpen, setServDropOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -39,10 +38,10 @@ export function Navbar({ activePage, onNavigate }: NavbarProps) {
 
   const handleNavClick = (page: string, e: React.MouseEvent) => {
     e.preventDefault();
-    // onNavigate(page);
     navigate(page)
     setMenuOpen(false);
     setServDropOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (

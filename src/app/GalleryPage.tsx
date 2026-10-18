@@ -5,10 +5,6 @@ import { Footer } from "./components/Footer";
 import { Button } from "./components/ui/button";
 import { X } from "lucide-react";
 
-interface GalleryPageProps {
-  onNavigate: (page: string) => void;
-}
-
 interface GalleryImage {
   id: string;
   url: string;
@@ -22,9 +18,7 @@ interface GalleryResponse {
 
 const TILES_PER_CYCLE = 10;
 
-export default function GalleryPage({
-  onNavigate,
-}: GalleryPageProps) {
+export default function GalleryPage() {
   const [images, setImages] = useState<GalleryImage[]>([]);
   const [nextCursor, setNextCursor] = useState<string | null>(null);
   const [selectedImg, setSelectedImg] = useState<string | null>(null);
@@ -120,7 +114,7 @@ export default function GalleryPage({
   return (
     <div className="min-h-screen bg-[#F8F9FA] text-[#1a1c18] ff-body flex flex-col justify-between">
       <div>
-        <Navbar activePage="galeria" onNavigate={onNavigate} />
+        <Navbar activePage="galeria"/>
 
         <section className="relative pt-28 pb-10 bg-[#1a1c18] text-white border-b border-white/10">
           <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-3">
@@ -224,7 +218,7 @@ export default function GalleryPage({
         )}
       </div>
 
-      <Footer onNavigate={onNavigate} />
+      <Footer />
     </div>
   );
 }
