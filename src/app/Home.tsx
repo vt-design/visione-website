@@ -24,9 +24,9 @@ const HERO_IMAGES = [
 ];
 
 const CLIENT_LOGOS = [
-  { name: "ADIDAS", src: "/images/imagenes-clientes/adidas-com-logo.png" },
-  { name: "BAYER S.A.", src: "/images/imagenes-clientes/bayer-com-logo.png" },
-  { name: "MERCEDES BENZ", src: "/images/imagenes-clientes/mbfs-com-logo.png" },
+  { name: "ADIDAS", src: "/images/imagenes-clientes/logo-adidas.png" },
+  { name: "BAYER S.A.", src: "/images/imagenes-clientes/logo-bayer.png" },
+  { name: "MERCEDES BENZ", src: "/images/imagenes-clientes/logo-mercedes-benz.png" },
   { name: "BRIDGESTONE", src: "/images/imagenes-clientes/logo-bridgestone.png" },
   { name: "GALENO", src: "/images/imagenes-clientes/logo-galeno.webp" },
   { name: "RENAULT", src: "/images/imagenes-clientes/logo-renault.png" },
@@ -36,6 +36,17 @@ const CLIENT_LOGOS = [
   { name: "LEVIS", src: "/images/imagenes-clientes/logo-levis.svg" },
   { name: "SAO", src: "/images/imagenes-clientes/sao-logo.svg" },
   { name: "MONTAGNE", src: "/images/imagenes-clientes/montagne-logo.svg" },
+  
+  // logos nuevos
+  { name: "AEROLINEAS ARGENTINAS", src: "/images/imagenes-clientes/logo-aerolineas-argentinas.svg" },
+  { name: "ANDREANI", src: "/images/imagenes-clientes/logo-andreani.svg" },
+  { name: "BAIC", src: "/images/imagenes-clientes/logo-baic.png" },
+  { name: "CONTINENTAL", src: "/images/imagenes-clientes/logo-continental.svg" },
+  { name: "HONDA", src: "/images/imagenes-clientes/logo-honda.png" },
+  { name: "KAWASAKI", src: "/images/imagenes-clientes/logo-kawasaki.png" },
+  { name: "MADIFE", src: "/images/imagenes-clientes/logo-medife.svg" },
+  { name: "MEGATLON", src: "/images/imagenes-clientes/logo-megatlon.svg" },
+  { name: "PATAGONIA FLOORING", src: "/images/imagenes-clientes/logo-patagonia-flooring.png" },
 ];
 
 const SERVICE_CARDS = [
