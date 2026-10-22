@@ -17,10 +17,40 @@ import { useNavigate } from "react-router-dom";
 
 // ─── DATA & CONSTANTS ────────────────────────────────────────────────────────
 
-const HERO_IMAGES = [
-  "/images/imagen-hero-1-uca.webp",
-  "/images/imagen-hero-2-cronica.webp",
-  "/images/imagen-hero-3-continental.webp",
+const HERO_SLIDES = [
+  {
+    image: "/images/imagen-hero-1-uca.webp",
+    title: "MÁS DE 25 AÑOS DE EXPERIENCIA",
+    titleLines: [
+      [{ text: "MÁS DE" }],
+      [{ text: "25 AÑOS", accent: true }, { text: " DE" }],
+      [{ text: "EXPERIENCIA" }],
+    ],
+    subtitle:
+      "Soluciones que combinan conocimiento, calidad y compromiso en cada proyecto.",
+  },
+  {
+    image: "/images/imagen-hero-2-cronica.webp",
+    title: "TRANSFORMAMOS ESPACIOS. POTENCIAMOS MARCAS",
+    titleLines: [
+      [{ text: "TRANS-" }],
+      [{ text: "FORMAMOS.", accent: true}],
+      [{ text: "POTENCIAMOS" }],
+    ],
+    subtitle:
+      "Revestimientos y cartelería que transforman fachadas y destacan tu marca.",
+  },
+  {
+    image: "/images/imagen-hero-3-continental.webp",
+    title: "UNA MARCA, LA MISMA CALIDAD EN CADA PUNTO DEL PAÍS",
+    titleLines: [
+      [{ text: "UNA MARCA," }],
+      [{ text: "CALIDAD", accent: true }, {text: " EN"}],
+      [{text: "TODO EL PAIS"}]
+    ],
+    subtitle:
+      "Llegamos a cada destino con la misma dedicación y excelencia.",
+  },
 ];
 
 const CLIENT_LOGOS = [
@@ -41,25 +71,25 @@ const CLIENT_LOGOS = [
 const SERVICE_CARDS = [
   {
     num: "01",
-    title: "FABRICACIÓN DE CARTELES",
-    desc: "Desde letras corpóreas hasta monumentales de gran formato. Aluminio, acero, acrílico y tecnología LED para máxima visibilidad corporativa.",
-    tags: "METAL · ACRÍLICO · DIMENSIONAL · LED",
-    photo: "/images/imagen-servicio-carteleria.webp",
-    page: "/servicios/carteleria",
-  },
-  {
-    num: "02",
-    title: "REVESTIMIENTO DE METAL",
-    desc: "Paneles de aluminio compuesto (ACM) y fachadas ventiladas. Soluciones estructurales de vanguardia con alta resistencia al clima.",
-    tags: "FACHADAS · ACM · ESTRUCTURA · RESISTENTE",
+    title: "REVESTIMIENTO DE FACHADAS",
+    desc: "Renovamos fachadas con soluciones de revestimiento que combinan diseño, calidad y durabilidad.",
+    tags: "ACM · CHAPA · PLEGADOS · CALADOS",
     photo: "/images/imagen-servicio-revestimiento.webp",
     page: "/servicios/revestimientos",
   },
   {
+    num: "02",
+    title: "CARTELERÍA Y LETRAS CORPOREAS",
+    desc: "Diseñamos y producimos carteles y letras con y sin iluminación para destacar cada marca.",
+    tags: "ACM · ACRILICO · CHAPA · ACERO · LED",
+    photo: "/images/imagen-servicio-carteleria.webp",
+    page: "/servicios/carteleria",
+  },
+  {
     num: "03",
     title: "GRÁFICA CORPORATIVA",
-    desc: "Impresión de alta resolución, vinilos de seguridad, microperforados y decoración de vidrieras para puntos de venta e industrias.",
-    tags: "VINILOS · MICROS · MARCA · VEHÍCULOS",
+    desc: "Soluciones gráficas para comunicar la identidad de empresas e instituciones.",
+    tags: "SEÑALETICA · VINILOS · PLOTEO ",
     photo: "/images/imagen-servicio-grafica.webp",
     page: "/servicios/grafica",
   },
@@ -266,6 +296,34 @@ function PhotoMosaicSection() {
     </section>)
 }
 
+function HeroSlideCopy({ slide }: { slide: (typeof HERO_SLIDES)[number] }) {
+  return (
+    <>
+      <div className="h-[12rem] sm:h-[13rem] lg:h-[19rem] flex items-center">
+        <h1 className="ff-display font-['Audiowide'] text-[clamp(1.4rem,6vw,4.5rem)] font-bold tracking-tight text-white uppercase leading-[1.05]">
+          {slide.titleLines.map((line, lineIndex) => (
+            <span key={lineIndex} className="block whitespace-nowrap">
+              {line.map((segment, segmentIndex) => (
+                <span
+                  key={segmentIndex}
+                  className={segment.accent ? "text-[#a5cd38]" : undefined}
+                >
+                  {segment.text}
+                </span>
+              ))}
+            </span>
+          ))}
+        </h1>
+      </div>
+      <div className="h-[4.5rem] sm:h-[3.75rem]">
+        <p className="text-base sm:text-xl text-white/90 leading-relaxed font-light max-w-2xl">
+          {slide.subtitle}
+        </p>
+      </div>
+    </>
+  );
+}
+
 // ─── MAIN APP COMPONENT ───────────────────────────────────────────────────────
 
 export default function HomePage() {
@@ -285,7 +343,7 @@ export default function HomePage() {
   useEffect(() => {
     // if (activePage !== "home") return;
     const interval = setInterval(() => {
-      const next = (heroIndexRef.current + 1) % HERO_IMAGES.length;
+      const next = (heroIndexRef.current + 1) % HERO_SLIDES.length;
       setIncoming({ idx: next, key: Date.now() });
       setTimeout(() => {
         heroIndexRef.current = next;
@@ -317,22 +375,36 @@ export default function HomePage() {
                 from { transform: translateX(100%); }
                 to   { transform: translateX(0); }
               }
+              @keyframes heroCopyWipeIn {
+                from { transform: translateX(100vw); }
+                to   { transform: translateX(0); }
+              }
+              @keyframes heroCopyWipeOut {
+                from { transform: translateX(0); }
+                to   { transform: translateX(-100vw); }
+              }
               .hero-wipe-in {
                 animation: heroWipeIn 0.82s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+              }
+              .hero-copy-wipe-in {
+                animation: heroCopyWipeIn 0.82s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+              }
+              .hero-copy-wipe-out {
+                animation: heroCopyWipeOut 0.82s cubic-bezier(0.77, 0, 0.175, 1) forwards;
               }
             `}</style>
             {/* Base layer — current image, stays in place */}
             <img
-              src={HERO_IMAGES[heroIndex]}
-              alt="Visione Cartelería Industrial"
+              src={HERO_SLIDES[heroIndex].image}
+              alt={HERO_SLIDES[heroIndex].title}
               className="absolute inset-0 w-full h-full object-cover"
             />
             {/* Incoming layer — mounts off-screen right, slides in, then unmounts */}
             {incoming && (
               <img
                 key={incoming.key}
-                src={HERO_IMAGES[incoming.idx]}
-                alt="Visione Cartelería Industrial"
+                src={HERO_SLIDES[incoming.idx].image}
+                alt={HERO_SLIDES[incoming.idx].title}
                 className="absolute inset-0 w-full h-full object-cover hero-wipe-in"
               />
             )}
@@ -348,32 +420,64 @@ export default function HomePage() {
                 FABRICANTE INDUSTRIAL EN BUENOS AIRES
               </span> */}
 
-              <h1 className="ff-display font-['Audiowide'] text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white uppercase leading-[1.05]">
-                MÁS DE <br />
-                <span className="text-[#a5cd38]">25 AÑOS</span> DE EXPERIENCIA
-              </h1>
-
-              <p className="text-base sm:text-xl text-white/90 leading-relaxed font-light max-w-2xl">
-                Diseñamos, fabricamos e instalamos cartelería, revestimientos de aluminio y gráfica corporativa en todo el país.
-              </p>
-
-              <div className="pt-4 flex flex-wrap items-center gap-4">
-                <button
-                  onClick={(e) => handleNav("/contacto", e)}
-                  className="btn-wipe btn-wipe-primary px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs tracking-wider uppercase rounded-xs shadow-lg flex items-center gap-3 cursor-pointer"
+               <div className="relative h-[18rem] sm:h-[18.25rem] lg:h-[24.25rem]">
+                <div
+                  className={`absolute inset-0 flex flex-col gap-6 ${
+                    incoming ? "hero-copy-wipe-out" : ""
+                  }`}
                 >
-                  <span>Solicitar Cotización</span>
-                  <ArrowRight size={16} />
-                </button>
+                  <HeroSlideCopy slide={HERO_SLIDES[heroIndex]} />
+                </div>
+
+              {incoming && (
+                  <div
+                    key={`hero-copy-${incoming.key}`}
+                    className="absolute inset-0 flex flex-col gap-6 hero-copy-wipe-in"
+                    aria-hidden="true"
+                  >
+                    <HeroSlideCopy slide={HERO_SLIDES[incoming.idx]} />
+                  </div>
+                )}
+              </div>
+
+              <div className="pt-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div className="relative h-[3.25rem] w-full sm:w-[14.5rem] shrink-0">
+                  <button
+                    onClick={(e) => handleNav("/contacto", e)}
+                    className={`absolute top-0 left-0 btn-wipe btn-wipe-primary px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs tracking-wider uppercase rounded-xs shadow-lg flex items-center gap-3 whitespace-nowrap ${
+                      incoming ? "hero-copy-wipe-out" : ""
+                    }`}
+                  >
+                    <span>Solicitar Cotización</span>
+                    <ArrowRight size={16} />
+                  </button>
+
+                  {incoming && (
+                    <button
+                      key={`hero-contact-${incoming.key}`}
+                      onClick={(e) => handleNav("/contacto", e)}
+                      className="absolute top-0 left-0 btn-wipe btn-wipe-primary px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs tracking-wider uppercase rounded-xs shadow-lg flex items-center gap-3 whitespace-nowrap hero-copy-wipe-in"
+                      aria-hidden="true"
+                      tabIndex={-1}
+                    >
+                      <span>Solicitar Cotización</span>
+                      <ArrowRight size={16} />
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           </div>
 
           <div className="absolute bottom-8 right-8 z-20 flex items-center gap-2">
-            {HERO_IMAGES.map((_, i) => (
+            {HERO_SLIDES.map((_, i) => (
               <button
                 key={i}
-                onClick={() => setHeroIndex(i)}
+                onClick={() => {
+                  heroIndexRef.current = i;
+                  setHeroIndex(i);
+                  setIncoming(null);
+                }}
                 className={`h-2 transition-all rounded-full ${heroIndex === i ? "w-8 bg-[#a5cd38]" : "w-2 bg-white/40 hover:bg-white/70"
                   }`}
                 aria-label={`Slide ${i + 1}`}
@@ -416,11 +520,11 @@ export default function HomePage() {
               Soluciones Especializadas
             </span>*/}
             <h2 className="ff-display font-['Audiowide'] text-3xl md:text-5xl font-bold tracking-tight text-[#1a1c18] uppercase">
-              Nuestros Servicios
+              SOLUCIONES
             </h2>
             <div className="w-16 h-1 bg-[#a5cd38] mx-auto"></div>
             <p className="text-[#1a1c18]/80 text-base md:text-lg">
-              Ofrecemos soluciones integrales de señalética corporativa, fachadas y gráfica industrial de alta precisión.
+              Ofrecemos soluciones integrales de fachadas, señalética corporativa, y gráfica industrial de alta precisión.
             </p>
           </div>
 
