@@ -6,12 +6,6 @@ import {
 } from "lucide-react";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
-import { ServicePage } from "./components/ServicePage";
-import AboutPage from "./AboutPage";
-import GalleryPage from "./GalleryPage";
-import ContactPage from "./ContactPage";
-import NotFoundPage from "./NotFoundPage";
-// import logoImg from "../assets/logo-visione.png";
 import { Avatar, AvatarImage, AvatarFallback } from "./components/ui/avatar";
 import { useNavigate } from "react-router-dom";
 
@@ -233,7 +227,7 @@ function PhotoMosaicSection() {
           {/* <span className="text-xs font-mono font-bold text-[#a5cd38] uppercase tracking-widest">
             Obras Realizadas
           </span> */}
-          <h2 className="font-['Audiowide'] text-3xl md:text-5xl font-bold tracking-tight uppercase text-[#1a1c18]">
+          <h2 className="font-audiowide text-3xl md:text-5xl font-bold tracking-tight uppercase text-[#1a1c18]">
             Nuestra Galería
           </h2>
           <div className="w-16 h-1 bg-[#a5cd38] mx-auto" />
@@ -320,7 +314,7 @@ function HeroSlideCopy({
   return (
     <>
       <div className="h-[11rem] sm:h-[12rem] lg:h-[18rem] flex items-center">
-        <h1 className="ff-display font-['Audiowide'] text-[clamp(1.4rem,6vw,4.5rem)] font-bold tracking-tight text-white uppercase leading-[1.05]">
+        <h1 className="ff-display text-[clamp(1.4rem,6vw,4.5rem)] font-bold tracking-tight text-white uppercase leading-[1.05] font-audiowide">
           {slide.titleLines.map((line, lineIndex) => (
             <span key={lineIndex} className="block whitespace-nowrap">
               {line.map((segment, segmentIndex) => (
@@ -525,7 +519,7 @@ export default function HomePage() {
             {/*<span className="text-xs font-mono font-bold text-[#637f1d] uppercase tracking-wider">
               Soluciones Especializadas
             </span>*/}
-            <h2 className="ff-display font-['Audiowide'] text-3xl md:text-5xl font-bold tracking-tight text-[#1a1c18] uppercase">
+            <h2 className="ff-display font-audiowide text-3xl md:text-5xl font-bold tracking-tight text-[#1a1c18] uppercase">
               SOLUCIONES
             </h2>
             <div className="w-16 h-1 bg-[#a5cd38] mx-auto"></div>
@@ -590,7 +584,7 @@ export default function HomePage() {
             {/*<span className="text-xs font-mono font-bold text-[#637f1d] uppercase tracking-wider">
               Confianza Empresarial
             </span>*/}
-            <h2 className="ff-display font-['Audiowide'] text-3xl md:text-5xl font-bold text-[#1a1c18] uppercase">
+            <h2 className="ff-display font-audiowide text-3xl md:text-5xl font-bold text-[#1a1c18] uppercase">
               Lo que dicen nuestros clientes
             </h2>
             <div className="w-16 h-1 bg-[#a5cd38] mx-auto"></div>
@@ -648,7 +642,7 @@ export default function HomePage() {
         {/* CTA FINAL */}
         <section className="bg-[#1a1c18] text-white py-20 border-t border-white/10">
           <div className="max-w-7xl mx-auto px-6 md:px-12 text-center space-y-6">
-            <h2 className="ff-display font-['Audiowide'] text-3xl md:text-5xl font-bold uppercase text-white">
+            <h2 className="ff-display font-audiowide text-3xl md:text-5xl font-bold uppercase text-white">
               ¿Listo para renovar la imagen de tu empresa?
             </h2>
             <p className="text-base md:text-xl text-white/70 max-w-2xl mx-auto font-light">

@@ -78,6 +78,11 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
+@theme {
+  --font-sans: 'Archivo', sans-serif;
+  --font-audiowide: 'Audiowide', sans-serif;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
