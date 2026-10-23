@@ -27,7 +27,7 @@ const HERO_SLIDES = [
       [{ text: "EXPERIENCIA" }],
     ],
     subtitle:
-      "Soluciones que combinan conocimiento, calidad y compromiso en cada proyecto.",
+      "Soluciones combinando conocimiento, calidad y compromiso en cada proyecto.",
   },
   {
     image: "/images/imagen-hero-2-cronica.webp",
@@ -296,10 +296,21 @@ function PhotoMosaicSection() {
     </section>)
 }
 
-function HeroSlideCopy({ slide }: { slide: (typeof HERO_SLIDES)[number] }) {
+function HeroSlideCopy({
+  slide,
+}: {
+  slide: (typeof HERO_SLIDES)[number];
+}) {
+  const navigate = useNavigate();
+  const handleNav = (page: string, e: React.MouseEvent) => {
+      e.preventDefault();
+      navigate(page);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
   return (
     <>
-      <div className="h-[12rem] sm:h-[13rem] lg:h-[19rem] flex items-center">
+      <div className="h-[11rem] sm:h-[12rem] lg:h-[18rem] flex items-center">
         <h1 className="ff-display font-['Audiowide'] text-[clamp(1.4rem,6vw,4.5rem)] font-bold tracking-tight text-white uppercase leading-[1.05]">
           {slide.titleLines.map((line, lineIndex) => (
             <span key={lineIndex} className="block whitespace-nowrap">
@@ -315,10 +326,19 @@ function HeroSlideCopy({ slide }: { slide: (typeof HERO_SLIDES)[number] }) {
           ))}
         </h1>
       </div>
-      <div className="h-[4.5rem] sm:h-[3.75rem]">
+      <div className="h-[4.5rem] sm:h-[3.5rem]">
         <p className="text-base sm:text-xl text-white/90 leading-relaxed font-light max-w-2xl">
           {slide.subtitle}
         </p>
+      </div>
+       <div className="pt-4 flex items-start">
+        <button
+          onClick={(e) => handleNav("/contacto", e)}
+          className="btn-wipe btn-wipe-primary px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs tracking-wider uppercase rounded-xs shadow-lg flex items-center gap-3 whitespace-nowrap"
+        >
+          <span>Solicitar Cotización</span>
+          <ArrowRight size={16} />
+        </button>
       </div>
     </>
   );
@@ -420,51 +440,28 @@ export default function HomePage() {
                 FABRICANTE INDUSTRIAL EN BUENOS AIRES
               </span> */}
 
-               <div className="relative h-[18rem] sm:h-[18.25rem] lg:h-[24.25rem]">
+              <div className="relative h-[23.5rem] sm:h-[23.75rem] lg:h-[29.75rem]">
                 <div
-                  className={`absolute inset-0 flex flex-col gap-6 ${
+                  className={`absolute inset-0 flex flex-col ${
                     incoming ? "hero-copy-wipe-out" : ""
                   }`}
                 >
-                  <HeroSlideCopy slide={HERO_SLIDES[heroIndex]} />
+                <HeroSlideCopy
+                    slide={HERO_SLIDES[heroIndex]}
+                  />
                 </div>
 
               {incoming && (
                   <div
                     key={`hero-copy-${incoming.key}`}
-                    className="absolute inset-0 flex flex-col gap-6 hero-copy-wipe-in"
+                    className="absolute inset-0 flex flex-col hero-copy-wipe-in"
                     aria-hidden="true"
                   >
-                    <HeroSlideCopy slide={HERO_SLIDES[incoming.idx]} />
+                  <HeroSlideCopy
+                      slide={HERO_SLIDES[incoming.idx]}
+                    />
                   </div>
                 )}
-              </div>
-
-              <div className="pt-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                <div className="relative h-[3.25rem] w-full sm:w-[14.5rem] shrink-0">
-                  <button
-                    onClick={(e) => handleNav("/contacto", e)}
-                    className={`absolute top-0 left-0 btn-wipe btn-wipe-primary px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs tracking-wider uppercase rounded-xs shadow-lg flex items-center gap-3 whitespace-nowrap ${
-                      incoming ? "hero-copy-wipe-out" : ""
-                    }`}
-                  >
-                    <span>Solicitar Cotización</span>
-                    <ArrowRight size={16} />
-                  </button>
-
-                  {incoming && (
-                    <button
-                      key={`hero-contact-${incoming.key}`}
-                      onClick={(e) => handleNav("/contacto", e)}
-                      className="absolute top-0 left-0 btn-wipe btn-wipe-primary px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs tracking-wider uppercase rounded-xs shadow-lg flex items-center gap-3 whitespace-nowrap hero-copy-wipe-in"
-                      aria-hidden="true"
-                      tabIndex={-1}
-                    >
-                      <span>Solicitar Cotización</span>
-                      <ArrowRight size={16} />
-                    </button>
-                  )}
-                </div>
               </div>
             </div>
           </div>
