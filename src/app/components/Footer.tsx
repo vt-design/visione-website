@@ -11,7 +11,7 @@ export function Footer() {
   
   return (
     <footer className="bg-[#1a1c18] text-white pt-16 pb-12 border-t border-white/10">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-4 gap-12 mb-8">
         {/* BRAND COLUMN */}
         <div className="space-y-4 md:col-span-1">
           <button
@@ -23,11 +23,6 @@ export function Footer() {
           <p className="text-sm text-white/60 leading-relaxed">
             Fabricación industrial de cartelería, revestimientos metálicos y soluciones gráficas de alta precisión en Buenos Aires.
           </p>
-          <div className="pt-2">
-            <span className="inline-block px-3 py-1 bg-white/5 border border-white/10 text-xs text-[#a5cd38] font-mono rounded">
-              BUENOS AIRES · ARGENTINA
-            </span>
-          </div>
         </div>
 
         {/* SERVICIOS LINKS */}
