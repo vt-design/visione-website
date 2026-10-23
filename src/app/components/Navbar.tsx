@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
-import logoImg from "/images/imagenes-clientes/visione-cliente-nuevos/logo-visione-compuesto.png";
+import logoImg from "/images/logos/logo-visione-compuesto.png";
 import { useNavigate } from 'react-router-dom'
 
 export interface NavbarProps {

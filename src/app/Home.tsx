@@ -175,8 +175,6 @@ const REVIEWS = [
   },
 ];
 
-const VALID_PAGES = ["home", "carteleria", "grafica", "revestimientos", "nosotros", "galeria", "contacto"];
-
 // ─── PHOTO MOSAIC SECTION ────────────────────────────────────────────────────
 
 function PhotoMosaicSection() {
