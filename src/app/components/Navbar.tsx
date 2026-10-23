@@ -8,9 +8,9 @@ export interface NavbarProps {
 }
 
 const SERVICIOS_LINKS = [
-  { label: "Cartelería", page: "/servicios/carteleria" },
-  { label: "Gráfica", page: "/servicios/grafica" },
   { label: "Revestimientos", page: "/servicios/revestimientos" },
+  { label: "Cartelería y Corpóreos", page: "/servicios/carteleria" },
+  { label: "Gráfica Corporativa", page: "/servicios/grafica" },
 ];
 
 export function Navbar({ activePage }: NavbarProps) {
@@ -94,7 +94,7 @@ export function Navbar({ activePage }: NavbarProps) {
                   : "text-white/80 hover:text-[#a5cd38]"
               }`}
             >
-              Servicios
+              Soluciones
               <ChevronDown
                 size={15}
                 className={`transition-transform duration-200 ${servDropOpen ? "rotate-180 text-[#a5cd38]" : ""}`}
@@ -125,7 +125,7 @@ export function Navbar({ activePage }: NavbarProps) {
               activePage === "galeria" ? "text-[#a5cd38]" : "text-white/80 hover:text-[#a5cd38]"
             }`}
           >
-            Galería
+            Proyectos
           </button>
 
           <button
@@ -169,7 +169,7 @@ export function Navbar({ activePage }: NavbarProps) {
           </button>
 
           <div className="space-y-2 pl-3 border-l-2 border-[#a5cd38]/40">
-            <div className="text-xs uppercase tracking-wider text-white/40 font-bold mb-1">Servicios</div>
+            <div className="text-xs uppercase tracking-wider text-white/40 font-bold mb-1">Soluciones</div>
             {SERVICIOS_LINKS.map((sub) => (
               <button
                 key={sub.page}
@@ -189,7 +189,7 @@ export function Navbar({ activePage }: NavbarProps) {
               activePage === "galeria" ? "text-[#a5cd38]" : "text-white/80 hover:text-[#a5cd38]"
             }`}
           >
-            Galería
+            Proyectos
           </button>
 
           <button

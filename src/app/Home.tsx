@@ -524,7 +524,7 @@ export default function HomePage() {
             </h2>
             <div className="w-16 h-1 bg-[#a5cd38] mx-auto"></div>
             <p className="text-[#1a1c18]/80 text-base md:text-lg">
-              Ofrecemos soluciones integrales de fachadas, señalética corporativa, y gráfica industrial de alta precisión.
+              Integramos diseño, materiales y tecnología para transformar espacios y potenciar marcas.
             </p>
           </div>
 
