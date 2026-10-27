@@ -337,7 +337,7 @@ function HeroSlideCopy({
        <div className="pt-4 flex items-start">
         <button
           onClick={(e) => handleNav("/contacto", e)}
-          className="btn-wipe btn-wipe-primary px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs tracking-wider uppercase rounded-xs shadow-lg flex items-center gap-3 whitespace-nowrap"
+          className="btn-wipe btn-wipe-primary px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs tracking-wider uppercase rounded-xs shadow-lg flex items-center gap-3 whitespace-nowrap cursor-pointer"
         >
           <span>Solicitar Cotización</span>
           <ArrowRight size={16} />
@@ -540,7 +540,7 @@ export default function HomePage() {
                     <img
                       src={card.photo}
                       alt={card.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <span className="absolute top-4 left-4 ff-display font-['Audiowide'] text-2xl font-bold text-white bg-black/60 backdrop-blur-md px-3 py-1 border border-white/20">
                       {card.num}
@@ -548,7 +548,7 @@ export default function HomePage() {
                   </div>
 
                   <div className="p-8 space-y-4">
-                    <span className="text-[11px] font-mono font-bold text-[#637f1d] tracking-wider block">
+                    <span className="text-[11px] font-mono font-bold text-[#84a62a] tracking-wider block">
                       {card.tags}
                     </span>
                     <h3 className="ff-display font-['Audiowide'] text-xl font-bold text-[#1a1c18] uppercase leading-tight whitespace-pre-line">
@@ -561,7 +561,7 @@ export default function HomePage() {
                 </div>
 
                 <div className="px-8 pb-8 pt-2">
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#637f1d] group-hover:text-[#1a1c18] inline-flex items-center gap-2 transition-colors">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#84a62a] group-hover:text-[#1a1c18] inline-flex items-center gap-2 transition-colors">
                     <span>Saber más del servicio</span>
                     <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                   </span>
@@ -611,7 +611,7 @@ export default function HomePage() {
                   <p className="ff-display font-['Audiowide'] text-base font-bold text-[#1a1c18]">
                     {REVIEWS[reviewIndex].name}
                   </p>
-                  <p className="text-xs text-[#637f1d] font-semibold">
+                  <p className="text-xs text-[#84a62a] font-semibold">
                     {REVIEWS[reviewIndex].company}
                   </p>
                 </div>
