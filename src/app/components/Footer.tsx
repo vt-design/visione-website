@@ -20,30 +20,30 @@ export function Footer() {
           >
             <img alt="logo visione" src= "/images/logos/texto-logo-visione.png" className="w-3/4"></img>
           </button>
-          <p className="text-sm text-white/60 leading-relaxed">
-            Fabricación industrial de cartelería, revestimientos metálicos y soluciones gráficas de alta precisión en Buenos Aires.
+          <p className="text-sm text-white/60 leading-relaxed line-height 1.2">
+            Desarrollamos soluciones integrales de revestimientos, cartelería y gráfica corporativa para empresas de todo el país.
           </p>
         </div>
 
         {/* SERVICIOS LINKS */}
         <div className="space-y-3">
           <h4 className="ff-display font-['Audiowide'] text-xs font-bold uppercase tracking-widest text-[#a5cd38]">
-            Servicios
+            Soluciones
           </h4>
           <ul className="space-y-2.5 text-sm text-white/70">
             <li>
+              <button onClick={(e) => handleNav("/servicios/revestimientos", e)} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
+                Revestimientos
+              </button>
+            </li>
+            <li>
               <button onClick={(e) => handleNav("/servicios/carteleria", e)} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
-                Cartelería Industrial & LED
+                Cartelería y Corporeos
               </button>
             </li>
             <li>
               <button onClick={(e) => handleNav("/servicios/grafica", e)} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
-                Gráfica Corporativa & Vinilos
-              </button>
-            </li>
-            <li>
-              <button onClick={(e) => handleNav("/servicios/revestimientos", e)} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
-                Revestimientos de Metal & Fachadas
+                Gráfica Corporativa
               </button>
             </li>
           </ul>
