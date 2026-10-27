@@ -228,11 +228,11 @@ function PhotoMosaicSection() {
             Obras Realizadas
           </span> */}
           <h2 className="font-audiowide text-3xl md:text-5xl font-bold tracking-tight uppercase text-[#1a1c18]">
-            Nuestra Galería
+            Proyectos Destacados
           </h2>
           <div className="w-16 h-1 bg-[#a5cd38] mx-auto" />
           <p className="text-[#1a1c18]/70 text-base md:text-lg font-light">
-            Proyectos de cartelería, gráfica y revestimiento entregados en todo el país.
+            Una selección de proyectos que refleja nuestra experiencia, versatilidad y alcance en todo el país.
           </p>
         </div>
 
@@ -291,7 +291,7 @@ function PhotoMosaicSection() {
             onClick={(e) => handleNav("/galeria", e)}
             className="btn-wipe btn-wipe-primary px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs tracking-wider uppercase rounded-xs shadow-lg inline-flex items-center gap-3 cursor-pointer"
           >
-            <span>Ver Galería Completa</span>
+            <span>Ver Todos Los Proyectos</span>
             <ArrowRight size={16} />
           </button>
         </div>
@@ -646,7 +646,7 @@ export default function HomePage() {
               ¿Listo para renovar la imagen de tu empresa?
             </h2>
             <p className="text-base md:text-xl text-white/70 max-w-2xl mx-auto font-light">
-              Coordinemos una visita técnica o envianos los planos de tu proyecto para una cotización inmediata.
+              Coordinemos una visita técnica para evaluar tu proyecto y preparar una propuesta a medida.
             </p>
             <div className="pt-4">
               <button
