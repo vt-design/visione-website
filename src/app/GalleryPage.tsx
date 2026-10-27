@@ -4,6 +4,7 @@ import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Button } from "./components/ui/button";
 import { X } from "lucide-react";
+import { motion } from "motion/react";
 
 interface GalleryImage {
   id: string;
@@ -16,7 +17,16 @@ interface GalleryResponse {
   nextCursor: string | null;
 }
 
+type GalleryCategory = (typeof FILTERS)[number]["value"];
+
 const TILES_PER_CYCLE = 10;
+
+const FILTERS = [
+  { label: "Todos los trabajos", value: "all" },
+  { label: "Revestimientos", value: "revestimientos" },
+  { label: "Cartelería y Corpóreos", value: "carteleria" },
+  { label: "Gráfica y Corporativas", value: "grafica" }
+] as const;
 
 export default function GalleryPage() {
   const [images, setImages] = useState<GalleryImage[]>([]);
@@ -28,6 +38,14 @@ export default function GalleryPage() {
 
   const loadMoreRef = useRef<HTMLDivElement>(null);
   const loadingRef = useRef(false);
+
+  const [activeFilter, setActiveFilter] =  useState<GalleryCategory>("all");
+
+  const selectFilter = (filter: GalleryCategory) => {
+    setActiveFilter(filter)
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
 
   async function loadImages(cursor?: string | null) {
     // Evita solicitudes duplicadas simultáneas.
@@ -43,6 +61,11 @@ export default function GalleryPage() {
 
       if (cursor) {
         params.set("cursor", cursor);
+      }
+
+      if (activeFilter !== "all") {
+        console.log(`active filer: ${activeFilter}`)
+        params.set('tag', activeFilter)
       }
 
       const response = await fetch(
@@ -86,7 +109,7 @@ export default function GalleryPage() {
   // Carga las primeras 10 imágenes al abrir la página.
   useEffect(() => {
     void loadImages();
-  }, []);
+  }, [activeFilter]);
 
   // Carga otras 10 cuando el visitante se acerca al final.
   useEffect(() => {
@@ -128,6 +151,39 @@ export default function GalleryPage() {
           </div>
         </section>
 
+        <div className="sticky top-16 z-40 border-b border-border/70 bg-background/90 backdrop-blur-xl">
+          <nav
+            aria-label="Filtrar trabajos"
+            className="mx-auto flex max-w-7xl gap-1 overflow-x-auto px-6 py-3 md:justify-center md:px-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {FILTERS.map((filter) => {
+              const isActive = activeFilter === filter.value;
+              return (
+                <Button
+                  key={filter.value}
+                  type="button"
+                  variant="ghost"
+                  aria-pressed={isActive}
+                  onClick={() => selectFilter(filter.value)}
+                  className={`relative h-9 shrink-0 overflow-hidden  px-4 text-xs font-semibold tracking-wide transition-colors duration-300 ${
+                    isActive ? "text-primary-foreground" : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  }`}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="gallery-active-filter"
+                      className="absolute inset-0 bg-primary"
+                      transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                    />
+                  )}
+                  <span className="relative z-10">{filter.label}</span>
+                </Button>
+              );
+            })}
+          </nav>
+        </div>
+
+
         <section className="py-12 max-w-7xl mx-auto px-6 md:px-12">
           <div className="gallery-mosaic">
             {images.map((item, index) => (
@@ -166,7 +222,7 @@ export default function GalleryPage() {
 
           {error && (
             <div className="py-6 text-center" role="alert">
-              <p className="text-red-600 mb-3">{error}</p>
+              <p className="text-red-600 mb-3">Error al cargas las imágenes</p>
               <Button
                 variant="ghost"
                 onClick={() => void loadImages(nextCursor)}

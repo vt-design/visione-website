@@ -9,11 +9,20 @@ cloudinary.config({
 exports.handler = async (event) => {
   try {
     const cursor = event.queryStringParameters?.cursor;
+    const tag = event.queryStringParameters?.tag
 
-    let query = cloudinary.search
-      .expression("")
-      .sort_by("created_at", "desc")
-      .max_results(10);
+    let query
+    if (tag) {
+      query = cloudinary.search
+        .expression(`resource_type:image AND tags=${tag}`)
+        .sort_by("created_at", "desc")
+        .max_results(10);
+    } else {
+      query = cloudinary.search
+        .expression("resource_type:image")
+        .sort_by("created_at", "desc")
+        .max_results(10);
+    }
 
     if (cursor) {
       query = query.next_cursor(cursor);
