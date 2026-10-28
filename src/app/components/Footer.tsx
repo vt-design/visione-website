@@ -20,7 +20,7 @@ export function Footer() {
           >
             <img alt="logo visione" src= "/images/logos/texto-logo-visione.png" className="w-3/4"></img>
           </button>
-          <p className="text-sm text-white/60 leading-relaxed line-height 1.2">
+          <p className="text-md text-white/60 leading-normal pt-2">
             Desarrollamos soluciones integrales de revestimientos, cartelería y gráfica corporativa para empresas de todo el país.
           </p>
         </div>
