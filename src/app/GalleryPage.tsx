@@ -165,7 +165,7 @@ export default function GalleryPage() {
                   variant="ghost"
                   aria-pressed={isActive}
                   onClick={() => selectFilter(filter.value)}
-                  className={`relative h-9 shrink-0 overflow-hidden  px-4 text-xs font-semibold tracking-wide transition-colors duration-300 ${
+                  className={`relative h-9 shrink-0 overflow-hidden  px-4 text-xs font-semibold tracking-wide transition-colors duration-300 rounded-xs ${
                     isActive ? "text-primary-foreground" : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   }`}
                 >
