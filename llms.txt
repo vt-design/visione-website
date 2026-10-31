@@ -1,0 +1,16 @@
+# Mi Empresa
+
+> Breve descripción de tu empresa en Argentina, orientada a qué servicios o soluciones provees y a qué público te diriges.
+
+## Secciones Principales
+- [Inicio](URL/): Página principal con la propuesta de valor y resumen de servicios.
+- [Sobre Nosotros](URL/sobre-nosotros): Información sobre nuestra trayectoria, experiencia y equipo.
+- [Galería](URL/galeria): Portafolio visual de proyectos realizados y casos de éxito.
+- [Contacto](URL/contacto): Canales de comunicación directa, formulario, teléfono y ubicación en Argentina.
+- [Revestimientos](URL/soluciones/revestimientos): Detalle técnico y comercial de nuestras ofertas.
+- [Cartelería / Corpóreos](URL/soluciones/carteleria): Detalle técnico y comercial de nuestras ofertas.
+- [Gráfica Corporativa](URL/soluciones/grafica): Detalle técnico y comercial de nuestras ofertas.
+
+## Información de Contacto
+- Email: ---
+- Ubicación: Argentina

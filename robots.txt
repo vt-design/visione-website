@@ -1,0 +1,20 @@
+TODO: PONER URLs del sitio
+
+User-agent: *
+Allow: /
+
+# Permitir explícitamente a los bots de IA que indexan contenido para respuestas
+User-agent: OGPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Ubicación del Sitemap
+Sitemap: URL/sitemap.xml
