@@ -590,8 +590,11 @@ export default function HomePage() {
             <div className="w-16 h-1 bg-[#a5cd38] mx-auto"></div>
           </div>
 
-          <div className="max-w-4xl mx-auto bg-card p-6 md:p-10 border border-border rounded-sm shadow-lg relative flex items-start gap-4 md:gap-8">
-            <Avatar key={reviewIndex} className="w-20 h-28 sm:w-32 sm:h-44 md:w-40 md:h-52 rounded-sm border border-border">
+          <div className="max-w-5xl mx-auto bg-card p-5 md:p-8 border border-border rounded-sm shadow-lg relative flex flex-col md:flex-row items-stretch md:items-center gap-6 md:gap-8">
+            <Avatar
+              key={reviewIndex}
+              className="w-full h-56 sm:h-72 md:w-[46%] md:h-72 lg:h-80 rounded-sm border border-border"
+            >
               <AvatarImage
                 src={REVIEWS[reviewIndex].photo}
                 alt="Retrato ilustrativo de cliente"
@@ -602,17 +605,16 @@ export default function HomePage() {
               </AvatarFallback>
             </Avatar>
             <div className="min-w-0 flex-1">
-              <p className="text-lg md:text-xl text-[#1a1c18]/90 font-light italic leading-relaxed mb-8">
+              <p className="text-base sm:text-lg text-[#1a1c18]/90 font-light italic leading-relaxed mb-6">
                 "{REVIEWS[reviewIndex].quote}"
               </p>
 
-              <div className="flex flex-wrap items-center justify-between gap-4 border-t border-black/10 pt-6">
+              <div className="flex flex-wrap items-center justify-between gap-4 border-t border-black/10 pt-5">
                 <div>
                   <p className="ff-display font-['Audiowide'] text-base font-bold text-[#1a1c18]">
                     {REVIEWS[reviewIndex].name}
                   </p>
-                  <p className="text-xs text-[#84a62a] font-semibold">
-                    {REVIEWS[reviewIndex].company}
+                  <p className="text-xs text-[#637f1d] font-semibold"> · {REVIEWS[reviewIndex].company}
                   </p>
                 </div>
 
