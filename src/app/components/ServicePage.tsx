@@ -61,7 +61,7 @@ export function ServicePage() {
         <section className="py-24 max-w-7xl mx-auto px-6 md:px-12 space-y-24">
           <div className="text-center max-w-2xl mx-auto space-y-3">
             <h2 className="ff-display font-['Audiowide'] text-2xl md:text-4xl font-bold tracking-tight text-[#1a1c18] uppercase">
-              Capacidades & Características
+              Materiales y terminaciones
             </h2>
             <div className="w-16 h-1 bg-[#a5cd38] mx-auto"></div>
             <p className="text-[#1a1c18]/70 text-base">
