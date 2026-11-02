@@ -8,9 +8,9 @@ export interface NavbarProps {
 }
 
 const SERVICIOS_LINKS = [
-  { label: "Revestimientos", page: "/servicios/revestimientos" },
-  { label: "Cartelería y Corpóreos", page: "/servicios/carteleria" },
-  { label: "Gráfica Corporativa", page: "/servicios/grafica" },
+  { label: "Revestimientos", page: "/soluciones/revestimientos" },
+  { label: "Cartelería y Corpóreos", page: "/soluciones/carteleria" },
+  { label: "Gráfica Corporativa", page: "/soluciones/grafica" },
 ];
 
 export function Navbar({ activePage }: NavbarProps) {

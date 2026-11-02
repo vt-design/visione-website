@@ -8,6 +8,8 @@ import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Avatar, AvatarImage, AvatarFallback } from "./components/ui/avatar";
 import { useNavigate } from "react-router-dom";
+import { DialogDescription } from "@radix-ui/react-dialog";
+import PhotoMosaicSection from "./components/PhotoMosaicSection";
 
 // ─── DATA & CONSTANTS ────────────────────────────────────────────────────────
 
@@ -169,135 +171,6 @@ const REVIEWS = [
   },
 ];
 
-// ─── PHOTO MOSAIC SECTION ────────────────────────────────────────────────────
-
-function PhotoMosaicSection() {
-  const mosaicRef = useRef<SVGSVGElement | null>(null);
-  const [visible, setVisible] = useState<boolean[]>(new Array(MOSAIC_TILES.length).fill(false));
-  const navigate = useNavigate();
-
-  const handleNav = (page: string, e: React.MouseEvent) => {
-      e.preventDefault();
-      navigate(page);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-
-  useEffect(() => {
-    const mosaic = mosaicRef.current;
-    if (!mosaic) return;
-
-    const timers: ReturnType<typeof setTimeout>[] = [];
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-
-        MOSAIC_TILES.forEach((_, i) => {
-          timers.push(
-            setTimeout(() => {
-              setVisible((previous) => {
-                const next = [...previous];
-                next[i] = true;
-                return next;
-              });
-            }, i * 110),
-          );
-        });
-        observer.disconnect();
-      },
-      { threshold: 0.12 },
-    );
-
-    observer.observe(mosaic);
-    return () => {
-      observer.disconnect();
-      timers.forEach(clearTimeout);
-    };
-  }, []);
-
-
-
-  /**
-   * bg-[#1a1c18]
-   * text-white
-   */
-  return (
-    <section className="bg-[#f8f9fa] text-white py-20 lg:py-28 border-t border-white/10 w-full flex justify-center">
-      <div className="w-full px-[48px] space-y-12 max-w-7xl">
-        <div className="text-center max-w-2xl mx-auto space-y-3">
-          {/* <span className="text-xs font-mono font-bold text-[#a5cd38] uppercase tracking-widest">
-            Obras Realizadas
-          </span> */}
-          <h2 className="font-audiowide text-3xl md:text-5xl font-bold tracking-tight uppercase text-[#1a1c18]">
-            Proyectos Destacados
-          </h2>
-          <div className="w-16 h-1 bg-[#a5cd38] mx-auto" />
-          <p className="text-[#1a1c18]/70 text-base md:text-lg font-light">
-            Una selección de proyectos que refleja nuestra experiencia, versatilidad y alcance en todo el país.
-          </p>
-        </div>
-
-        <svg
-          ref={mosaicRef}
-          className="home-collage"
-          viewBox="0 0 1600 1000"
-          role="img"
-          aria-labelledby="home-collage-title"
-          preserveAspectRatio="xMidYMid meet"
-        >
-          <title id="home-collage-title">Selección de obras realizadas</title>
-          <defs>
-            {MOSAIC_TILES.map((tile) => (
-              <clipPath key={tile.id} id={`home-collage-clip-${tile.id}`} clipPathUnits="userSpaceOnUse">
-                <polygon points={tile.points} />
-              </clipPath>
-            ))}
-          </defs>
-
-          {MOSAIC_TILES.map((tile, i) => (
-            <g
-              key={tile.id}
-              role="img"
-              aria-label={tile.alt}
-              className={`home-collage-tile ${visible[i]
-                  ? "home-collage-visible"
-                  : i % 2 === 0
-                    ? "home-collage-enter-left"
-                    : "home-collage-enter-right"
-                }`}
-            >
-              <image
-                href={tile.url}
-                x={tile.frame.x}
-                y={tile.frame.y}
-                width={tile.frame.width}
-                height={tile.frame.height}
-                preserveAspectRatio="xMidYMid slice"
-                clipPath={`url(#home-collage-clip-${tile.id})`}
-              />
-              <polygon
-                className="home-collage-outline"
-                points={tile.points}
-                fill="none"
-                stroke="#f8f9fa"
-                strokeWidth="18"
-                strokeLinejoin="round"
-              />
-            </g>
-          ))}
-        </svg>
-
-        <div className="text-center pt-4">
-          <button
-            onClick={(e) => handleNav("/galeria", e)}
-            className="btn-wipe btn-wipe-primary px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs tracking-wider uppercase rounded-xs shadow-lg inline-flex items-center gap-3 cursor-pointer"
-          >
-            <span>Ver Todos Los Proyectos</span>
-            <ArrowRight size={16} />
-          </button>
-        </div>
-      </div>
-    </section>)
-}
 
 function HeroSlideCopy({
   slide,
