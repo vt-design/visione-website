@@ -96,7 +96,7 @@ export function ServicePage() {
                     </p>
                     <div className="pt-2">
                       <button
-                        onClick={() => navigate("/galeria")}
+                        onClick={() => navigate("/proyectos")}
                         className="text-xs font-bold tracking-wider uppercase text-[#a5cd38] hover:text-[#a5cd38] inline-flex items-center gap-2 border-b-2 border-[#a5cd38] pb-1 transition-colors cursor-pointer"
                       >
                         <span>Ver más fotos</span>

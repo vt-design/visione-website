@@ -82,7 +82,7 @@ const SERVICE_CARDS = [
     desc: "Renovamos fachadas con soluciones de revestimiento que combinan diseño, calidad y durabilidad.",
     tags: "ACM · CHAPA · PLEGADOS · CALADOS",
     photo: "/images/imagen-servicio-revestimiento.webp",
-    page: "/servicios/revestimientos",
+    page: "/soluciones/revestimientos",
   },
   {
     num: "02",
@@ -90,7 +90,7 @@ const SERVICE_CARDS = [
     desc: "Diseñamos y producimos carteles y letras con y sin iluminación para destacar cada marca.",
     tags: "ACM · ACRILICO · CHAPA · ACERO · LED",
     photo: "/images/imagen-servicio-carteleria.webp",
-    page: "/servicios/carteleria",
+    page: "/soluciones/carteleria",
   },
   {
     num: "03",
@@ -98,52 +98,7 @@ const SERVICE_CARDS = [
     desc: "Soluciones gráficas para comunicar la identidad de empresas e instituciones.",
     tags: "SEÑALETICA · VINILOS · PLOTEO ",
     photo: "/images/imagen-servicio-grafica.webp",
-    page: "/servicios/grafica",
-  },
-];
-
-const MOSAIC_TILES = [
-  {
-    id: "t1",
-    url: "/images/mosaic-images/imagen-mosaico-1.webp",
-    alt: "Cartelería exterior iluminada",
-    points: "0,0 900,0 790,320 0,250",
-    frame: { x: 0, y: 0, width: 900, height: 320 },
-  },
-  {
-    id: "t2",
-    url: "/images/mosaic-images/imagen-mosaico-2.webp",
-    alt: "Fachada comercial revestida",
-    points: "900,0 1600,0 1600,400 790,320",
-    frame: { x: 790, y: 0, width: 810, height: 400 },
-  },
-  {
-    id: "t3",
-    url: "/images/mosaic-images/imagen-mosaico-3.webp",
-    alt: "Montaje de estructura industrial",
-    points: "0,250 790,320 650,740 0,810",
-    frame: { x: 0, y: 250, width: 790, height: 560 },
-  },
-  {
-    id: "t4",
-    url: "/images/mosaic-images/imagen-mosaico-4.webp",
-    alt: "Gráfica aplicada en espacio comercial",
-    points: "790,320 1600,400 1600,650 650,740",
-    frame: { x: 650, y: 320, width: 950, height: 420 },
-  },
-  {
-    id: "t5",
-    url: "/images/mosaic-images/imagen-mosaico-5.webp",
-    alt: "Señalética urbana de gran formato",
-    points: "0,810 650,740 560,1000 0,1000",
-    frame: { x: 0, y: 740, width: 650, height: 260 },
-  },
-  {
-    id: "t6",
-    url: "/images/mosaic-images/imagen-mosaico-6.webp",
-    alt: "Revestimiento arquitectónico contemporáneo",
-    points: "650,740 1600,650 1600,1000 560,1000",
-    frame: { x: 560, y: 650, width: 1040, height: 350 },
+    page: "/soluciones/grafica",
   },
 ];
 

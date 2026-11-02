@@ -32,17 +32,17 @@ export function Footer() {
           </h4>
           <ul className="space-y-2.5 text-sm text-white/70">
             <li>
-              <button onClick={(e) => handleNav("/servicios/revestimientos", e)} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
+              <button onClick={(e) => handleNav("/soluciones/revestimientos", e)} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
                 Revestimientos
               </button>
             </li>
             <li>
-              <button onClick={(e) => handleNav("/servicios/carteleria", e)} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
+              <button onClick={(e) => handleNav("/soluciones/carteleria", e)} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
                 Cartelería y Corporeos
               </button>
             </li>
             <li>
-              <button onClick={(e) => handleNav("/servicios/grafica", e)} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
+              <button onClick={(e) => handleNav("/soluciones/grafica", e)} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
                 Gráfica Corporativa
               </button>
             </li>
@@ -61,7 +61,7 @@ export function Footer() {
               </button>
             </li>
             <li>
-              <button onClick={(e) => handleNav("/galeria", e)} className="cursor-pointer hover:text-[#a5cd38] transition-colors">
+              <button onClick={(e) => handleNav("/proyectos", e)} className="cursor-pointer hover:text-[#a5cd38] transition-colors">
                 Galería de Trabajos
               </button>
             </li>
