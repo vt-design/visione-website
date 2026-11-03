@@ -5,22 +5,28 @@
     "heroImg": "https://images.unsplash.com/photo-1780385187604-4663a1d7c6e6?w=1920&h=1080&fit=crop&auto=format",
     "features": [
       {
-        "title": "Corpóreos en Acero & Acrílico",
+        "title": "LETRAS Y LOGOS CORPÓREOS",
         "description": "Letras en relieve en acero inoxidable, chapa galvanizada o acrílico con iluminación frontal, posterior (halo light) o combinada con matrices LED de alta durabilidad.",
         "image": "https://images.unsplash.com/photo-1780385187604-4663a1d7c6e6?w=900&h=700&fit=crop&auto=format",
         "tag": "CORPÓREOS 3D"
       },
       {
-        "title": "Marquesinas & Totems Monumentales",
+        "title": "MARQUESINAS, CARTELES Y SALIENTES",
         "description": "Estructuras de gran porte para estaciones de servicio, parques industriales y shoppings. Cálculos estructurales homologados e ingeniería antiviento.",
         "image": "https://images.unsplash.com/photo-1779614800682-0c0cea8e0cd5?w=900&h=700&fit=crop&auto=format",
         "tag": "GRAN FORMATO"
       },
       {
-        "title": "Iluminación LED de Alta Eficiencia",
+        "title": "GRAN FORMATO Y TOTEMS",
         "description": "Módulos LED sellados con protección IP67 para exterior, fuentes con protección térmica y bajo consumo energético sostenido.",
         "image": "https://images.unsplash.com/photo-1780565081532-0f68d721e44a?w=900&h=700&fit=crop&auto=format",
         "tag": "TECNOLOGÍA LED"
+      },
+      {
+        "title": "ILUMINACIÓN LED ",
+        "description": "Estructuras de gran porte para estaciones de servicio, parques industriales y shoppings. Cálculos estructurales homologados e ingeniería antiviento.",
+        "image": "https://images.unsplash.com/photo-1779614800682-0c0cea8e0cd5?w=900&h=700&fit=crop&auto=format",
+        "tag": "GRAN FORMATO"
       }
     ]
   },
