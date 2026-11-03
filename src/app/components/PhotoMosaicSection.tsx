@@ -32,28 +32,64 @@ interface PinnedProject {
 const MOSAIC_TILES: PinnedProject[] = [
     {
         id: "t1",
-        title: "Identidad exterior para local comercial",
+        title: "REVESTIMIENTO - CARTELERÍA Y  CORPOREOS - GRAFICA CORPORATIVA",
         description:
-            "Desarrollamos una presencia de marca de alto impacto con cartelería corpórea e iluminación integrada, cuidando la legibilidad tanto de día como de noche.",
-        url: "https://images.unsplash.com/photo-1780385187604-4663a1d7c6e6?w=1200&h=800&fit=crop&auto=format",
-        alt: "Cartelería exterior iluminada",
+            "Desarrollamos una solución de integral de  imagen corporativa que combina revestimiento de fachada en ACM (aluminio compuesto), grandes letras corpóreas de acrilico iluminadas con leds, y totem publicitario de gran altura. El proyecto se completa con elementos de identidad visual en el interior, integrando diseño, materiales y tecnología en una propuesta de alto impacto.",
+        url: "/images/mosaic-images/proyecto-continental/continental-foto-3.webp",
+        alt: "REVESTIMIENTO - CARTELERÍA Y  CORPOREOS - GRAFICA CORPORATIVA",
         photos: [
+            // proceso
             {
-                url: "https://images.unsplash.com/photo-1780385187604-4663a1d7c6e6?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Vista general de la cartelería exterior iluminada",
+                url: "/images/mosaic-images/proyecto-continental/continental-foto-4.webp",
+                alt: "imagen continental de noche",
             },
             {
-                url: "https://images.unsplash.com/photo-1779614800682-0c0cea8e0cd5?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Detalle de señalética urbana de gran formato",
+                url: "/images/mosaic-images/proyecto-continental/continental-foto-10.webp",
+                alt: "imagen continental de noche",
+            },
+            // de dia
+            {
+                url: "/images/mosaic-images/proyecto-continental/continental-foto-11.webp",
+                alt: "imagen continental de noche",
             },
             {
-                url: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Aplicación de identidad visual en el acceso comercial",
+                url: "/images/mosaic-images/proyecto-continental/continental-foto-5.webp",
+                alt: "imagen continental de noche",
             },
             {
-                url: "https://images.unsplash.com/photo-1608126841830-53832c4b326f?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Terminación de fachada y letras corpóreas",
+                url: "/images/mosaic-images/proyecto-continental/continental-foto-9.webp",
+                alt: "imagen continental de noche",
             },
+            // noche
+            {
+                url: "/images/mosaic-images/proyecto-continental/continental-foto-2.webp",
+                alt: "imagen continental de noche",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-continental/continental-foto-3.webp",
+                alt: "imagen continental de noche",
+            },
+            
+            {
+                url: "/images/mosaic-images/proyecto-continental/continental-foto-8.webp",
+                alt: "imagen continental de noche",
+            },
+            // interior
+            {
+                url: "/images/mosaic-images/proyecto-continental/continental-foto-1.webp",
+                alt: "imagen continental de noche",
+            },
+            
+            
+            {
+                url: "/images/mosaic-images/proyecto-continental/continental-foto-6.webp",
+                alt: "imagen continental de noche",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-continental/continental-foto-7.webp",
+                alt: "imagen continental de noche",
+            },
+            
         ],
         points: "0,0 900,0 790,320 0,250",
         frame: { x: 0, y: 0, width: 900, height: 320 },
@@ -673,10 +709,10 @@ export default function PhotoMosaicSection() {
                                 )}
                             </div>
 
-                            <div className="project-gallery-details space-y-5 px-5 py-5 sm:px-7 sm:py-6">
+                            <div className="project-gallery-details space-y-5 px-5 py-5 sm:px-7 sm:py-6 overflow-x-hidden">
                                 <div
                                     ref={thumbnailRailRef}
-                                    className="project-gallery-thumbnails flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2"
+                                    className="project-gallery-thumbnails flex snap-x snap-mandatory gap-3 overflow-x-scroll pb-2 "
                                     aria-label="Fotos del proyecto"
                                 >
                                     {selectedProject.photos.map((photo, index) => (
