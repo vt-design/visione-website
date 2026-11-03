@@ -96,31 +96,53 @@ const MOSAIC_TILES: PinnedProject[] = [
     },
     {
         id: "t2",
-        title: "Renovación integral de fachada",
+        title: "DUNLOP - General Rodriguez, San Nicolás de los Arroyos, Córdoba, Pilar, CABA",
         description:
-            "Revestimos el frente comercial con paneles metálicos de alta resistencia y una solución gráfica precisa para unificar arquitectura, marca y señalización.",
-        url: "https://images.unsplash.com/photo-1760787545864-b468b6fe2c92?w=1200&h=900&fit=crop&auto=format",
+            "Desarrollamos una intervención integral en diferentes sucursales del país, combinando revestimientos de los edificios en aluminio compuesto (ACM), carteles con fondo en ACM y letras corpóreas con laterales en chapa y frente de acrílico, con iluminación led, respetando los colores de la marca. El proyecto se completó con grafica corporativa en vidrieras y espacios interiores, asegurando una identidad visual consistente en cada sede.",
+        url: "/images/mosaic-images/proyecto-dunlop/dunlop-foto-3.webp",
         alt: "Fachada comercial revestida",
         photos: [
-            {
-                url: "https://images.unsplash.com/photo-1760787545864-b468b6fe2c92?w=1600&h=1100&fit=crop&auto=format",
+            // general rodriguez
+             {
+                url: "/images/mosaic-images/proyecto-dunlop/dunlop-foto-7.webp",
                 alt: "Vista frontal de la fachada comercial revestida",
             },
             {
-                url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Volúmenes y modulación del revestimiento exterior",
+                url: "/images/mosaic-images/proyecto-dunlop/dunlop-foto-8.webp",
+                alt: "Vista frontal de la fachada comercial revestida",
             },
             {
-                url: "https://images.unsplash.com/photo-1551520692-7cdc7dc041b1?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Detalle arquitectónico de la envolvente metálica",
+                url: "/images/mosaic-images/proyecto-dunlop/dunlop-foto-6.webp",
+                alt: "Vista frontal de la fachada comercial revestida",
             },
             {
-                url: "https://images.unsplash.com/photo-1608126841830-53832c4b326f?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Encuentro entre fachada, acceso e identidad visual",
+                url: "/images/mosaic-images/proyecto-dunlop/dunlop-foto-9.webp",
+                alt: "Vista frontal de la fachada comercial revestida",
+            },
+            //
+            {
+                url: "/images/mosaic-images/proyecto-dunlop/dunlop-foto-2.webp",
+                alt: "Vista frontal de la fachada comercial revestida",
             },
             {
-                url: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Vista interior vinculada con el nuevo acceso",
+                url: "/images/mosaic-images/proyecto-dunlop/dunlop-foto-1.webp",
+                alt: "Vista frontal de la fachada comercial revestida",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-dunlop/dunlop-foto-5.webp",
+                alt: "Vista frontal de la fachada comercial revestida",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-dunlop/dunlop-foto-4.webp",
+                alt: "Vista frontal de la fachada comercial revestida",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-dunlop/dunlop-foto-3.webp",
+                alt: "Vista frontal de la fachada comercial revestida",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-dunlop/dunlop-foto-10.webp",
+                alt: "Vista frontal de la fachada comercial revestida",
             },
         ],
         points: "900,0 1600,0 1600,400 790,320",
