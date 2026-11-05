@@ -64,7 +64,7 @@ export default function ContactPage() {
               Contacto & Presupuestos
             </h1>
             <p className="text-sm md:text-base text-white/80 max-w-2xl font-light leading-relaxed">
-              Hablá directamente con nuestro equipo para cotizaciones de obra, visitas técnicas o asesoramiento.
+              Hablá directamente con nuestro equipo para solicitar presupuestos, coordinar visitas técnicas o recibir asesoramiento sobre tu proyecto.
             </p>
           </div>
         </section>
@@ -122,10 +122,10 @@ export default function ContactPage() {
                     onChange={(e) => setServicio(e.target.value)}
                     className="w-full px-4 py-2.5 bg-[#F8F9FA] border border-black/15 rounded-xs text-sm focus:outline-none focus:border-[#637f1d] transition-colors cursor-pointer"
                   >
-                    <option value="Cartelería">Cartelería Industrial / LED</option>
-                    <option value="Gráfica">Gráfica Corporativa / Vinilos</option>
-                    <option value="Revestimientos">Revestimiento Metal / Fachadas</option>
-                    <option value="Proyecto Integral">Proyecto Integral / Asesoramiento</option>
+                    <option value="Cartelería">Revestimientos</option>
+                    <option value="Gráfica">Carteleria y Corpóreos</option>
+                    <option value="Revestimientos">Gráfica corporativa</option>
+                    <option value="Proyecto Integral">Aseosoramiento / Proyecto integral</option>
                   </select>
                 </div>
 
@@ -163,7 +163,7 @@ export default function ContactPage() {
             <div className="lg:col-span-5 flex flex-col gap-6">
               <div className="bg-[#1a1c18] text-white p-6 md:p-8 rounded-sm border border-white/10 space-y-5 shadow-lg">
                 <h3 className="ff-display font-['Audiowide'] text-lg font-bold uppercase text-[#a5cd38]">
-                  Oficinas & Planta Industrial
+                  LOCAL COMERCIAL
                 </h3>
 
                 <div className="space-y-4 text-xs text-white/80">

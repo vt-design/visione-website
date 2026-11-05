@@ -6,23 +6,23 @@ import { Footer } from "./components/Footer";
 const STEPS = [
   {
     num: "01",
-    title: "Relevamiento & Muestreo",
-    desc: "Inspeccionamos la locación, tomamos mediciones láser de precisión y analizamos la incidencia de viento, sol y visibilidad peatonal/vehicular.",
+    title: "Contacto",
+    desc: "Recibimos tu consulta con imágenes del lugar, medidas aproximadas y características del proyecto. Si es necesario, realizamos una visita técnica para asesorarte.",
   },
   {
     num: "02",
-    title: "Ingeniería & Render 3D",
-    desc: "Desarrollamos el modelado técnico tridimensional y el cálculo de estructuras, asegurando estética impactante y durabilidad reglamentaria.",
+    title: "Presupuesto y diseño",
+    desc: "Analizamos el proyecto, elaboramos el presupuesto y desarrollamos un render para visualizar la propuesta.",
   },
   {
     num: "03",
-    title: "Fabricación Industrial",
-    desc: "Corte CNC router y láser, plegado automatizado y pintura horneada en nuestras propias instalaciones con control de calidad certificado.",
+    title: "Fabricación",
+    desc: "Producimos cada pieza y componente con materiales, tecnología y procesos adecuados a los requerimientos del proyecto.",
   },
   {
     num: "04",
-    title: "Montaje & Garantía",
-    desc: "Instalación en altura por profesionales capacitados, con sistemas de anclaje sísmico y garantía escrita sobre materiales y componentes LED.",
+    title: "Instalación y garantía",
+    desc: "Realizamos la colocación en obra de cada proyecto, incluyendo instalaciones en altura y trabajos de gran escala. Respaldamos nuestros trabajos con garantía",
   },
 ];
 
@@ -68,7 +68,7 @@ export default function AboutPage() {
               Sobre Nosotros
             </h1>
             <p className="text-sm md:text-base text-white/80 max-w-2xl font-light leading-relaxed">
-              Somos ingenieros y artesanos de la comunicación visual urbana. Transformamos materiales nobles en marcas tridimensionales duraderas.
+              Somos especialistas en transformar materiales en identidad visual. Combinamos diseño, tecnología y oficio para crear marcas que perduran.
             </p>
           </div>
         </section>
@@ -83,7 +83,7 @@ export default function AboutPage() {
               </h2>
               <div className="w-12 h-1 bg-[#a5cd38] mx-auto"></div>
               <p className="text-[#1a1c18]/70 text-sm">
-                De la idea inicial en plano hasta el último tornillo en altura, garantizamos un flujo de trabajo estructurado.
+                Desde la primera consulta hasta la instalación final, acompañamos cada proyecto con asesoramiento, diseño, fabricación y colocación. En formato de 4 recuadros podría ir una imagen y este texto?
               </p>
             </div>
 
@@ -158,7 +158,7 @@ export default function AboutPage() {
               <p className="text-xs text-white/60">Corte, soldadura, pintura y armado sin intermediarios.</p>
             </div>
             <div className="space-y-2">
-              <span className="ff-display font-['Audiowide'] text-4xl font-bold text-[#a5cd38] block">14+</span>
+              <span className="ff-display font-['Audiowide'] text-4xl font-bold text-[#a5cd38] block">25+</span>
               <h4 className="ff-display font-['Audiowide'] text-xs font-bold uppercase tracking-wider text-white">
                 Años de Experiencia
               </h4>
