@@ -258,27 +258,51 @@ const MOSAIC_TILES: PinnedProject[] = [
     },
     {
         id: "t5",
-        title: "Totem de acceso y orientación",
+        title: "JEBAR - NEUQUÉN",
         description:
-            "Resolvimos un hito de acceso visible y resistente, combinando estructura metálica, gráfica de alto desempeño y una lectura jerárquica para visitantes.",
-        url: "https://images.unsplash.com/photo-1779614800682-0c0cea8e0cd5?w=1200&h=900&fit=crop&auto=format",
-        alt: "Señalética urbana de gran formato",
+            "Proyecto integral de revestimiento en ACM (aluminio compuesto) y cartelería  de acero inoxidable con frente de acrílico e iluminación led para una concesionaria de gran escala en la ciudad de Neuquén.\nUna intervención que combina soluciones constructivas e identidad corporativa para lograr una imagen arquitectónica sólida, uniforme y de gran impacto visual alineada con la identidad de marca de JEBAR.",
+        url: "/images/mosaic-images/proyecto-jebar/jebar-foto-5.webp",
+        alt: "Jebar imagen principal",
         photos: [
             {
-                url: "https://images.unsplash.com/photo-1779614800682-0c0cea8e0cd5?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Totem de acceso visto desde la circulación principal",
+                url: "/images/mosaic-images/proyecto-jebar/jebar-foto-1.webp",
+                alt: "foto jebar 1",
             },
             {
-                url: "https://images.unsplash.com/photo-1780385187604-4663a1d7c6e6?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Detalle de iluminación y lectura nocturna",
+                url: "/images/mosaic-images/proyecto-jebar/jebar-foto-2.webp",
+                alt: "foto jebar 2",
             },
             {
-                url: "https://images.unsplash.com/photo-1564182842834-681b7be6de4b?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Estructura portante durante el montaje",
+                url: "/images/mosaic-images/proyecto-jebar/jebar-foto-3.webp",
+                alt: "foto jebar 3",
             },
             {
-                url: "https://images.unsplash.com/photo-1551520692-7cdc7dc041b1?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Integración de la señal con el entorno arquitectónico",
+                url: "/images/mosaic-images/proyecto-jebar/jebar-foto-4.webp",
+                alt: "foto jebar 4",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-jebar/jebar-foto-5.webp",
+                alt: "foto jebar 5",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-jebar/jebar-foto-6.webp",
+                alt: "foto jebar 6",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-jebar/jebar-foto-7.webp",
+                alt: "foto jebar 7",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-jebar/jebar-foto-8.webp",
+                alt: "foto jebar 8",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-jebar/jebar-foto-9.webp",
+                alt: "foto jebar 9",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-jebar/jebar-foto-10.webp",
+                alt: "foto jebar 10",
             },
         ],
         points: "0,810 650,740 560,1000 0,1000",
