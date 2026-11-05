@@ -21,7 +21,7 @@ import servicePageData from '@/data/servicios.json'
 export function ServicePage() {
 
   const navigate = useNavigate();
-  const { servicio } = useParams();
+  const { servicio } = useParams() || { servicio: "revestimientos"};
   const { title, subtitle, heroImg, features } = servicePageData[servicio];
 
   return (

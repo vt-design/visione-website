@@ -69,7 +69,7 @@ const MOSAIC_TILES: PinnedProject[] = [
                 url: "/images/mosaic-images/proyecto-continental/continental-foto-3.webp",
                 alt: "imagen continental de noche",
             },
-            
+
             {
                 url: "/images/mosaic-images/proyecto-continental/continental-foto-8.webp",
                 alt: "imagen continental de noche",
@@ -79,8 +79,8 @@ const MOSAIC_TILES: PinnedProject[] = [
                 url: "/images/mosaic-images/proyecto-continental/continental-foto-1.webp",
                 alt: "imagen continental de noche",
             },
-            
-            
+
+
             {
                 url: "/images/mosaic-images/proyecto-continental/continental-foto-6.webp",
                 alt: "imagen continental de noche",
@@ -89,7 +89,7 @@ const MOSAIC_TILES: PinnedProject[] = [
                 url: "/images/mosaic-images/proyecto-continental/continental-foto-7.webp",
                 alt: "imagen continental de noche",
             },
-            
+
         ],
         points: "0,0 900,0 790,320 0,250",
         frame: { x: 0, y: 0, width: 900, height: 320 },
@@ -103,7 +103,7 @@ const MOSAIC_TILES: PinnedProject[] = [
         alt: "Fachada comercial revestida",
         photos: [
             // general rodriguez
-             {
+            {
                 url: "/images/mosaic-images/proyecto-dunlop/dunlop-foto-7.webp",
                 alt: "Vista frontal de la fachada comercial revestida",
             },
@@ -347,30 +347,30 @@ const MOSAIC_TILES: PinnedProject[] = [
 ];
 
 const MOBILE_MOSAIC_LAYOUT = [
-  {
-    points: "0,0 600,0 600,270 0,330",
-    frame: { x: 0, y: 0, width: 600, height: 330 },
-  },
-  {
-    points: "0,330 600,270 600,620 0,570",
-    frame: { x: 0, y: 270, width: 600, height: 350 },
-  },
-  {
-    points: "0,570 600,620 600,870 0,930",
-    frame: { x: 0, y: 570, width: 600, height: 360 },
-  },
-  {
-    points: "0,930 600,870 600,1220 0,1170",
-    frame: { x: 0, y: 870, width: 600, height: 350 },
-  },
-  {
-    points: "0,1170 600,1220 600,1470 0,1530",
-    frame: { x: 0, y: 1170, width: 600, height: 360 },
-  },
-  {
-    points: "0,1530 600,1470 600,1800 0,1800",
-    frame: { x: 0, y: 1470, width: 600, height: 330 },
-  },
+    {
+        points: "0,0 600,0 600,270 0,330",
+        frame: { x: 0, y: 0, width: 600, height: 330 },
+    },
+    {
+        points: "0,330 600,270 600,620 0,570",
+        frame: { x: 0, y: 270, width: 600, height: 350 },
+    },
+    {
+        points: "0,570 600,620 600,870 0,930",
+        frame: { x: 0, y: 570, width: 600, height: 360 },
+    },
+    {
+        points: "0,930 600,870 600,1220 0,1170",
+        frame: { x: 0, y: 870, width: 600, height: 350 },
+    },
+    {
+        points: "0,1170 600,1220 600,1470 0,1530",
+        frame: { x: 0, y: 1170, width: 600, height: 360 },
+    },
+    {
+        points: "0,1530 600,1470 600,1800 0,1800",
+        frame: { x: 0, y: 1470, width: 600, height: 330 },
+    },
 ];
 
 
@@ -636,10 +636,10 @@ export default function PhotoMosaicSection() {
                                 }
                             }}
                             className={`home-collage-tile ${visible[i]
-                                    ? "home-collage-visible"
-                                    : i % 2 === 0
-                                        ? "home-collage-enter-left"
-                                        : "home-collage-enter-right"
+                                ? "home-collage-visible"
+                                : i % 2 === 0
+                                    ? "home-collage-enter-left"
+                                    : "home-collage-enter-right"
                                 }`}
                         >
                             <image
@@ -681,14 +681,14 @@ export default function PhotoMosaicSection() {
                                     VER PROYECTO
                                 </text>
                             </g>
-                            <g
+                            {/* <g
                                 className="home-collage-touch-marker"
                                 transform={`translate(${layout.frame.x + layout.frame.width / 2} ${layout.frame.y + layout.frame.height / 2})`}
                                 aria-hidden="true"
                             >
                                 <circle r="34" />
                                 <path d="M-13-4v-9h9 M4-13h9v9 M13 4v9H4 M-4 13h-9V4" />
-                            </g>
+                            </g> */}
                         </g>
                     );
                 })}
