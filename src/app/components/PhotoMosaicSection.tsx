@@ -222,31 +222,35 @@ const MOSAIC_TILES: PinnedProject[] = [
     },
     {
         id: "t4",
-        title: "Gráfica ambiental para oficinas",
+        title: "IVESS - JAUREGUI",
         description:
-            "Aplicamos vinilos y recursos de señalética interior para reforzar la identidad corporativa, ordenar los recorridos y transformar los espacios de trabajo.",
-        url: "https://images.unsplash.com/photo-1780565081532-0f68d721e44a?w=1200&h=800&fit=crop&auto=format",
-        alt: "Gráfica aplicada en espacio comercial",
+            "Desarrollamos e instalamos un cartel exterior de grandes dimensiones, con letras corpóreas monumentales y el logo institucional en chapa y frente de acrílico, iluminados,, respetando con precisión los colores que identifican la marca.\nUna intervención de gran impacto visual que refuerza la identidad corporativa y consolida la presencia de IVESS en su planta industrial.",
+        url: "/images/mosaic-images/proyecto-ivess/ivess-foto-1.webp",
+        alt: "Ivess imagen principal",
         photos: [
             {
-                url: "https://images.unsplash.com/photo-1780565081532-0f68d721e44a?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Gráfica de marca aplicada en un espacio corporativo",
+                url: "/images/mosaic-images/proyecto-ivess/ivess-foto-1.webp",
+                alt: "Ivess foto 1",
             },
             {
-                url: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Vista general del espacio de trabajo intervenido",
+                url: "/images/mosaic-images/proyecto-ivess/ivess-foto-2.webp",
+                alt: "Ivess foto 2",
             },
             {
-                url: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Detalle de gráfica y señalización interior",
+                url: "/images/mosaic-images/proyecto-ivess/ivess-foto-3.webp",
+                alt: "Ivess foto 3",
             },
             {
-                url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Acceso corporativo con identidad integrada",
+                url: "/images/mosaic-images/proyecto-ivess/ivess-foto-4.webp",
+                alt: "Ivess foto 4",
             },
             {
-                url: "https://images.unsplash.com/photo-1608126841830-53832c4b326f?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Terminación de materiales en el área de recepción",
+                url: "/images/mosaic-images/proyecto-ivess/ivess-foto-5.webp",
+                alt: "Ivess foto 5",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-ivess/ivess-foto-6.webp",
+                alt: "Ivess foto 6",
             },
         ],
         points: "790,320 1600,400 1600,650 650,740",
