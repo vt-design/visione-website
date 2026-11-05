@@ -32,7 +32,7 @@ interface PinnedProject {
 const MOSAIC_TILES: PinnedProject[] = [
     {
         id: "t1",
-        title: "REVESTIMIENTO - CARTELERÍA Y  CORPOREOS - GRAFICA CORPORATIVA",
+        title: "CONTINENTAL NEUMASHOP - PILAR, BUENOS AIRES",
         description:
             "Desarrollamos una solución de integral de  imagen corporativa que combina revestimiento de fachada en ACM (aluminio compuesto), grandes letras corpóreas de acrilico iluminadas con leds, y totem publicitario de gran altura. El proyecto se completa con elementos de identidad visual en el interior, integrando diseño, materiales y tecnología en una propuesta de alto impacto.",
         url: "/images/mosaic-images/proyecto-continental/continental-foto-3.webp",
@@ -150,27 +150,71 @@ const MOSAIC_TILES: PinnedProject[] = [
     },
     {
         id: "t3",
-        title: "Señalización para planta industrial",
+        title: "GRUPO GALENO - IDENTIDAD CORPORATIVA MULTISEDE",
         description:
-            "Fabricamos e instalamos elementos de orientación y seguridad preparados para entornos exigentes, con estructuras durables y lectura clara a distancia.",
-        url: "https://images.unsplash.com/photo-1564182842834-681b7be6de4b?w=1200&h=900&fit=crop&auto=format",
-        alt: "Montaje de estructura industrial",
+            "El proyecto incluye renovación de logo y la instalación en altura de letras corpóreas de gran formato realizadas en acero inoxidable con frente de acrílico e iluminación led en la Clínica TRINIDAD DE PALERMO. Se sumó en esta importante sede cartelería de ingreso con logo en acero inoxidable. En el proyecto abarcó sedes en San Isidro, Corrientes, Neuquén, Ramos Mejía, Luján, Microcentro (CABA), Belgrano y Puerto Madero con soluciones de cartelería corpórea exterior e interior desarrollada en diversos materiales como chapa o acero con frente de acrilico, y acero inoxidable pleno, con y sin iluminación led, adaptándose a las necesidades de cada espacio.",
+        url: "/images/mosaic-images/proyecto-galeno/galeno-foto-9.webp",
+        alt: "Galeno imagen principal",
         photos: [
             {
-                url: "https://images.unsplash.com/photo-1564182842834-681b7be6de4b?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Montaje de la estructura de señalización industrial",
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-1.webp",
+                alt: "galeno foto 1",
             },
             {
-                url: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Equipo trabajando en la instalación de planta",
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-2.webp",
+                alt: "galeno foto 2",
             },
             {
-                url: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Detalle técnico de fabricación industrial",
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-3.webp",
+                alt: "galeno foto 3",
             },
             {
-                url: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Terminaciones y controles del montaje",
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-4.webp",
+                alt: "galeno foto 4",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-5.webp",
+                alt: "galeno foto 5",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-6.webp",
+                alt: "galeno foto 6",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-7.webp",
+                alt: "galeno foto 7",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-8.webp",
+                alt: "galeno foto 8",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-9.webp",
+                alt: "galeno foto 9",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-10.webp",
+                alt: "galeno foto 10",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-11.webp",
+                alt: "galeno foto 11",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-12.webp",
+                alt: "galeno foto 12",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-13.webp",
+                alt: "galeno foto 13",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-14.webp",
+                alt: "galeno foto 14",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-15.webp",
+                alt: "galeno foto 15",
             },
         ],
         points: "0,250 790,320 650,740 0,810",
