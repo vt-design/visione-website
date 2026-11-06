@@ -8,7 +8,6 @@ import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Avatar, AvatarImage, AvatarFallback } from "./components/ui/avatar";
 import { useNavigate } from "react-router-dom";
-import { DialogDescription } from "@radix-ui/react-dialog";
 import PhotoMosaicSection from "./components/PhotoMosaicSection";
 
 // ─── DATA & CONSTANTS ────────────────────────────────────────────────────────

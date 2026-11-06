@@ -58,18 +58,18 @@
   "revestimientos": {
     "title": "Revestimientos",
     "subtitle": "Transformamos frentes y edificios con revestimientos que combinan diseño, volumen y personalidad. Plegados, calados y diferentes formas crean superficies únicas que renuevan la imagen arquitectónica.",
-    "heroImg": "https://images.unsplash.com/photo-1551520692-7cdc7dc041b1?w=1920&h=1080&fit=crop&auto=format",
+    "heroImg": "/images/soluciones/revestimientos/revestimientos-foto-principal.webp",
     "features": [
       {
         "title": "Paneles de Aluminio Compuesto (ACM)",
         "description": "El aluminio compuesto permite crear superficies modernas y versátiles, con terminaciones uniformes y gran precisión. Se adapta a diseños planos, curvos y tridimensionales, ofreciendo múltiples posibilidades para revestir y renovar espacios.",
-        "image": "https://images.unsplash.com/photo-1760787545864-b468b6fe2c92?w=900&h=700&fit=crop&auto=format",
+        "image": "/images/soluciones/revestimientos/revestimientos-foto-acm.webp",
         "tag": "FACHADAS ACM"
       },
       {
         "title": "Chapa galuanizada",
         "description": "La chapa galvanizada combina resistencia y versatilidad, permitiendo desarrollar piezas planas, plegadas, moldeadas y caladas. Sus posibilidades de diseño la convierten en una excelente opción para crear revestimientos, formas y detalles con identidad propia.",
-        "image": "https://images.unsplash.com/photo-1551520692-7cdc7dc041b1?w=900&h=700&fit=crop&auto=format",
+        "image": "/images/soluciones/revestimientos/revestimientos-foto-chapa.webp",
         "tag": "DISEÑO A MEDIDA"
       }
     ]

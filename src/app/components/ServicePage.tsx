@@ -5,19 +5,6 @@ import { ArrowRight } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import servicePageData from '@/data/servicios.json'
 
-// interface ServicePageProps {
-//   title: string;
-//   subtitle: string;
-//   heroImg: string;
-//   features: Array<{
-//     title: string;
-//     description: string;
-//     image: string;
-//     tag: string;
-//   }>;
-//   onNavigate: (page: string) => void;
-// } { title, subtitle, heroImg, features, onNavigate }: ServicePageProps
-
 export function ServicePage() {
 
   const navigate = useNavigate();
@@ -36,7 +23,7 @@ export function ServicePage() {
             alt={title}
             className="absolute inset-0 w-full h-full object-cover opacity-35 filter brightness-90"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1a1c18] via-[#1a1c18]/40 to-[#1a1c18]/70" />
+          {/* <div className="absolute inset-0 bg-gradient-to-t from-[#1a1c18] via-[#1a1c18]/40 to-[#1a1c18]/70" /> */}
 
           <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-12 text-center text-white space-y-6">
             <h1 className="ff-display font-['Audiowide'] text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white uppercase leading-tight">

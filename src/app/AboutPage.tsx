@@ -83,7 +83,7 @@ export default function AboutPage() {
               </h2>
               <div className="w-12 h-1 bg-[#a5cd38] mx-auto"></div>
               <p className="text-[#1a1c18]/70 text-sm">
-                Desde la primera consulta hasta la instalación final, acompañamos cada proyecto con asesoramiento, diseño, fabricación y colocación. En formato de 4 recuadros podría ir una imagen y este texto?
+                Desde la primera consulta hasta la instalación final, acompañamos cada proyecto con asesoramiento, diseño, fabricación y colocación.
               </p>
             </div>
 

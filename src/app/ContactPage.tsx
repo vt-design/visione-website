@@ -125,7 +125,7 @@ export default function ContactPage() {
                     <option value="Cartelería">Revestimientos</option>
                     <option value="Gráfica">Carteleria y Corpóreos</option>
                     <option value="Revestimientos">Gráfica corporativa</option>
-                    <option value="Proyecto Integral">Aseosoramiento / Proyecto integral</option>
+                    <option value="Proyecto Integral">Asesoramiento / Proyecto integral</option>
                   </select>
                 </div>
 
