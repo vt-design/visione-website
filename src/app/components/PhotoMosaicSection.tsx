@@ -32,59 +32,117 @@ interface PinnedProject {
 const MOSAIC_TILES: PinnedProject[] = [
     {
         id: "t1",
-        title: "Identidad exterior para local comercial",
+        title: "CONTINENTAL NEUMASHOP - PILAR, BUENOS AIRES",
         description:
-            "Desarrollamos una presencia de marca de alto impacto con cartelería corpórea e iluminación integrada, cuidando la legibilidad tanto de día como de noche.",
-        url: "https://images.unsplash.com/photo-1780385187604-4663a1d7c6e6?w=1200&h=800&fit=crop&auto=format",
-        alt: "Cartelería exterior iluminada",
+            "Desarrollamos una solución de integral de  imagen corporativa que combina revestimiento de fachada en ACM (aluminio compuesto), grandes letras corpóreas de acrilico iluminadas con leds, y totem publicitario de gran altura. El proyecto se completa con elementos de identidad visual en el interior, integrando diseño, materiales y tecnología en una propuesta de alto impacto.",
+        url: "/images/mosaic-images/proyecto-continental/continental-foto-3.webp",
+        alt: "REVESTIMIENTO - CARTELERÍA Y  CORPOREOS - GRAFICA CORPORATIVA",
         photos: [
+            // proceso
             {
-                url: "https://images.unsplash.com/photo-1780385187604-4663a1d7c6e6?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Vista general de la cartelería exterior iluminada",
+                url: "/images/mosaic-images/proyecto-continental/continental-foto-4.webp",
+                alt: "imagen continental de noche",
             },
             {
-                url: "https://images.unsplash.com/photo-1779614800682-0c0cea8e0cd5?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Detalle de señalética urbana de gran formato",
+                url: "/images/mosaic-images/proyecto-continental/continental-foto-10.webp",
+                alt: "imagen continental de noche",
+            },
+            // de dia
+            {
+                url: "/images/mosaic-images/proyecto-continental/continental-foto-11.webp",
+                alt: "imagen continental de noche",
             },
             {
-                url: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Aplicación de identidad visual en el acceso comercial",
+                url: "/images/mosaic-images/proyecto-continental/continental-foto-5.webp",
+                alt: "imagen continental de noche",
             },
             {
-                url: "https://images.unsplash.com/photo-1608126841830-53832c4b326f?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Terminación de fachada y letras corpóreas",
+                url: "/images/mosaic-images/proyecto-continental/continental-foto-9.webp",
+                alt: "imagen continental de noche",
             },
+            // noche
+            {
+                url: "/images/mosaic-images/proyecto-continental/continental-foto-2.webp",
+                alt: "imagen continental de noche",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-continental/continental-foto-3.webp",
+                alt: "imagen continental de noche",
+            },
+
+            {
+                url: "/images/mosaic-images/proyecto-continental/continental-foto-8.webp",
+                alt: "imagen continental de noche",
+            },
+            // interior
+            {
+                url: "/images/mosaic-images/proyecto-continental/continental-foto-1.webp",
+                alt: "imagen continental de noche",
+            },
+
+
+            {
+                url: "/images/mosaic-images/proyecto-continental/continental-foto-6.webp",
+                alt: "imagen continental de noche",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-continental/continental-foto-7.webp",
+                alt: "imagen continental de noche",
+            },
+
         ],
         points: "0,0 900,0 790,320 0,250",
         frame: { x: 0, y: 0, width: 900, height: 320 },
     },
     {
         id: "t2",
-        title: "Renovación integral de fachada",
+        title: "DUNLOP - General Rodriguez, San Nicolás de los Arroyos, Córdoba, Pilar, CABA",
         description:
-            "Revestimos el frente comercial con paneles metálicos de alta resistencia y una solución gráfica precisa para unificar arquitectura, marca y señalización.",
-        url: "https://images.unsplash.com/photo-1760787545864-b468b6fe2c92?w=1200&h=900&fit=crop&auto=format",
+            "Desarrollamos una intervención integral en diferentes sucursales del país, combinando revestimientos de los edificios en aluminio compuesto (ACM), carteles con fondo en ACM y letras corpóreas con laterales en chapa y frente de acrílico, con iluminación led, respetando los colores de la marca. El proyecto se completó con grafica corporativa en vidrieras y espacios interiores, asegurando una identidad visual consistente en cada sede.",
+        url: "/images/mosaic-images/proyecto-dunlop/dunlop-foto-3.webp",
         alt: "Fachada comercial revestida",
         photos: [
+            // general rodriguez
             {
-                url: "https://images.unsplash.com/photo-1760787545864-b468b6fe2c92?w=1600&h=1100&fit=crop&auto=format",
+                url: "/images/mosaic-images/proyecto-dunlop/dunlop-foto-7.webp",
                 alt: "Vista frontal de la fachada comercial revestida",
             },
             {
-                url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Volúmenes y modulación del revestimiento exterior",
+                url: "/images/mosaic-images/proyecto-dunlop/dunlop-foto-8.webp",
+                alt: "Vista frontal de la fachada comercial revestida",
             },
             {
-                url: "https://images.unsplash.com/photo-1551520692-7cdc7dc041b1?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Detalle arquitectónico de la envolvente metálica",
+                url: "/images/mosaic-images/proyecto-dunlop/dunlop-foto-6.webp",
+                alt: "Vista frontal de la fachada comercial revestida",
             },
             {
-                url: "https://images.unsplash.com/photo-1608126841830-53832c4b326f?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Encuentro entre fachada, acceso e identidad visual",
+                url: "/images/mosaic-images/proyecto-dunlop/dunlop-foto-9.webp",
+                alt: "Vista frontal de la fachada comercial revestida",
+            },
+            //
+            {
+                url: "/images/mosaic-images/proyecto-dunlop/dunlop-foto-2.webp",
+                alt: "Vista frontal de la fachada comercial revestida",
             },
             {
-                url: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Vista interior vinculada con el nuevo acceso",
+                url: "/images/mosaic-images/proyecto-dunlop/dunlop-foto-1.webp",
+                alt: "Vista frontal de la fachada comercial revestida",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-dunlop/dunlop-foto-5.webp",
+                alt: "Vista frontal de la fachada comercial revestida",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-dunlop/dunlop-foto-4.webp",
+                alt: "Vista frontal de la fachada comercial revestida",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-dunlop/dunlop-foto-3.webp",
+                alt: "Vista frontal de la fachada comercial revestida",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-dunlop/dunlop-foto-10.webp",
+                alt: "Vista frontal de la fachada comercial revestida",
             },
         ],
         points: "900,0 1600,0 1600,400 790,320",
@@ -92,27 +150,71 @@ const MOSAIC_TILES: PinnedProject[] = [
     },
     {
         id: "t3",
-        title: "Señalización para planta industrial",
+        title: "GRUPO GALENO - IDENTIDAD CORPORATIVA MULTISEDE",
         description:
-            "Fabricamos e instalamos elementos de orientación y seguridad preparados para entornos exigentes, con estructuras durables y lectura clara a distancia.",
-        url: "https://images.unsplash.com/photo-1564182842834-681b7be6de4b?w=1200&h=900&fit=crop&auto=format",
-        alt: "Montaje de estructura industrial",
+            "El proyecto incluye renovación de logo y la instalación en altura de letras corpóreas de gran formato realizadas en acero inoxidable con frente de acrílico e iluminación led en la Clínica TRINIDAD DE PALERMO. Se sumó en esta importante sede cartelería de ingreso con logo en acero inoxidable. En el proyecto abarcó sedes en San Isidro, Corrientes, Neuquén, Ramos Mejía, Luján, Microcentro (CABA), Belgrano y Puerto Madero con soluciones de cartelería corpórea exterior e interior desarrollada en diversos materiales como chapa o acero con frente de acrilico, y acero inoxidable pleno, con y sin iluminación led, adaptándose a las necesidades de cada espacio.",
+        url: "/images/mosaic-images/proyecto-galeno/galeno-foto-9.webp",
+        alt: "Galeno imagen principal",
         photos: [
             {
-                url: "https://images.unsplash.com/photo-1564182842834-681b7be6de4b?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Montaje de la estructura de señalización industrial",
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-1.webp",
+                alt: "galeno foto 1",
             },
             {
-                url: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Equipo trabajando en la instalación de planta",
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-2.webp",
+                alt: "galeno foto 2",
             },
             {
-                url: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Detalle técnico de fabricación industrial",
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-3.webp",
+                alt: "galeno foto 3",
             },
             {
-                url: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Terminaciones y controles del montaje",
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-4.webp",
+                alt: "galeno foto 4",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-5.webp",
+                alt: "galeno foto 5",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-6.webp",
+                alt: "galeno foto 6",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-7.webp",
+                alt: "galeno foto 7",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-8.webp",
+                alt: "galeno foto 8",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-9.webp",
+                alt: "galeno foto 9",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-10.webp",
+                alt: "galeno foto 10",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-11.webp",
+                alt: "galeno foto 11",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-12.webp",
+                alt: "galeno foto 12",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-13.webp",
+                alt: "galeno foto 13",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-14.webp",
+                alt: "galeno foto 14",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-galeno/galeno-foto-15.webp",
+                alt: "galeno foto 15",
             },
         ],
         points: "0,250 790,320 650,740 0,810",
@@ -120,31 +222,35 @@ const MOSAIC_TILES: PinnedProject[] = [
     },
     {
         id: "t4",
-        title: "Gráfica ambiental para oficinas",
+        title: "IVESS - JAUREGUI",
         description:
-            "Aplicamos vinilos y recursos de señalética interior para reforzar la identidad corporativa, ordenar los recorridos y transformar los espacios de trabajo.",
-        url: "https://images.unsplash.com/photo-1780565081532-0f68d721e44a?w=1200&h=800&fit=crop&auto=format",
-        alt: "Gráfica aplicada en espacio comercial",
+            "Desarrollamos e instalamos un cartel exterior de grandes dimensiones, con letras corpóreas monumentales y el logo institucional en chapa y frente de acrílico, iluminados,, respetando con precisión los colores que identifican la marca.\nUna intervención de gran impacto visual que refuerza la identidad corporativa y consolida la presencia de IVESS en su planta industrial.",
+        url: "/images/mosaic-images/proyecto-ivess/ivess-foto-1.webp",
+        alt: "Ivess imagen principal",
         photos: [
             {
-                url: "https://images.unsplash.com/photo-1780565081532-0f68d721e44a?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Gráfica de marca aplicada en un espacio corporativo",
+                url: "/images/mosaic-images/proyecto-ivess/ivess-foto-1.webp",
+                alt: "Ivess foto 1",
             },
             {
-                url: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Vista general del espacio de trabajo intervenido",
+                url: "/images/mosaic-images/proyecto-ivess/ivess-foto-2.webp",
+                alt: "Ivess foto 2",
             },
             {
-                url: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Detalle de gráfica y señalización interior",
+                url: "/images/mosaic-images/proyecto-ivess/ivess-foto-3.webp",
+                alt: "Ivess foto 3",
             },
             {
-                url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Acceso corporativo con identidad integrada",
+                url: "/images/mosaic-images/proyecto-ivess/ivess-foto-4.webp",
+                alt: "Ivess foto 4",
             },
             {
-                url: "https://images.unsplash.com/photo-1608126841830-53832c4b326f?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Terminación de materiales en el área de recepción",
+                url: "/images/mosaic-images/proyecto-ivess/ivess-foto-5.webp",
+                alt: "Ivess foto 5",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-ivess/ivess-foto-6.webp",
+                alt: "Ivess foto 6",
             },
         ],
         points: "790,320 1600,400 1600,650 650,740",
@@ -152,27 +258,51 @@ const MOSAIC_TILES: PinnedProject[] = [
     },
     {
         id: "t5",
-        title: "Totem de acceso y orientación",
+        title: "JEBAR - NEUQUÉN",
         description:
-            "Resolvimos un hito de acceso visible y resistente, combinando estructura metálica, gráfica de alto desempeño y una lectura jerárquica para visitantes.",
-        url: "https://images.unsplash.com/photo-1779614800682-0c0cea8e0cd5?w=1200&h=900&fit=crop&auto=format",
-        alt: "Señalética urbana de gran formato",
+            "Proyecto integral de revestimiento en ACM (aluminio compuesto) y cartelería  de acero inoxidable con frente de acrílico e iluminación led para una concesionaria de gran escala en la ciudad de Neuquén.\nUna intervención que combina soluciones constructivas e identidad corporativa para lograr una imagen arquitectónica sólida, uniforme y de gran impacto visual alineada con la identidad de marca de JEBAR.",
+        url: "/images/mosaic-images/proyecto-jebar/jebar-foto-5.webp",
+        alt: "Jebar imagen principal",
         photos: [
             {
-                url: "https://images.unsplash.com/photo-1779614800682-0c0cea8e0cd5?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Totem de acceso visto desde la circulación principal",
+                url: "/images/mosaic-images/proyecto-jebar/jebar-foto-1.webp",
+                alt: "foto jebar 1",
             },
             {
-                url: "https://images.unsplash.com/photo-1780385187604-4663a1d7c6e6?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Detalle de iluminación y lectura nocturna",
+                url: "/images/mosaic-images/proyecto-jebar/jebar-foto-2.webp",
+                alt: "foto jebar 2",
             },
             {
-                url: "https://images.unsplash.com/photo-1564182842834-681b7be6de4b?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Estructura portante durante el montaje",
+                url: "/images/mosaic-images/proyecto-jebar/jebar-foto-3.webp",
+                alt: "foto jebar 3",
             },
             {
-                url: "https://images.unsplash.com/photo-1551520692-7cdc7dc041b1?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Integración de la señal con el entorno arquitectónico",
+                url: "/images/mosaic-images/proyecto-jebar/jebar-foto-4.webp",
+                alt: "foto jebar 4",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-jebar/jebar-foto-5.webp",
+                alt: "foto jebar 5",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-jebar/jebar-foto-6.webp",
+                alt: "foto jebar 6",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-jebar/jebar-foto-7.webp",
+                alt: "foto jebar 7",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-jebar/jebar-foto-8.webp",
+                alt: "foto jebar 8",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-jebar/jebar-foto-9.webp",
+                alt: "foto jebar 9",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-jebar/jebar-foto-10.webp",
+                alt: "foto jebar 10",
             },
         ],
         points: "0,810 650,740 560,1000 0,1000",
@@ -217,30 +347,30 @@ const MOSAIC_TILES: PinnedProject[] = [
 ];
 
 const MOBILE_MOSAIC_LAYOUT = [
-  {
-    points: "0,0 600,0 600,270 0,330",
-    frame: { x: 0, y: 0, width: 600, height: 330 },
-  },
-  {
-    points: "0,330 600,270 600,620 0,570",
-    frame: { x: 0, y: 270, width: 600, height: 350 },
-  },
-  {
-    points: "0,570 600,620 600,870 0,930",
-    frame: { x: 0, y: 570, width: 600, height: 360 },
-  },
-  {
-    points: "0,930 600,870 600,1220 0,1170",
-    frame: { x: 0, y: 870, width: 600, height: 350 },
-  },
-  {
-    points: "0,1170 600,1220 600,1470 0,1530",
-    frame: { x: 0, y: 1170, width: 600, height: 360 },
-  },
-  {
-    points: "0,1530 600,1470 600,1800 0,1800",
-    frame: { x: 0, y: 1470, width: 600, height: 330 },
-  },
+    {
+        points: "0,0 600,0 600,270 0,330",
+        frame: { x: 0, y: 0, width: 600, height: 330 },
+    },
+    {
+        points: "0,330 600,270 600,620 0,570",
+        frame: { x: 0, y: 270, width: 600, height: 350 },
+    },
+    {
+        points: "0,570 600,620 600,870 0,930",
+        frame: { x: 0, y: 570, width: 600, height: 360 },
+    },
+    {
+        points: "0,930 600,870 600,1220 0,1170",
+        frame: { x: 0, y: 870, width: 600, height: 350 },
+    },
+    {
+        points: "0,1170 600,1220 600,1470 0,1530",
+        frame: { x: 0, y: 1170, width: 600, height: 360 },
+    },
+    {
+        points: "0,1530 600,1470 600,1800 0,1800",
+        frame: { x: 0, y: 1470, width: 600, height: 330 },
+    },
 ];
 
 
@@ -506,10 +636,10 @@ export default function PhotoMosaicSection() {
                                 }
                             }}
                             className={`home-collage-tile ${visible[i]
-                                    ? "home-collage-visible"
-                                    : i % 2 === 0
-                                        ? "home-collage-enter-left"
-                                        : "home-collage-enter-right"
+                                ? "home-collage-visible"
+                                : i % 2 === 0
+                                    ? "home-collage-enter-left"
+                                    : "home-collage-enter-right"
                                 }`}
                         >
                             <image
@@ -551,14 +681,14 @@ export default function PhotoMosaicSection() {
                                     VER PROYECTO
                                 </text>
                             </g>
-                            <g
+                            {/* <g
                                 className="home-collage-touch-marker"
                                 transform={`translate(${layout.frame.x + layout.frame.width / 2} ${layout.frame.y + layout.frame.height / 2})`}
                                 aria-hidden="true"
                             >
                                 <circle r="34" />
                                 <path d="M-13-4v-9h9 M4-13h9v9 M13 4v9H4 M-4 13h-9V4" />
-                            </g>
+                            </g> */}
                         </g>
                     );
                 })}
@@ -673,10 +803,10 @@ export default function PhotoMosaicSection() {
                                 )}
                             </div>
 
-                            <div className="project-gallery-details space-y-5 px-5 py-5 sm:px-7 sm:py-6">
+                            <div className="project-gallery-details space-y-5 px-5 py-5 sm:px-7 sm:py-6 overflow-x-hidden">
                                 <div
                                     ref={thumbnailRailRef}
-                                    className="project-gallery-thumbnails flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2"
+                                    className="project-gallery-thumbnails flex snap-x snap-mandatory gap-3 overflow-x-scroll pb-2 "
                                     aria-label="Fotos del proyecto"
                                 >
                                     {selectedProject.photos.map((photo, index) => (

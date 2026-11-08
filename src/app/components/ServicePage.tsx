@@ -5,23 +5,10 @@ import { ArrowRight } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import servicePageData from '@/data/servicios.json'
 
-// interface ServicePageProps {
-//   title: string;
-//   subtitle: string;
-//   heroImg: string;
-//   features: Array<{
-//     title: string;
-//     description: string;
-//     image: string;
-//     tag: string;
-//   }>;
-//   onNavigate: (page: string) => void;
-// } { title, subtitle, heroImg, features, onNavigate }: ServicePageProps
-
 export function ServicePage() {
 
   const navigate = useNavigate();
-  const { servicio } = useParams();
+  const { servicio } = useParams() || { servicio: "revestimientos"};
   const { title, subtitle, heroImg, features } = servicePageData[servicio];
 
   return (
@@ -30,13 +17,13 @@ export function ServicePage() {
         <Navbar activePage={servicio} />
 
         {/* FULL SCREEN HERO WITH BACKGROUND PHOTO */}
-        <section className="relative h-screen flex items-center justify-center bg-[#1a1c18] overflow-hidden">
+        <section className="relative h-[75dvh] lg:h-screen flex items-center justify-center bg-[#1a1c18] overflow-hidden">
           <img
             src={heroImg}
             alt={title}
             className="absolute inset-0 w-full h-full object-cover opacity-35 filter brightness-90"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1a1c18] via-[#1a1c18]/40 to-[#1a1c18]/70" />
+          {/* <div className="absolute inset-0 bg-gradient-to-t from-[#1a1c18] via-[#1a1c18]/40 to-[#1a1c18]/70" /> */}
 
           <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-12 text-center text-white space-y-6">
             <h1 className="ff-display font-['Audiowide'] text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white uppercase leading-tight">
@@ -50,7 +37,8 @@ export function ServicePage() {
                 onClick={() => navigate("/contacto")}
                 className="btn-wipe btn-wipe-primary px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-sm tracking-wider uppercase rounded-xs shadow-lg inline-flex items-center gap-3 cursor-pointer"
               >
-                <span>Solicitar Presupuesto para este Servicio</span>
+                <span className="hidden md:block">Solicitar Presupuesto para este Servicio</span>
+                <span className="block md:hidden">Contactanos</span>
                 <ArrowRight size={18} />
               </button>
             </div>
@@ -96,7 +84,7 @@ export function ServicePage() {
                     </p>
                     <div className="pt-2">
                       <button
-                        onClick={() => navigate("/galeria")}
+                        onClick={() => navigate("/proyectos")}
                         className="text-xs font-bold tracking-wider uppercase text-[#a5cd38] hover:text-[#a5cd38] inline-flex items-center gap-2 border-b-2 border-[#a5cd38] pb-1 transition-colors cursor-pointer"
                       >
                         <span>Ver más fotos</span>

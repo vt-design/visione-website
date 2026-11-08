@@ -120,7 +120,7 @@ export function Navbar({ activePage }: NavbarProps) {
           </div>
 
           <button
-            onClick={(e) => handleNavClick("/galeria", e)}
+            onClick={(e) => handleNavClick("/proyectos", e)}
             className={`text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer font-['Archivo'] ${
               activePage === "galeria" ? "text-[#a5cd38]" : "text-white/80 hover:text-[#a5cd38]"
             }`}
@@ -184,7 +184,7 @@ export function Navbar({ activePage }: NavbarProps) {
           </div>
 
           <button
-            onClick={(e) => handleNavClick("/galeria", e)}
+            onClick={(e) => handleNavClick("/proyectos", e)}
             className={`block w-full text-left py-2 font-medium text-base font-['Archivo'] ${
               activePage === "galeria" ? "text-[#a5cd38]" : "text-white/80 hover:text-[#a5cd38]"
             }`}

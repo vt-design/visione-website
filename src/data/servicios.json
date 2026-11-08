@@ -5,22 +5,28 @@
     "heroImg": "https://images.unsplash.com/photo-1780385187604-4663a1d7c6e6?w=1920&h=1080&fit=crop&auto=format",
     "features": [
       {
-        "title": "Corpóreos en Acero & Acrílico",
-        "description": "Letras en relieve en acero inoxidable, chapa galvanizada o acrílico con iluminación frontal, posterior (halo light) o combinada con matrices LED de alta durabilidad.",
-        "image": "https://images.unsplash.com/photo-1780385187604-4663a1d7c6e6?w=900&h=700&fit=crop&auto=format",
-        "tag": "CORPÓREOS 3D"
-      },
-      {
-        "title": "Marquesinas & Totems Monumentales",
-        "description": "Estructuras de gran porte para estaciones de servicio, parques industriales y shoppings. Cálculos estructurales homologados e ingeniería antiviento.",
+        "title": "LETRAS Y LOGOS CORPOREOS",
+        "description": "Fabricamos letras y logos a medida, adaptados a las necesidades de cada proyecto. Trabajamos con diferentes materiales y combinaciones: Acrílico, acrilico termoformado. Cuerpo de chapa con frente de acrílico. Chapa pintada. Acero inoxidable, más combinaciones. Disponibles en distintas terminaciones y con opciones de iluminación LED para aplicaciones interiores y exteriores.",
         "image": "https://images.unsplash.com/photo-1779614800682-0c0cea8e0cd5?w=900&h=700&fit=crop&auto=format",
         "tag": "GRAN FORMATO"
       },
       {
-        "title": "Iluminación LED de Alta Eficiencia",
-        "description": "Módulos LED sellados con protección IP67 para exterior, fuentes con protección térmica y bajo consumo energético sostenido.",
+        "title": "MARQUESINAS, CARTELES Y SALIENTES",
+        "description": "Fabricamos carteles con estructuras y bases de chapa galvanizada o aluminio compuesto (ACM). Pueden incorporar superficies caladas, letras y logos corpóreos aplicados, en distintos materiales y terminaciones. Se desarrollan con o sin iluminación LED, según el diseño y las necesidades de cada proyecto. CARTELES SALIENTES: Fabricamos carteles salientes en chapa, acero, acrílico, con diferentes formas, volúmenes y dimensiones. Pueden combinar materiales, incorporar iluminación LED y adaptarse a diseños personalizados para lograr una identificación visible desde distintos ángulos.",
         "image": "https://images.unsplash.com/photo-1780565081532-0f68d721e44a?w=900&h=700&fit=crop&auto=format",
         "tag": "TECNOLOGÍA LED"
+      },
+      {
+        "title": "GRAN FORMATO Y TOTEMS",
+        "description": "Tótems revestidos en aluminio compuesto (ACM), con letras y elementos corpóreos aplicados o diseños calados. Diferentes formatos, terminaciones y opciones de iluminación permiten  lograr una identificación visible y destacada. Desarrollamos letras y logos de grandes dimensiones en chapa, acrílico y acero inoxidable, combinando materiales y terminaciones según las características de cada proyecto. Incorporamos iluminación LED para instalaciones interiores y exteriores.",
+        "image": "https://images.unsplash.com/photo-1779614800682-0c0cea8e0cd5?w=900&h=700&fit=crop&auto=format",
+        "tag": "GRAN FORMATO"
+      },
+      {
+        "title": "ILUMINACIÓN LED",
+        "description": "Incorporamos sistemas de iluminación LED de calidad, seleccionados por su eficiencia, durabilidad, intensidad y definición visual. Ofrecemos distintas alternativas, desde puntos de luz hasta iluminación difusa, o iluminacion frontal y/o lateral en piezas de acrílico, logrando diferentes efectos y terminaciones.",
+        "image": "https://images.unsplash.com/photo-1779614800682-0c0cea8e0cd5?w=900&h=700&fit=crop&auto=format",
+        "tag": "GRAN FORMATO"
       }
     ]
   },
@@ -52,18 +58,18 @@
   "revestimientos": {
     "title": "Revestimientos",
     "subtitle": "Transformamos frentes y edificios con revestimientos que combinan diseño, volumen y personalidad. Plegados, calados y diferentes formas crean superficies únicas que renuevan la imagen arquitectónica.",
-    "heroImg": "https://images.unsplash.com/photo-1551520692-7cdc7dc041b1?w=1920&h=1080&fit=crop&auto=format",
+    "heroImg": "/images/soluciones/revestimientos/revestimientos-foto-principal.webp",
     "features": [
       {
         "title": "Paneles de Aluminio Compuesto (ACM)",
         "description": "El aluminio compuesto permite crear superficies modernas y versátiles, con terminaciones uniformes y gran precisión. Se adapta a diseños planos, curvos y tridimensionales, ofreciendo múltiples posibilidades para revestir y renovar espacios.",
-        "image": "https://images.unsplash.com/photo-1760787545864-b468b6fe2c92?w=900&h=700&fit=crop&auto=format",
+        "image": "/images/soluciones/revestimientos/revestimientos-foto-acm.webp",
         "tag": "FACHADAS ACM"
       },
       {
         "title": "Chapa galuanizada",
         "description": "La chapa galvanizada combina resistencia y versatilidad, permitiendo desarrollar piezas planas, plegadas, moldeadas y caladas. Sus posibilidades de diseño la convierten en una excelente opción para crear revestimientos, formas y detalles con identidad propia.",
-        "image": "https://images.unsplash.com/photo-1551520692-7cdc7dc041b1?w=900&h=700&fit=crop&auto=format",
+        "image": "/images/soluciones/revestimientos/revestimientos-foto-chapa.webp",
         "tag": "DISEÑO A MEDIDA"
       }
     ]
