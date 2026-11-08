@@ -17,7 +17,7 @@ export function ServicePage() {
         <Navbar activePage={servicio} />
 
         {/* FULL SCREEN HERO WITH BACKGROUND PHOTO */}
-        <section className="relative h-screen flex items-center justify-center bg-[#1a1c18] overflow-hidden">
+        <section className="relative h-[75dvh] lg:h-screen flex items-center justify-center bg-[#1a1c18] overflow-hidden">
           <img
             src={heroImg}
             alt={title}
@@ -37,7 +37,8 @@ export function ServicePage() {
                 onClick={() => navigate("/contacto")}
                 className="btn-wipe btn-wipe-primary px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-sm tracking-wider uppercase rounded-xs shadow-lg inline-flex items-center gap-3 cursor-pointer"
               >
-                <span>Solicitar Presupuesto para este Servicio</span>
+                <span className="hidden md:block">Solicitar Presupuesto para este Servicio</span>
+                <span className="block md:hidden">Contactanos</span>
                 <ArrowRight size={18} />
               </button>
             </div>
