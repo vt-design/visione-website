@@ -16,12 +16,14 @@ exports.handler = async (event) => {
       query = cloudinary.search
         .expression(`resource_type:image AND tags=${tag}`)
         .sort_by("created_at", "desc")
-        .max_results(10);
+        .max_results(10)
+        .with_field("tags");
     } else {
       query = cloudinary.search
         .expression("resource_type:image")
         .sort_by("created_at", "desc")
-        .max_results(10);
+        .max_results(10)
+        .with_field("tags");
     }
 
     if (cursor) {
@@ -41,6 +43,7 @@ exports.handler = async (event) => {
           id: image.public_id,
           url: image.secure_url,
           alt: image.context?.custom?.alt || image.public_id,
+          tags: image.tags || []
         })),
         nextCursor: result.next_cursor || null,
       }),
