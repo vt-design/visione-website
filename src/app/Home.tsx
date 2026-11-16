@@ -8,7 +8,6 @@ import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Avatar, AvatarImage, AvatarFallback } from "./components/ui/avatar";
 import { useNavigate } from "react-router-dom";
-import { DialogDescription } from "@radix-ui/react-dialog";
 import PhotoMosaicSection from "./components/PhotoMosaicSection";
 
 // ─── DATA & CONSTANTS ────────────────────────────────────────────────────────
@@ -219,7 +218,7 @@ export default function HomePage() {
         <Navbar activePage="home" />
 
         {/* HERO SECTION */}
-        <section className="relative h-screen bg-[#1a1c18] overflow-hidden flex items-center">
+        <section className="relative h-[75dvh] lg:h-screen bg-[#1a1c18] overflow-hidden flex items-center">
           <div className="absolute inset-0 overflow-hidden">
             <style>{`
               @keyframes heroWipeIn {
