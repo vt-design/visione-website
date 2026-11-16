@@ -5,11 +5,13 @@ import { Footer } from "./components/Footer";
 import { Button } from "./components/ui/button";
 import { X } from "lucide-react";
 import { motion } from "motion/react";
+import { listItemSecondaryActionClasses } from "@mui/material/ListItemSecondaryAction";
 
 interface GalleryImage {
   id: string;
   url: string;
   alt: string;
+  tags: string[];
 }
 
 interface GalleryResponse {
@@ -64,7 +66,6 @@ export default function GalleryPage() {
       }
 
       if (activeFilter !== "all") {
-        console.log(`active filer: ${activeFilter}`)
         params.set('tag', activeFilter)
       }
 
@@ -77,7 +78,7 @@ export default function GalleryPage() {
       }
 
       const data: GalleryResponse = await response.json();
-
+      console.log(data.images)
       setImages((previous) => {
         // La primera solicitud reemplaza las imágenes;
         // las siguientes agregan otras 10.
@@ -109,7 +110,7 @@ export default function GalleryPage() {
   // Carga las primeras 10 imágenes al abrir la página.
   useEffect(() => {
     void loadImages();
-  }, [activeFilter]);
+  }, []);
 
   // Carga otras 10 cuando el visitante se acerca al final.
   useEffect(() => {
@@ -131,6 +132,7 @@ export default function GalleryPage() {
 
     observer.observe(sentinel);
 
+    console.log(images)
     return () => observer.disconnect();
   }, [images.length, nextCursor, hasMore, loading]);
 
@@ -186,7 +188,7 @@ export default function GalleryPage() {
 
         <section className="py-12 max-w-7xl mx-auto px-6 md:px-12">
           <div className="gallery-mosaic">
-            {images.map((item, index) => (
+            {images.filter((item, index) => activeFilter.toLowerCase() === "all" ? true : item.tags.includes(activeFilter.toLowerCase()) ).map((item, index) => (
               <Button
                 key={item.id}
                 variant="ghost"

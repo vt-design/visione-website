@@ -34,17 +34,20 @@ function PlatformLogo({ brand }: { brand: "instagram" | "facebook" | "wetransfer
 
 export default function ContactPage() {
   const [nombre, setNombre] = useState("");
-  const [empresa, setEmpresa] = useState("");
+  const [ubicacion, setUbicacion] = useState("");
   const [consulta, setConsulta] = useState("");
   const [servicio, setServicio] = useState("Cartelería");
+  const [iluminado, setIluminado] = useState("no");
   const [submitted, setSubmitted] = useState(false);
 
   const handleWhatsApp = (e: React.FormEvent) => {
     e.preventDefault();
     if (!nombre.trim()) return;
     const msg = [
-      `Hola Visione, soy *${nombre.trim()}*${empresa.trim() ? ` de *${empresa.trim()}*` : ""}.`,
+      `Hola Visione, soy *${nombre.trim()}`,
       `\nInterés: *${servicio}*`,
+      `\nUbicación: *${ubicacion}*`,
+      `\nEs iluminado?: *${iluminado}*`,
       consulta.trim() ? `\n\nConsulta: ${consulta.trim()}` : "",
     ].join("");
     window.open(`https://wa.me/5491148897180?text=${encodeURIComponent(msg)}`, "_blank");
@@ -101,19 +104,53 @@ export default function ContactPage() {
 
                   <div className="space-y-1.5">
                     <label className="text-[11px] font-mono font-bold uppercase text-[#1a1c18]/80">
-                      Empresa / Razón Social
+                      Ubicación *
                     </label>
                     <input
                       type="text"
-                      placeholder="Ej: Constructora del Sur"
-                      value={empresa}
-                      onChange={(e) => setEmpresa(e.target.value)}
+                      required
+                      placeholder="Ej: Av. Córdoba, 1600"
+                      value={ubicacion}
+                      onChange={(e) => setUbicacion(e.target.value)}
                       className="w-full px-4 py-2.5 bg-[#F8F9FA] border border-black/15 rounded-xs text-sm focus:outline-none focus:border-[#637f1d] transition-colors"
                     />
                   </div>
                 </div>
 
-                <div className="space-y-1.5">
+                <div className="grid grid-col-1 md:grid-cols-2 gap-5">
+                  <div className="space-y-1.5">
+                    <label className="text-[11px] font-mono font-bold uppercase text-[#1a1c18]/80">
+                      Servicio Requerido *
+                    </label>
+                    <select
+                      value={servicio}
+                      required
+                      onChange={(e) => setServicio(e.target.value)}
+                      className="w-full px-4 py-2.5 bg-[#F8F9FA] border border-black/15 rounded-xs text-sm focus:outline-none focus:border-primary transition-colors cursor-pointer"
+                    >
+                      <option value="Revestimientos">Revestimientos</option>
+                      <option value="Cartelería y Corpóreos">Cartelería y Corpóreos</option>
+                      <option value="Gráfica corporativa">Gráfica corporativa</option>
+                      <option value="Proyecto Integral">Asesoramiento / Proyecto integral</option>
+                    </select>
+                  </div>
+
+                  <div className="spave-y-1.5">
+                    <label className="text-[11px] font-mono font-bold uppercase text-[#1a1c18]/80">
+                      Lleva iluminación? *
+                    </label>
+                    <select
+                      value={iluminado}
+                      onChange={(e) => setIluminado(e.target.value)}
+                      className="w-full px-4 py-2.5 bg-[#F8F9FA] border border-black/15 rounded-xs text-sm focus:outline-none focus:border-primary transition-colors cursor-pointer"
+                    >
+                      <option value="no">No es iluminado</option>
+                      <option value="si">Si es iluminado</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* <div className="space-y-1.5">
                   <label className="text-[11px] font-mono font-bold uppercase text-[#1a1c18]/80">
                     Servicio Requerido
                   </label>
@@ -127,11 +164,12 @@ export default function ContactPage() {
                     <option value="Revestimientos">Gráfica corporativa</option>
                     <option value="Proyecto Integral">Asesoramiento / Proyecto integral</option>
                   </select>
-                </div>
+                </div> */}
+                
 
                 <div className="space-y-1.5">
                   <label className="text-[11px] font-mono font-bold uppercase text-[#1a1c18]/80">
-                    Detalles de la Consulta / Medidas
+                    Medidas y Detalles de la Consulta *
                   </label>
                   <textarea
                     rows={3}
@@ -218,8 +256,19 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Full-width map below both contact columns. */}
-          <div className="w-full h-auto gap-8 flex flex-col md:flex-row">
+          <div className="w-full h-80 md:h-96 bg-card p-2 border border-border rounded-sm shadow-lg overflow-hidden">
+            <iframe
+              title="Ubicación Visione Buenos Aires"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.874776774225!2d-58.47590652409925!3d-34.58203495635373!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb6728626288b%3A0xbadc5a9c36254ab4!2sVisione%20Publicidad!5e0!3m2!1sen!2sar!4v1790878845736!5m2!1sen!2sar"
+              className="block w-full h-full border-0"
+              allowFullScreen={false}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+
+          {/* Full-width map below both contact columns. */ }
+  {/* <div className="w-full h-auto gap-8 flex flex-col md:flex-row">
             <div className="w-full md:w-1/2 h-80 md:h-96 bg-card p-2 border border-border rounded-sm shadow-lg overflow-hidden">
               <iframe
                 title="Ubicación Visione Buenos Aires"
@@ -240,11 +289,11 @@ export default function ContactPage() {
                 referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
-          </div>
-        </section>
-      </div>
+          </div> */}
+        </section >
+      </div >
 
-      <Footer />
-    </div>
+    <Footer />
+    </div >
   );
 }

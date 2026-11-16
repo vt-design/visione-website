@@ -310,36 +310,44 @@ const MOSAIC_TILES: PinnedProject[] = [
     },
     {
         id: "t6",
-        title: "Envolvente metálica contemporánea",
+        title: " LUCCIANO´S - VILLA URQUIZA",
         description:
-            "Diseñamos y ejecutamos un revestimiento modular que actualiza la imagen del edificio, protege la fachada y mantiene una terminación uniforme de bajo mantenimiento.",
-        url: "https://images.unsplash.com/photo-1608126841830-53832c4b326f?w=1200&h=800&fit=crop&auto=format",
-        alt: "Revestimiento arquitectónico contemporáneo",
+            "Desarrollamos una intervención integral que combina revestimientos de diseño exclusivo y plegados irregulares que generan textura, volúmenes y un marcado efecto tridimensional, que se completa con cartelería corpórea iluminada con leds. Un proyecto donde los materiales y la luz se integran para dar forma e identidad visual distintiva, convirtiendo la arquitectura del espacio en una extensión de la marca.",
+        url: "/images/mosaic-images/proyecto-luccianos/luccianos-foto-7.webp",
+        alt: "Lucciano's imagen principal",
         photos: [
             {
-                url: "https://images.unsplash.com/photo-1608126841830-53832c4b326f?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Vista completa del revestimiento arquitectónico",
+                url: "/images/mosaic-images/proyecto-luccianos/luccianos-foto-1.webp",
+                alt: "foto luccianos 1",
             },
             {
-                url: "https://images.unsplash.com/photo-1760787545864-b468b6fe2c92?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Modulación de paneles en la fachada comercial",
+                url: "/images/mosaic-images/proyecto-luccianos/luccianos-foto-2.webp",
+                alt: "foto luccianos 2",
             },
             {
-                url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Encuentros verticales de la envolvente exterior",
+                url: "/images/mosaic-images/proyecto-luccianos/luccianos-foto-3.webp",
+                alt: "foto luccianos 3",
             },
             {
-                url: "https://images.unsplash.com/photo-1551520692-7cdc7dc041b1?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Detalle de textura y terminación metálica",
+                url: "/images/mosaic-images/proyecto-luccianos/luccianos-foto-4.webp",
+                alt: "foto luccianos 4",
             },
             {
-                url: "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Proceso de instalación de la subestructura",
+                url: "/images/mosaic-images/proyecto-luccianos/luccianos-foto-5.webp",
+                alt: "foto luccianos 5",
             },
             {
-                url: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1600&h=1100&fit=crop&auto=format",
-                alt: "Acceso terminado visto desde el interior",
+                url: "/images/mosaic-images/proyecto-luccianos/luccianos-foto-6.webp",
+                alt: "foto luccianos 6",
             },
+            {
+                url: "/images/mosaic-images/proyecto-luccianos/luccianos-foto-7.webp",
+                alt: "foto luccianos 7",
+            },
+            {
+                url: "/images/mosaic-images/proyecto-luccianos/luccianos-foto-8.webp",
+                alt: "foto luccianos 8",
+            }
         ],
         points: "650,740 1600,650 1600,1000 560,1000",
         frame: { x: 560, y: 650, width: 1040, height: 350 },
