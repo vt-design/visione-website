@@ -58,8 +58,21 @@ function PhotoCarousel({ images, initialImage, title }: PhotoCarouselProps) {
           >
             <ArrowRight size={18} />
           </button>
-          <div className="pointer-events-none absolute bottom-4 right-4 rounded-full bg-black/60 px-3 py-1.5 text-xs font-bold tracking-wider text-white backdrop-blur-sm">
-            {currentIndex + 1} / {images.length}
+          <div className="absolute bottom-4 right-4 z-20 flex items-center gap-2">
+            {images.map((image, index) => (
+              <button
+                key={image}
+                type="button"
+                onClick={() => setCurrentIndex(index)}
+                className={`h-2 cursor-pointer rounded-full transition-all ${
+                  currentIndex === index
+                    ? "w-8 bg-[#a5cd38]"
+                    : "w-2 bg-white/40 hover:bg-white/70"
+                }`}
+                aria-label={`Ver foto ${index + 1} de ${title}`}
+                aria-current={currentIndex === index ? "true" : undefined}
+              />
+            ))}
           </div>
         </>
       )}
