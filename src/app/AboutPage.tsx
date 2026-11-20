@@ -108,8 +108,22 @@ export default function AboutPage() {
           </div>
         </section>
 
+
+        {/* NUESTROS PROYECTOS */}
+        <section className="py-20 h-fit  border-b border-black/5 max-w-7xl mx-auto px-12 space-y-12">
+          <div className="w-full h-80 md:h-96 bg-card p-2 border border-border rounded-sm shadow-lg overflow-hidden relative">
+            <iframe src="https://www.google.com/maps/d/mbed?mid=1MP0qcM-3oQDCOtZi3wZlhjfeA3FFf1g&ehbc=2E312F"
+              width="100%"  
+              height="100%"
+              loading="lazy"
+              className="-mt-[70px] h-[calc(100%+70px)] w-full border-0"
+            >
+            </iframe>
+          </div>
+        </section>
+
         {/* TIMELINE SECTION */}
-        <section className="py-20 max-w-7xl mx-auto px-6 md:px-12 space-y-12">
+        <section className="py-20 max-w-7xl bg-white mx-auto px-6 md:px-12 space-y-12">
           <div className="text-center max-w-2xl mx-auto space-y-2">
             <h2 className="ff-display font-['Audiowide'] text-2xl md:text-4xl font-bold tracking-tight text-[#1a1c18] uppercase">
               Línea de Tiempo
@@ -166,9 +180,11 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+
+
       </div>
 
-      <Footer  />
+      <Footer />
     </div>
   );
 }
