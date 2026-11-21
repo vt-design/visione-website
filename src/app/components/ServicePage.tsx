@@ -149,7 +149,7 @@ export function ServicePage() {
                 >
                   <div className="w-full md:w-1/2 overflow-hidden rounded-sm border border-black/10 shadow-lg bg-white">
                     <PhotoCarousel
-                      images={serviceImages}
+                      images={item.images?.length ? item.images : serviceImages}
                       initialImage={item.image}
                       title={item.title}
                     />

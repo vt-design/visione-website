@@ -7,7 +7,13 @@
       {
         "title": "LETRAS Y LOGOS CORPOREOS",
         "description": "Fabricamos letras y logos a medida, adaptados a las necesidades de cada proyecto. Trabajamos con diferentes materiales y combinaciones: Acrílico, acrilico termoformado. Cuerpo de chapa con frente de acrílico. Chapa pintada. Acero inoxidable, más combinaciones. Disponibles en distintas terminaciones y con opciones de iluminación LED para aplicaciones interiores y exteriores.",
-        "image": "https://images.unsplash.com/photo-1779614800682-0c0cea8e0cd5?w=900&h=700&fit=crop&auto=format",
+        "image": "/images/soluciones/carteleria/carteleria-foto1.webp",
+        "images": [
+          "/images/soluciones/carteleria/carteleria-foto1.webp",
+          "/images/soluciones/carteleria/carteleria-foto2.webp",
+          "/images/soluciones/carteleria/carteleria-foto3.webp",
+          "/images/soluciones/carteleria/carteleria-foto4.webp"
+        ],
         "tag": "GRAN FORMATO"
       },
       {
