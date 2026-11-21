@@ -7,11 +7,12 @@
       {
         "title": "LETRAS Y LOGOS CORPOREOS",
         "description": "Fabricamos letras y logos a medida, adaptados a las necesidades de cada proyecto. Trabajamos con diferentes materiales y combinaciones: Acrílico, acrilico termoformado. Cuerpo de chapa con frente de acrílico. Chapa pintada. Acero inoxidable, más combinaciones. Disponibles en distintas terminaciones y con opciones de iluminación LED para aplicaciones interiores y exteriores.",
-        "image": "/images/soluciones/carteleria/carteleria-foto1.webp",
+        "image": "/images/soluciones/carteleria/carteleria-letras1.webp",
         "images": [
-          "/images/soluciones/carteleria/carteleria-foto1.webp",
-          "/images/soluciones/carteleria/carteleria-foto2.webp",
-          "/images/soluciones/carteleria/carteleria-foto3.webp"
+          "/images/soluciones/carteleria/carteleria-letras1.webp",
+          "/images/soluciones/carteleria/carteleria-letras2.webp",
+          "/images/soluciones/carteleria/carteleria-letras3.webp",
+          "/images/soluciones/carteleria/carteleria-letras4.webp"
         ],
         "tag": "LETRAS Y LOGOS CORPORATIVOS"
       },
@@ -39,6 +40,9 @@
         "title": "ILUMINACIÓN LED",
         "description": "Incorporamos sistemas de iluminación LED de calidad, seleccionados por su eficiencia, durabilidad, intensidad y definición visual. Ofrecemos distintas alternativas, desde puntos de luz hasta iluminación difusa, o iluminacion frontal y/o lateral en piezas de acrílico, logrando diferentes efectos y terminaciones.",
         "image": "/images/soluciones/carteleria/carteleria-iluminacion1.webp",
+        "images": [
+          "/images/soluciones/carteleria/carteleria-iluminacion1.webp"
+        ],
         "tag": "ILUMINACION"
       }
     ]
