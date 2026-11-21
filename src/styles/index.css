@@ -111,11 +111,59 @@
   pointer-events: none;
 }
 
-.home-collage-interaction-shade {
-  fill: var(--foreground);
+/* Hover: the photo slowly zooms and a "Ver proyecto" label fades up in the
+   middle of the tile. A soft text shadow keeps it legible without darkening the photo. */
+.home-collage-image {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.home-collage-caption {
   opacity: 0;
+  transform: translateY(12px);
   pointer-events: none;
-  transition: opacity 250ms ease;
+  filter: drop-shadow(0 2px 6px rgb(0 0 0 / 0.75)) drop-shadow(0 0 18px rgb(0 0 0 / 0.45));
+  transition:
+    opacity 350ms ease,
+    transform 550ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.home-collage-caption-rule {
+  fill: var(--primary);
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scaleX(0);
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1) 120ms;
+}
+
+.home-collage-caption-cta {
+  fill: #fff;
+  font-family: 'Archivo', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 5px;
+}
+
+@media (hover: hover) {
+  .home-collage-tile:hover .home-collage-image {
+    transform: scale(1.05);
+  }
+}
+
+.home-collage-tile:hover .home-collage-caption,
+.home-collage-tile:focus-visible .home-collage-caption {
+  opacity: 1;
+}
+
+.home-collage-tile:hover .home-collage-caption,
+.home-collage-tile:focus-visible .home-collage-caption {
+  transform: translateY(0);
+}
+
+.home-collage-tile:hover .home-collage-caption-rule,
+.home-collage-tile:focus-visible .home-collage-caption-rule {
+  transform: scaleX(1);
 }
 
 .home-collage-focus-ring {
@@ -125,7 +173,6 @@
   transition: opacity 250ms ease;
 }
 
-.home-collage-action-label,
 .home-collage-touch-marker {
   opacity: 0;
   pointer-events: none;
@@ -134,17 +181,8 @@
     transform 250ms ease;
 }
 
-.home-collage-action-label rect,
 .home-collage-touch-marker circle {
   fill: var(--primary);
-}
-
-.home-collage-action-label text {
-  fill: var(--primary-foreground);
-  font-family: monospace;
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: 2px;
 }
 
 .home-collage-touch-marker path {
@@ -155,13 +193,6 @@
   stroke-width: 5;
 }
 
-.home-collage-tile:hover .home-collage-interaction-shade,
-.home-collage-tile:focus-visible .home-collage-interaction-shade {
-  opacity: 0.35;
-}
-
-.home-collage-tile:hover .home-collage-action-label,
-.home-collage-tile:focus-visible .home-collage-action-label,
 .home-collage-tile:focus-visible .home-collage-focus-ring {
   opacity: 1;
 }
@@ -191,15 +222,29 @@
   color: var(--primary-foreground);
 }
 
+/* The dialog is the back face of a two-sided card; its front face is
+   .project-flip-card (the tile photo). Hiding back faces makes them read as one card. */
 .project-gallery-dialog {
-  backface-visibility: hidden;
-  transform-style: preserve-3d;
   transform-origin: center;
-  will-change: transform, opacity, filter;
+  backface-visibility: hidden;
+  will-change: transform, filter;
 }
 
 .project-gallery-dialog[data-state="open"] {
   animation: none;
+}
+
+.project-flip-card {
+  position: fixed;
+  z-index: 51;
+  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+  border-radius: var(--radius);
+  backface-visibility: hidden;
+  transform-origin: center;
+  will-change: transform, filter;
+  box-shadow: 0 30px 60px -20px rgb(0 0 0 / 0.55);
 }
 
 .project-gallery-thumbnails {
@@ -283,10 +328,6 @@
   .home-collage-touch-marker {
     opacity: 0.92;
   }
-
-  .home-collage-action-label {
-    display: none;
-  }
 }
 
 @media (max-width: 767px) {
@@ -311,9 +352,10 @@
     transform: none;
   }
 
-  .home-collage-interaction-shade,
+  .home-collage-image,
+  .home-collage-caption,
+  .home-collage-caption-rule,
   .home-collage-focus-ring,
-  .home-collage-action-label,
   .home-collage-touch-marker {
     transition: none;
   }

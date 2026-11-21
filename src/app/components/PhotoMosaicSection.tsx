@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
     Dialog,
     DialogContent,
@@ -381,16 +381,154 @@ const MOBILE_MOSAIC_LAYOUT = [
     },
 ];
 
+type Rect = { left: number; top: number; width: number; height: number };
+type Frame = { x: number; y: number; width: number; height: number };
+
+/** What the flip needs to know about the tile that was clicked. */
+interface FlipOrigin {
+    tile: SVGGElement;
+    frame: Frame;
+    points: string;
+    imageUrl: string;
+}
+
+const FLIP_STEPS = 36;
+const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
+const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2);
+
+/** Screen rect of a tile's frame, from SVG viewBox units. */
+function tileScreenRect(origin: FlipOrigin): Rect {
+    const svg = origin.tile.ownerSVGElement!;
+    const svgRect = svg.getBoundingClientRect();
+    const s = svgRect.width / svg.viewBox.baseVal.width;
+    return {
+        left: svgRect.left + origin.frame.x * s,
+        top: svgRect.top + origin.frame.y * s,
+        width: origin.frame.width * s,
+        height: origin.frame.height * s,
+    };
+}
+
+/** The tile's slanted polygon as a CSS clip-path relative to its frame. */
+function tileClipPath({ points, frame }: FlipOrigin) {
+    const pts = points.split(" ").map((pair) => {
+        const [x, y] = pair.split(",").map(Number);
+        return `${(((x - frame.x) / frame.width) * 100).toFixed(2)}% ${(((y - frame.y) / frame.height) * 100).toFixed(2)}%`;
+    });
+    return `polygon(${pts.join(", ")})`;
+}
+
+/**
+ * Keyframes for a physical card flip from the tile to the dialog. The front face
+ * (tile photo) and back face (dialog) share one path and differ only by 180° of
+ * rotation, so with backface-visibility hidden they read as one two-sided card.
+ * Along the way the card lifts toward the viewer, tilts a little, and darkens as
+ * it turns edge-on, like a real card catching the light.
+ */
+function cardFlipKeyframes(from: Rect, to: Rect, direction: 1 | -1) {
+    const center = (r: Rect) => [r.left + r.width / 2, r.top + r.height / 2];
+    const [fromX, fromY] = center(from);
+    const [toX, toY] = center(to);
+
+    // Each face is laid out at its own natural size (front = tile, back = dialog) and
+    // transformed onto the card's shared position/size, so neither face is ever stretched
+    // while it's the one facing the viewer.
+    const placeFace = (face: Rect, x: number, y: number, w: number, h: number) => {
+        const [faceX, faceY] = center(face);
+        return {
+            translate: `translate3d(${x - faceX}px, ${y - faceY}px, 0)`,
+            scale: `scale(${w / face.width}, ${h / face.height})`,
+        };
+    };
+
+    const front: Keyframe[] = [];
+    const back: Keyframe[] = [];
+    for (let i = 0; i <= FLIP_STEPS; i++) {
+        const t = i / FLIP_STEPS;
+        const move = easeInOutCubic(t);
+        // Rotation starts a beat after the lift and lands as the card settles.
+        const turn = easeInOutCubic(clamp01((t - 0.06) / 0.86));
+        // Lift + tilt happen in the first part only and are gone before the card
+        // arrives, so the size grows steadily into place with no overshoot/bounce.
+        const arc = Math.sin(Math.PI * clamp01(t / 0.62));
+        const lift = 1 + 0.06 * arc;
+        const angle = 180 * turn;
+        const shade = 0.6 + 0.4 * Math.abs(Math.cos((angle * Math.PI) / 180));
+
+        const x = lerp(fromX, toX, move);
+        const y = lerp(fromY, toY, move) - 22 * arc;
+        const w = lerp(from.width, to.width, move) * lift;
+        const h = lerp(from.height, to.height, move) * lift;
+        const tilt = `rotateX(${(5 * arc).toFixed(2)}deg)`;
+        const filter = `brightness(${shade.toFixed(3)})`;
+
+        const f = placeFace(from, x, y, w, h);
+        const b = placeFace(to, x, y, w, h);
+        front.push({
+            transform: `perspective(1800px) ${f.translate} ${tilt} rotateY(${direction * angle}deg) ${f.scale}`,
+            filter,
+        });
+        back.push({
+            transform: `perspective(1800px) ${b.translate} ${tilt} rotateY(${direction * (angle - 180)}deg) ${b.scale}`,
+            filter,
+        });
+    }
+    return { front, back };
+}
+
+/** Builds the card's front face (the tile photo) on top of the page, exactly over the tile. */
+function createCardFront(origin: FlipOrigin, at: Rect) {
+    const card = document.createElement("div");
+    card.className = "project-flip-card";
+    Object.assign(card.style, {
+        left: `${at.left}px`,
+        top: `${at.top}px`,
+        width: `${at.width}px`,
+        height: `${at.height}px`,
+        backgroundImage: `url("${origin.imageUrl}")`,
+        clipPath: tileClipPath(origin),
+    });
+    document.body.appendChild(card);
+    return card;
+}
+
+function runCardFlip(origin: FlipOrigin, dialog: HTMLElement, mode: "open" | "close") {
+    dialog.getAnimations().forEach((a) => a.cancel());
+    // If the previous flip hasn't finished (e.g. closed mid-open), drop its front face.
+    document.querySelectorAll(".project-flip-card").forEach((el) => el.remove());
+    const from = tileScreenRect(origin);
+    const to = dialog.getBoundingClientRect();
+    const direction = from.left + from.width / 2 < window.innerWidth / 2 ? 1 : -1;
+    const { front, back } = cardFlipKeyframes(from, to, direction);
+    if (mode === "close") {
+        front.reverse();
+        back.reverse();
+    }
+
+    const card = createCardFront(origin, from);
+    const timing: KeyframeAnimationOptions = {
+        duration: mode === "open" ? 900 : 760,
+        easing: "linear",
+        fill: "both",
+    };
+    origin.tile.style.visibility = "hidden";
+    const cardAnimation = card.animate(front, timing);
+    const dialogAnimation = dialog.animate(back, timing);
+
+    const cleanup = () => {
+        card.remove();
+        if (mode === "close") origin.tile.style.visibility = "";
+    };
+    cardAnimation.onfinish = cleanup;
+    cardAnimation.oncancel = cleanup;
+    return dialogAnimation;
+}
 
 export default function PhotoMosaicSection() {
     const mosaicRef = useRef<HTMLDivElement | null>(null);
     const thumbnailRailRef = useRef<HTMLDivElement | null>(null);
-    const flipOriginRef = useRef<{
-        left: number;
-        top: number;
-        width: number;
-        height: number;
-    } | null>(null);
+    const flipOriginRef = useRef<FlipOrigin | null>(null);
     const photoTouchStartRef = useRef<{ x: number; y: number } | null>(null);
     const closingRef = useRef(false);
     const [visible, setVisible] = useState<boolean[]>(new Array(MOSAIC_TILES.length).fill(false));
@@ -440,70 +578,31 @@ export default function PhotoMosaicSection() {
             });
     }, [activePhotoIndex, selectedProject]);
 
-    useEffect(() => {
+    // Called when the dialog's DOM attaches (before first paint), so the card flip
+    // starts from the tile without the dialog flashing in its final position first.
+    const startOpenFlip = useCallback((marker: HTMLElement | null) => {
         const origin = flipOriginRef.current;
-        if (
-            !selectedProject ||
-            !origin ||
-            window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ) {
+        const dialog = marker?.closest<HTMLElement>(".project-gallery-dialog");
+        if (!origin || !dialog || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
             return;
         }
-
-        let animation: Animation | null = null;
-        const frame = requestAnimationFrame(() => {
-            const dialog = document.querySelector<HTMLElement>(
-                '.project-gallery-dialog[data-state="open"]',
-            );
-            if (!dialog) return;
-
-            const target = dialog.getBoundingClientRect();
-            const originCenterX = origin.left + origin.width / 2;
-            const originCenterY = origin.top + origin.height / 2;
-            const targetCenterX = target.left + target.width / 2;
-            const targetCenterY = target.top + target.height / 2;
-            const offsetX = originCenterX - targetCenterX;
-            const offsetY = originCenterY - targetCenterY;
-            const scaleX = Math.max(0.16, Math.min(1, origin.width / target.width));
-            const scaleY = Math.max(0.16, Math.min(1, origin.height / target.height));
-            const rotationDirection = originCenterX < window.innerWidth / 2 ? -1 : 1;
-
-            animation = dialog.animate(
-                [
-                    {
-                        opacity: 0.08,
-                        transform: `perspective(1050px) translate3d(${offsetX}px, ${offsetY}px, 0) rotateY(${rotationDirection * 88}deg) scale(${scaleX}, ${scaleY})`,
-                        filter: "brightness(0.62)",
-                    },
-                    {
-                        offset: 0.72,
-                        opacity: 1,
-                        transform: `perspective(1050px) translate3d(${offsetX * 0.08}px, ${offsetY * 0.08}px, 0) rotateY(${rotationDirection * 10}deg) scale(0.98)`,
-                        filter: "brightness(0.96)",
-                    },
-                    {
-                        opacity: 1,
-                        transform: "perspective(1050px) translate3d(0, 0, 0) rotateY(0deg) scale(1)",
-                        filter: "brightness(1)",
-                    },
-                ],
-                {
-                    duration: 650,
-                    easing: "cubic-bezier(0.2, 0.78, 0.22, 1)",
-                    fill: "both",
-                },
-            );
+        // Hide for one frame so the dialog doesn't flash, and so the scroll lock
+        // (which removes the page scrollbar and widens the dialog) has applied
+        // before we measure the card's final size.
+        dialog.style.opacity = "0";
+        requestAnimationFrame(() => {
+            dialog.style.opacity = "";
+            if (dialog.isConnected) runCardFlip(origin, dialog, "open");
         });
+    }, []);
 
-        return () => {
-            cancelAnimationFrame(frame);
-            animation?.cancel();
+    const openProject = (project: PinnedProject, tile: SVGGElement, layout: { points: string; frame: Frame }) => {
+        flipOriginRef.current = {
+            tile,
+            frame: layout.frame,
+            points: layout.points,
+            imageUrl: project.url,
         };
-    }, [selectedProject]);
-
-    const openProject = (project: PinnedProject, source: Element) => {
-        const { left, top, width, height } = source.getBoundingClientRect();
-        flipOriginRef.current = { left, top, width, height };
         closingRef.current = false;
         setSelectedProject(project);
         setActivePhotoIndex(0);
@@ -521,50 +620,14 @@ export default function PhotoMosaicSection() {
         ).matches;
 
         if (!origin || !dialog || prefersReducedMotion) {
+            if (origin) origin.tile.style.visibility = "";
             flipOriginRef.current = null;
             setSelectedProject(null);
             return;
         }
 
         closingRef.current = true;
-        dialog.getAnimations().forEach((runningAnimation) => runningAnimation.cancel());
-
-        const target = dialog.getBoundingClientRect();
-        const originCenterX = origin.left + origin.width / 2;
-        const originCenterY = origin.top + origin.height / 2;
-        const targetCenterX = target.left + target.width / 2;
-        const targetCenterY = target.top + target.height / 2;
-        const offsetX = originCenterX - targetCenterX;
-        const offsetY = originCenterY - targetCenterY;
-        const scaleX = Math.max(0.16, Math.min(1, origin.width / target.width));
-        const scaleY = Math.max(0.16, Math.min(1, origin.height / target.height));
-        const rotationDirection = originCenterX < window.innerWidth / 2 ? -1 : 1;
-
-        const animation = dialog.animate(
-            [
-                {
-                    opacity: 1,
-                    transform: "perspective(1050px) translate3d(0, 0, 0) rotateY(0deg) scale(1)",
-                    filter: "brightness(1)",
-                },
-                {
-                    offset: 0.3,
-                    opacity: 1,
-                    transform: `perspective(1050px) translate3d(${offsetX * 0.08}px, ${offsetY * 0.08}px, 0) rotateY(${rotationDirection * 10}deg) scale(0.98)`,
-                    filter: "brightness(0.96)",
-                },
-                {
-                    opacity: 0.08,
-                    transform: `perspective(1050px) translate3d(${offsetX}px, ${offsetY}px, 0) rotateY(${rotationDirection * 88}deg) scale(${scaleX}, ${scaleY})`,
-                    filter: "brightness(0.62)",
-                },
-            ],
-            {
-                duration: 580,
-                easing: "cubic-bezier(0.4, 0, 0.58, 1)",
-                fill: "both",
-            },
-        );
+        const animation = runCardFlip(origin, dialog, "close");
 
         const finishClose = () => {
             closingRef.current = false;
@@ -629,6 +692,11 @@ export default function PhotoMosaicSection() {
                 {MOSAIC_TILES.map((tile, i) => {
                     const layout = isMobile ? MOBILE_MOSAIC_LAYOUT[i] : tile;
                     const clipPath = `url(#${clipPrefix}-${tile.id})`;
+                    const { x, y, width, height } = layout.frame;
+                    // Center the label on the visible (slanted) shape, not the bounding frame.
+                    const vertices = layout.points.split(" ").map((p) => p.split(",").map(Number));
+                    const labelX = vertices.reduce((sum, [px]) => sum + px, 0) / vertices.length;
+                    const labelY = vertices.reduce((sum, [, py]) => sum + py, 0) / vertices.length;
 
                     return (
                         <g
@@ -636,11 +704,11 @@ export default function PhotoMosaicSection() {
                             role="button"
                             tabIndex={0}
                             aria-label={`Abrir proyecto: ${tile.title}`}
-                            onClick={(event) => openProject(tile, event.currentTarget)}
+                            onClick={(event) => openProject(tile, event.currentTarget, layout)}
                             onKeyDown={(event) => {
                                 if (event.key === "Enter" || event.key === " ") {
                                     event.preventDefault();
-                                    openProject(tile, event.currentTarget);
+                                    openProject(tile, event.currentTarget, layout);
                                 }
                             }}
                             className={`home-collage-tile ${visible[i]
@@ -650,20 +718,17 @@ export default function PhotoMosaicSection() {
                                     : "home-collage-enter-right"
                                 }`}
                         >
-                            <image
-                                href={tile.url}
-                                x={layout.frame.x}
-                                y={layout.frame.y}
-                                width={layout.frame.width}
-                                height={layout.frame.height}
-                                preserveAspectRatio="xMidYMid slice"
-                                clipPath={clipPath}
-                            />
-                            <polygon
-                                className="home-collage-interaction-shade"
-                                points={layout.points}
-                                clipPath={clipPath}
-                            />
+                            <g clipPath={clipPath}>
+                                <image
+                                    className="home-collage-image"
+                                    href={tile.url}
+                                    x={x}
+                                    y={y}
+                                    width={width}
+                                    height={height}
+                                    preserveAspectRatio="xMidYMid slice"
+                                />
+                            </g>
                             <polygon
                                 className="home-collage-outline"
                                 points={layout.points}
@@ -680,14 +745,25 @@ export default function PhotoMosaicSection() {
                                 strokeLinejoin="round"
                             />
                             <g
-                                className="home-collage-action-label"
-                                transform={`translate(${layout.frame.x + layout.frame.width / 2} ${layout.frame.y + layout.frame.height / 2})`}
+                                transform={`translate(${labelX} ${labelY})`}
                                 aria-hidden="true"
                             >
-                                <rect x="-126" y="-29" width="252" height="58" rx="4" />
-                                <text textAnchor="middle" dominantBaseline="central">
-                                    VER PROYECTO
-                                </text>
+                                <g className="home-collage-caption">
+                                    <text
+                                        className="home-collage-caption-cta"
+                                        textAnchor="middle"
+                                        dominantBaseline="central"
+                                    >
+                                        VER PROYECTO  →
+                                    </text>
+                                    <rect
+                                        className="home-collage-caption-rule"
+                                        x={-40}
+                                        y={26}
+                                        width={80}
+                                        height={4}
+                                    />
+                                </g>
                             </g>
                             {/* <g
                                 className="home-collage-touch-marker"
@@ -740,7 +816,7 @@ export default function PhotoMosaicSection() {
                 }}
             >
                 <DialogContent
-                    className="project-gallery-dialog max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-5xl gap-0 overflow-y-auto border-white/15 bg-foreground p-0 text-white shadow-2xl sm:max-w-5xl"
+                    className="project-gallery-dialog max-h-[calc(100dvh-4rem)] w-[calc(100%-2rem)] max-w-4xl gap-0 overflow-y-auto border-white/15 bg-foreground p-0 text-white shadow-2xl sm:max-w-4xl"
                     onKeyDown={(event) => {
                         if (event.key === "ArrowLeft") {
                             event.preventDefault();
@@ -754,7 +830,8 @@ export default function PhotoMosaicSection() {
                 >
                     {selectedProject && activePhoto && (
                         <>
-                            <DialogHeader className="project-gallery-header border-b border-white/10 px-5 py-5 pr-16 text-left sm:px-7">
+                            <span ref={startOpenFlip} hidden aria-hidden="true" />
+                            <DialogHeader className="project-gallery-header border-b border-white/10 px-5 py-5 pr-16 text-left sm:px-7 sm:py-4">
                                 <div className="flex items-center gap-3">
                                     <span className="font-mono text-xs font-bold uppercase tracking-widest text-primary">
                                         Proyecto destacado
@@ -769,7 +846,7 @@ export default function PhotoMosaicSection() {
                             </DialogHeader>
 
                             <div
-                                className="project-gallery-media relative flex min-h-64 items-center justify-center bg-black sm:min-h-96"
+                                className="project-gallery-media relative flex min-h-64 items-center justify-center bg-black"
                                 onTouchStart={(event) => {
                                     const touch = event.touches[0];
                                     photoTouchStartRef.current = { x: touch.clientX, y: touch.clientY };
@@ -783,7 +860,7 @@ export default function PhotoMosaicSection() {
                                     key={activePhoto.url}
                                     src={activePhoto.url}
                                     alt={activePhoto.alt}
-                                    className="max-h-[52dvh] min-h-64 w-full object-contain sm:min-h-96"
+                                    className="h-[52dvh] min-h-64 w-full object-contain sm:h-[min(42dvh,480px)]"
                                 />
                                 {selectedProject.photos.length > 1 && (
                                     <>
@@ -811,7 +888,7 @@ export default function PhotoMosaicSection() {
                                 )}
                             </div>
 
-                            <div className="project-gallery-details space-y-5 px-5 py-5 sm:px-7 sm:py-6 overflow-x-hidden">
+                            <div className="project-gallery-details space-y-5 px-5 py-5 sm:space-y-4 sm:px-7 sm:py-4 overflow-x-hidden">
                                 <div
                                     ref={thumbnailRailRef}
                                     className="project-gallery-thumbnails flex snap-x snap-mandatory gap-3 overflow-x-scroll pb-2 "
@@ -825,7 +902,7 @@ export default function PhotoMosaicSection() {
                                             aria-label={`Ver foto ${index + 1}: ${photo.alt}`}
                                             aria-current={index === activePhotoIndex ? "true" : undefined}
                                             onClick={() => setActivePhotoIndex(index)}
-                                            className="project-gallery-thumbnail h-20 w-28 shrink-0 snap-center overflow-hidden rounded-none border-2 border-transparent p-0 opacity-60 hover:border-white/55 hover:bg-transparent hover:opacity-100 aria-[current=true]:border-primary aria-[current=true]:opacity-100 sm:h-24 sm:w-36"
+                                            className="project-gallery-thumbnail h-20 w-28 shrink-0 snap-center overflow-hidden rounded-none border-2 border-transparent p-0 opacity-60 hover:border-white/55 hover:bg-transparent hover:opacity-100 aria-[current=true]:border-primary aria-[current=true]:opacity-100 sm:h-16 sm:w-24"
                                         >
                                             <img
                                                 src={photo.url}
@@ -838,7 +915,7 @@ export default function PhotoMosaicSection() {
                                     ))}
                                 </div>
 
-                                <DialogDescription className="max-w-3xl text-sm leading-relaxed text-white/70 sm:text-base">
+                                <DialogDescription className="max-w-3xl text-sm leading-relaxed text-white/70">
                                     {selectedProject.description}
                                 </DialogDescription>
                             </div>

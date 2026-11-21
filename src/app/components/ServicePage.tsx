@@ -164,10 +164,10 @@ export function ServicePage() {
                     <div className="pt-2">
                       <button
                         onClick={() => navigate("/proyectos")}
-                        className="text-xs font-bold tracking-wider uppercase text-[#a5cd38] hover:text-[#a5cd38] inline-flex items-center gap-2 border-b-2 border-[#a5cd38] pb-1 transition-colors cursor-pointer"
+                        className="group text-xs font-bold tracking-wider uppercase text-[#a5cd38] hover:text-[#1a1c18] inline-flex items-center gap-2 border-b-2 border-[#a5cd38] hover:border-[#1a1c18] pb-1 transition-colors cursor-pointer"
                       >
                         <span>Ver más fotos</span>
-                        <ArrowRight size={14} />
+                        <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                       </button>
                     </div>
                   </div>
