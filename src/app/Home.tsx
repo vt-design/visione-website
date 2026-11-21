@@ -7,8 +7,9 @@ import {
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Avatar, AvatarImage, AvatarFallback } from "./components/ui/avatar";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PhotoMosaicSection from "./components/PhotoMosaicSection";
+import { usePageMeta } from "./seo";
 
 // ─── DATA & CONSTANTS ────────────────────────────────────────────────────────
 
@@ -131,12 +132,9 @@ function HeroSlideCopy({
 }: {
   slide: (typeof HERO_SLIDES)[number];
 }) {
-  const navigate = useNavigate();
-  const handleNav = (page: string, e: React.MouseEvent) => {
-      e.preventDefault();
-      navigate(page);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
+  const handleNav = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <>
@@ -162,13 +160,14 @@ function HeroSlideCopy({
         </p>
       </div>
        <div className="pt-4 flex items-start">
-        <button
-          onClick={(e) => handleNav("/contacto", e)}
+        <Link
+          to="/contacto"
+          onClick={handleNav}
           className="btn-wipe btn-wipe-primary px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs tracking-wider uppercase rounded-xs shadow-lg flex items-center gap-3 whitespace-nowrap cursor-pointer"
         >
           <span>Solicitar Cotización</span>
           <ArrowRight size={16} />
-        </button>
+        </Link>
       </div>
     </>
   );
@@ -177,18 +176,21 @@ function HeroSlideCopy({
 // ─── MAIN APP COMPONENT ───────────────────────────────────────────────────────
 
 export default function HomePage() {
+  usePageMeta({
+    title: "Visione Publicidad | Cartelería, Corpóreos y Revestimientos en CABA",
+    description: "Fabricamos cartelería, letras corpóreas, marquesinas, revestimientos y gráfica corporativa en CABA. Diseño, fabricación e instalación en todo el país.",
+    path: "/",
+  });
+
   // const [activePage, setActivePage] = useState("home");
   const [heroIndex, setHeroIndex] = useState(0);
   const [reviewIndex, setReviewIndex] = useState(0);
   const [incoming, setIncoming] = useState<{ idx: number; key: number } | null>(null);
   const heroIndexRef = useRef(0);
 
-  const navigate = useNavigate();
-  const handleNav = (page: string, e: React.MouseEvent) => {
-      e.preventDefault();
-      navigate(page);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
+  const handleNav = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   useEffect(() => {
     // if (activePage !== "home") return;
@@ -357,9 +359,10 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {SERVICE_CARDS.map((card, idx) => (
-              <div
+              <Link
                 key={idx}
-                onClick={(e) => handleNav(card.page, e)}
+                to={card.page}
+                onClick={handleNav}
                 className="group bg-white border border-black/10 rounded-sm overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between cursor-pointer"
               >
                 <div>
@@ -375,7 +378,7 @@ export default function HomePage() {
                   </div>
 
                   <div className="p-8 space-y-4">
-                    <span className="text-[11px] font-mono font-bold text-[#84a62a] tracking-wider block">
+                    <span className="text-[11px] font-mono font-bold text-[#637f1d] tracking-wider block">
                       {card.tags}
                     </span>
                     <h3 className="ff-display font-['Audiowide'] text-xl font-bold text-[#1a1c18] uppercase leading-tight whitespace-pre-line">
@@ -388,12 +391,12 @@ export default function HomePage() {
                 </div>
 
                 <div className="px-8 pb-8 pt-2">
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#84a62a] group-hover:text-[#1a1c18] inline-flex items-center gap-2 transition-colors">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#637f1d] group-hover:text-[#1a1c18] inline-flex items-center gap-2 transition-colors">
                     <span>Saber más del servicio</span>
                     <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                   </span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </section>
@@ -478,12 +481,13 @@ export default function HomePage() {
               Coordinemos una visita técnica para evaluar tu proyecto y preparar una propuesta a medida.
             </p>
             <div className="pt-4">
-              <button
-                onClick={(e) => handleNav("/contacto", e)}
-                className="btn-wipe btn-wipe-primary px-9 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs uppercase tracking-wider rounded-xs shadow-xl"
+              <Link
+                to="/contacto"
+                onClick={handleNav}
+                className="btn-wipe btn-wipe-light inline-block px-9 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs uppercase tracking-wider rounded-xs shadow-xl"
               >
                 Contactar a Asesor Comercial
-              </button>
+              </Link>
             </div>
           </div>
         </section>

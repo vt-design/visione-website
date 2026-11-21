@@ -2,6 +2,7 @@ import React from "react";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { BeforeAfterSection } from "./components/BeforeAfterSection";
+import { usePageMeta } from "./seo";
 
 
 const STEPS = [
@@ -28,6 +29,12 @@ const STEPS = [
 ];
 
 export default function AboutPage() {
+  usePageMeta({
+    title: "Sobre Nosotros | Visione Publicidad",
+    description: "Conocé a Visione Publicidad: cómo trabajamos, desde el primer contacto y el diseño hasta la fabricación, la instalación en obra y la garantía.",
+    path: "/sobre-nosotros",
+  });
+
 
   return (
     <div className="min-h-screen bg-[#F8F9FA] text-[#1a1c18] ff-body flex flex-col justify-between">
@@ -85,8 +92,8 @@ export default function AboutPage() {
         <BeforeAfterSection />
 
         {/* NUESTROS PROYECTOS */}
-        <section className="py-20 border-b border-black/5 max-w-7xl mx-auto px-6 md:px-12">
-          <div className="flex flex-col md:flex-row md:items-center gap-12 md:gap-16">
+        <section className="py-20 bg-white border-b border-black/5">
+          <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row md:items-center gap-12 md:gap-16">
             <div className="w-full md:w-1/2 space-y-5">
               <h2 className="ff-display font-['Audiowide'] text-2xl md:text-4xl font-bold tracking-tight text-[#1a1c18] uppercase leading-snug">
                 Fabricamos, enviamos e instalamos

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Button } from "./components/ui/button";
+import { usePageMeta } from "./seo";
 import {
   Mail,
   MapPin,
@@ -33,6 +34,12 @@ function PlatformLogo({ brand }: { brand: "instagram" | "facebook" | "wetransfer
 }
 
 export default function ContactPage() {
+  usePageMeta({
+    title: "Contacto y Presupuestos | Visione Publicidad",
+    description: "Pedí tu presupuesto de cartelería, revestimientos o gráfica. Escribinos por WhatsApp o visitanos en Av. Triunvirato 3686, CABA. Lunes a viernes 10 a 17 hs.",
+    path: "/contacto",
+  });
+
   const [nombre, setNombre] = useState("");
   const [ubicacion, setUbicacion] = useState("");
   const [consulta, setConsulta] = useState("");

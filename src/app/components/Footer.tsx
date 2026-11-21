@@ -1,11 +1,8 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export function Footer() {
-  const navigate = useNavigate();
-  const handleNav = (page: string, e: React.MouseEvent) => {
-    e.preventDefault();
-    navigate(page);
+  const handleNav = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
   
@@ -14,12 +11,11 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-4 gap-12 mb-8">
         {/* BRAND COLUMN */}
         <div className="space-y-4 md:col-span-1">
-          <button
-            onClick={(e) => handleNav("/", e)}
+          <Link to="/" onClick={handleNav}
             className="ff-display font-['Audiowide'] text-2xl font-bold tracking-wider text-white hover:text-[#a5cd38] transition-colors text-left"
           >
-            <img alt="logo visione" src= "/images/logos/texto-logo-visione.png" className="w-3/4"></img>
-          </button>
+            <img alt="Visione Publicidad" src= "/images/logos/texto-logo-visione.png" className="w-3/4"></img>
+          </Link>
           <p className="text-md text-white/60 leading-normal pt-2">
             Desarrollamos soluciones integrales de revestimientos, cartelería y gráfica corporativa para empresas de todo el país.
           </p>
@@ -27,65 +23,68 @@ export function Footer() {
 
         {/* SERVICIOS LINKS */}
         <div className="space-y-3">
-          <h4 className="ff-display font-['Audiowide'] text-xs font-bold uppercase tracking-widest text-[#a5cd38]">
+          <h2 className="ff-display font-['Audiowide'] text-xs font-bold uppercase tracking-widest text-[#a5cd38]">
             Soluciones
-          </h4>
+          </h2>
           <ul className="space-y-2.5 text-sm text-white/70">
             <li>
-              <button onClick={(e) => handleNav("/soluciones/revestimientos", e)} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
+              <Link to="/soluciones/revestimientos" onClick={handleNav} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
                 Revestimientos
-              </button>
+              </Link>
             </li>
             <li>
-              <button onClick={(e) => handleNav("/soluciones/carteleria", e)} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
+              <Link to="/soluciones/carteleria" onClick={handleNav} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
                 Cartelería y Corporeos
-              </button>
+              </Link>
             </li>
             <li>
-              <button onClick={(e) => handleNav("/soluciones/grafica", e)} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
+              <Link to="/soluciones/grafica" onClick={handleNav} className="cursor-pointer text-start hover:text-[#a5cd38] transition-colors">
                 Gráfica Corporativa
-              </button>
+              </Link>
             </li>
           </ul>
         </div>
 
         {/* NAVEGACIÓN */}
         <div className="space-y-3">
-          <h4 className="ff-display font-['Audiowide'] text-xs font-bold uppercase tracking-widest text-[#a5cd38]">
+          <h2 className="ff-display font-['Audiowide'] text-xs font-bold uppercase tracking-widest text-[#a5cd38]">
             Navegación
-          </h4>
+          </h2>
           <ul className="space-y-2.5 text-sm text-white/70">
             <li>
-              <button onClick={(e) => handleNav("/", e)} className="cursor-pointer hover:text-[#a5cd38] transition-colors">
+              <Link to="/" onClick={handleNav} className="cursor-pointer hover:text-[#a5cd38] transition-colors">
                 Inicio
-              </button>
+              </Link>
             </li>
             <li>
-              <button onClick={(e) => handleNav("/proyectos", e)} className="cursor-pointer hover:text-[#a5cd38] transition-colors">
+              <Link to="/proyectos" onClick={handleNav} className="cursor-pointer hover:text-[#a5cd38] transition-colors">
                 Galería de Trabajos
-              </button>
+              </Link>
             </li>
             <li>
-              <button onClick={(e) => handleNav("/sobre-nosotros", e)} className="cursor-pointer hover:text-[#a5cd38] transition-colors">
+              <Link to="/sobre-nosotros" onClick={handleNav} className="cursor-pointer hover:text-[#a5cd38] transition-colors">
                 Sobre Nosotros
-              </button>
+              </Link>
             </li>
             <li>
-              <button onClick={(e) => handleNav("/contacto", e)} className="cursor-pointer hover:text-[#a5cd38] transition-colors">
+              <Link to="/contacto" onClick={handleNav} className="cursor-pointer hover:text-[#a5cd38] transition-colors">
                 Contacto Directo
-              </button>
+              </Link>
             </li>
           </ul>
         </div>
 
         {/* CONTACTO INFO */}
         <div className="space-y-3">
-          <h4 className="ff-display font-['Audiowide'] text-xs font-bold uppercase tracking-widest text-[#a5cd38]">
+          <h2 className="ff-display font-['Audiowide'] text-xs font-bold uppercase tracking-widest text-[#a5cd38]">
             Contacto & Planta
-          </h4>
+          </h2>
           <p className="text-sm text-white/70">
             Av. Triunvirato 3686, CABA, Argentina
           </p>
+          <a href="mailto:info@visione.com.ar" className="block text-sm text-white/70 hover:text-[#a5cd38] transition-colors">
+            info@visione.com.ar
+          </a>
           <p className="text-sm text-white/70">
             Atención Lunes a Viernes: 10:00 hs - 17:00 hs
           </p>

@@ -5,3 +5,10 @@
 
 [functions]
   node_bundler = "esbuild"
+
+# SPA: servir index.html en cualquier ruta (los archivos existentes, como
+# robots.txt y sitemap.xml, se sirven primero).
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

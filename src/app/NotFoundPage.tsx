@@ -2,17 +2,17 @@ import React from "react";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { ArrowLeft, AlertTriangle } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { usePageMeta } from "./seo";
 
 
 
 export default function NotFoundPage() {
-   const navigate = useNavigate();
-  const handleNav = (page: string, e: React.MouseEvent) => {
-    e.preventDefault();
-    navigate(page);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  usePageMeta({
+    title: "Página no encontrada | Visione Publicidad",
+    description: "La página que buscás no existe. Volvé al inicio para conocer nuestras soluciones en cartelería, revestimientos y gráfica corporativa.",
+    noindex: true,
+  });
   return (
     <div className="min-h-screen bg-[#F8F9FA] text-[#1a1c18] ff-body flex flex-col justify-between">
       <div>
@@ -38,13 +38,13 @@ export default function NotFoundPage() {
             </p>
 
             <div className="pt-6">
-              <button
-                onClick={(e) => handleNav("/", e)}
-                className="btn-wipe btn-wipe-primery px-8 py-4 bg-[#a5cd38] text-[#1a1c18] hover:text-[#a5cd38] font-bold text-xs uppercase tracking-wider rounded-xs shadow-xl inline-flex items-center gap-3"
+              <Link
+                to="/"
+                className="btn-wipe btn-wipe-light px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs uppercase tracking-wider rounded-xs shadow-xl inline-flex items-center gap-3"
               >
                 <ArrowLeft size={16} />
                 <span>Volver a la Página Principal</span>
-              </button>
+              </Link>
             </div>
           </div>
         </section>

@@ -2,7 +2,9 @@ import React, { useState } from "react"
 import { Navbar } from "./Navbar"
 import { Footer } from "./Footer"
 import { ArrowLeft, ArrowRight } from "lucide-react"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
+import NotFoundPage from "../NotFoundPage"
+import { usePageMeta } from "../seo"
 import servicePageData from "@/data/servicios.json"
 
 type PhotoCarouselProps = {
@@ -80,10 +82,42 @@ function PhotoCarousel({ images, initialImage, title }: PhotoCarouselProps) {
   )
 }
 
+type ServiceData = {
+  title: string
+  subtitle: string
+  seoTitle: string
+  seoDescription: string
+  heroImg: string
+  features: {
+    title: string
+    description: string
+    image: string
+    images?: string[]
+    tag: string
+  }[]
+}
+
 export function ServicePage() {
-  const navigate = useNavigate()
-  const { servicio } = useParams() || { servicio: "revestimientos" }
-  const { title, subtitle, heroImg, features } = servicePageData[servicio]
+  const { servicio = "" } = useParams()
+  const data = (servicePageData as Record<string, ServiceData>)[servicio]
+  if (!data) return <NotFoundPage />
+  return <ServicePageContent servicio={servicio} data={data} />
+}
+
+function ServicePageContent({
+  servicio,
+  data,
+}: {
+  servicio: string
+  data: ServiceData
+}) {
+  const { title, subtitle, heroImg, features, seoTitle, seoDescription } = data
+  usePageMeta({
+    title: seoTitle,
+    description: seoDescription,
+    path: `/soluciones/${servicio}`,
+    image: features.find((f) => f.image.startsWith("/"))?.image,
+  })
   const serviceImages = Array.from(
     new Set([heroImg, ...features.map((feature) => feature.image)]),
   )
@@ -110,16 +144,17 @@ export function ServicePage() {
               {subtitle}
             </p>
             <div className="pt-6">
-              <button
-                onClick={() => navigate("/contacto")}
-                className="btn-wipe btn-wipe-primary px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-sm tracking-wider uppercase rounded-xs shadow-lg inline-flex items-center gap-3 cursor-pointer"
+              <Link
+                to="/contacto"
+                onClick={() => window.scrollTo({ top: 0 })}
+                className="btn-wipe btn-wipe-light px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-sm tracking-wider uppercase rounded-xs shadow-lg inline-flex items-center gap-3 cursor-pointer"
               >
                 <span className="hidden md:block">
                   Solicitar Presupuesto para este Servicio
                 </span>
                 <span className="block md:hidden">Contactanos</span>
                 <ArrowRight size={18} />
-              </button>
+              </Link>
             </div>
           </div>
         </section>
@@ -162,13 +197,14 @@ export function ServicePage() {
                       {item.description}
                     </p>
                     <div className="pt-2">
-                      <button
-                        onClick={() => navigate("/proyectos")}
+                      <Link
+                to="/proyectos"
+                onClick={() => window.scrollTo({ top: 0 })}
                         className="group text-xs font-bold tracking-wider uppercase text-[#a5cd38] hover:text-[#1a1c18] inline-flex items-center gap-2 border-b-2 border-[#a5cd38] hover:border-[#1a1c18] pb-1 transition-colors cursor-pointer"
                       >
                         <span>Ver más fotos</span>
                         <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -189,12 +225,13 @@ export function ServicePage() {
                 montaje final en cualquier punto del país.
               </p>
             </div>
-            <button
-              onClick={() => navigate("/contacto")}
-              className="btn-wipe btn-wipe-primary px-8 py-3.5 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs tracking-wider uppercase rounded-xs shadow-md whitespace-nowrap cursor-pointer"
+            <Link
+                to="/contacto"
+                onClick={() => window.scrollTo({ top: 0 })}
+              className="btn-wipe btn-wipe-light px-8 py-3.5 bg-[#a5cd38] text-[#1a1c18] font-bold text-xs tracking-wider uppercase rounded-xs shadow-md whitespace-nowrap cursor-pointer"
             >
               Contactar Asesor Técnico
-            </button>
+            </Link>
           </div>
         </section>
       </div>

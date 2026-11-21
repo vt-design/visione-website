@@ -6,6 +6,7 @@ import { Button } from "./components/ui/button";
 import { X } from "lucide-react";
 import { motion } from "motion/react";
 import { listItemSecondaryActionClasses } from "@mui/material/ListItemSecondaryAction";
+import { usePageMeta } from "./seo";
 
 interface GalleryImage {
   id: string;
@@ -31,6 +32,12 @@ const FILTERS = [
 ] as const;
 
 export default function GalleryPage() {
+  usePageMeta({
+    title: "Proyectos y Trabajos Realizados | Visione Publicidad",
+    description: "Galería de proyectos de cartelería, letras corpóreas, revestimientos y gráfica corporativa realizados por Visione Publicidad para empresas y locales.",
+    path: "/proyectos",
+  });
+
   const [images, setImages] = useState<GalleryImage[]>([]);
   const [nextCursor, setNextCursor] = useState<string | null>(null);
   const [selectedImg, setSelectedImg] = useState<string | null>(null);

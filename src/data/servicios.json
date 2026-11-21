@@ -2,6 +2,8 @@
   "carteleria": {
     "title": "Cartelería y Corpóreos",
     "subtitle": "Diseño, materiales e iluminación para darle identidad a cada espacio.",
+    "seoTitle": "Cartelería y Letras Corpóreas en CABA | Visione Publicidad",
+    "seoDescription": "Fabricamos letras corpóreas, marquesinas, carteles salientes y tótems con iluminación LED. Diseño, fabricación e instalación en CABA y todo el país.",
     "heroImg": "https://images.unsplash.com/photo-1780385187604-4663a1d7c6e6?w=1920&h=1080&fit=crop&auto=format",
     "features": [
       {
@@ -58,6 +60,8 @@
   "grafica": {
     "title": "Gráfica Corporativa & Vinilos",
     "subtitle": "Soluciones de impresión digital de alta fidelidad, vinilos decorativos y rotulación de vehículos.",
+    "seoTitle": "Gráfica Corporativa y Vinilos | Visione Publicidad",
+    "seoDescription": "Impresión digital de alta calidad, vinilos decorativos, rotulación de vehículos y gráfica corporativa para empresas y locales. Pedí tu presupuesto.",
     "heroImg": "https://images.unsplash.com/photo-1608126841830-53832c4b326f?w=1920&h=1080&fit=crop&auto=format",
     "features": [
       {
@@ -83,6 +87,8 @@
   "revestimientos": {
     "title": "Revestimientos",
     "subtitle": "Transformamos frentes y edificios con revestimientos que combinan diseño, volumen y personalidad. Plegados, calados y diferentes formas crean superficies únicas que renuevan la imagen arquitectónica.",
+    "seoTitle": "Revestimientos de Frentes en ACM | Visione Publicidad",
+    "seoDescription": "Revestimientos de frentes y edificios en aluminio compuesto (ACM) y chapa plegada o calada. Renová la imagen de tu local o empresa con Visione.",
     "heroImg": "/images/soluciones/revestimientos/revestimientos-foto-principal.webp",
     "features": [
       {
