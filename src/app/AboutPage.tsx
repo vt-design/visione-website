@@ -112,7 +112,7 @@ export default function AboutPage() {
         {/* NUESTROS PROYECTOS */}
         <section className="py-20 h-fit  border-b border-black/5 max-w-7xl mx-auto px-12 space-y-12">
           <div className="w-full h-80 md:h-96 bg-card p-2 border border-border rounded-sm shadow-lg overflow-hidden relative">
-            <iframe src="https://www.google.com/maps/d/mbed?mid=1MP0qcM-3oQDCOtZi3wZlhjfeA3FFf1g&ehbc=2E312F"
+            <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1MP0qcM-3oQDCOtZi3wZlhjfeA3FFf1g&ehbc=2E312F&noprof=1"
               width="100%"  
               height="100%"
               loading="lazy"
