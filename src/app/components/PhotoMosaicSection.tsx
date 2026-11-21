@@ -567,6 +567,26 @@ export default function PhotoMosaicSection() {
         };
     }, []);
 
+    // The collage SVG scales with its width, which would scale the hover label too.
+    // Expose the SVG's scale so the label can counter-scale to a constant on-screen size.
+    useEffect(() => {
+        const svgs = mosaicRef.current?.querySelectorAll<SVGSVGElement>(".home-collage");
+        if (!svgs?.length) return;
+        const observer = new ResizeObserver((entries) => {
+            for (const { target } of entries) {
+                const svg = target as SVGSVGElement;
+                const width = svg.getBoundingClientRect().width;
+                if (!width) continue;
+                svg.style.setProperty(
+                    "--collage-label-scale",
+                    String(svg.viewBox.baseVal.width / width),
+                );
+            }
+        });
+        svgs.forEach((svg) => observer.observe(svg));
+        return () => observer.disconnect();
+    }, []);
+
     useEffect(() => {
         if (!selectedProject) return;
         thumbnailRailRef.current
@@ -669,11 +689,10 @@ export default function PhotoMosaicSection() {
             <svg
                 className={`home-collage home-collage-${variant}`}
                 viewBox={isMobile ? "0 0 600 1800" : "0 0 1600 1000"}
-                role="img"
-                aria-labelledby={`home-collage-title-${variant}`}
+                role="group"
+                aria-label="Selección de obras realizadas"
                 preserveAspectRatio="xMidYMid meet"
             >
-                <title id={`home-collage-title-${variant}`}>Selección de obras realizadas</title>
                 <defs>
                     {MOSAIC_TILES.map((tile, index) => {
                         const layout = isMobile ? MOBILE_MOSAIC_LAYOUT[index] : tile;
@@ -745,7 +764,9 @@ export default function PhotoMosaicSection() {
                                 strokeLinejoin="round"
                             />
                             <g
-                                transform={`translate(${labelX} ${labelY})`}
+                                style={{
+                                    transform: `translate(${labelX}px, ${labelY}px) scale(var(--collage-label-scale, 1))`,
+                                }}
                                 aria-hidden="true"
                             >
                                 <g className="home-collage-caption">
@@ -758,10 +779,10 @@ export default function PhotoMosaicSection() {
                                     </text>
                                     <rect
                                         className="home-collage-caption-rule"
-                                        x={-40}
-                                        y={26}
-                                        width={80}
-                                        height={4}
+                                        x={-24}
+                                        y={16}
+                                        width={48}
+                                        height={3}
                                     />
                                 </g>
                             </g>

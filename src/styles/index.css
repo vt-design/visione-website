@@ -83,6 +83,13 @@
   display: none;
 }
 
+/* Keep the whole desktop collage within one screen: its width is capped so its
+   height (width / 1.6, the viewBox ratio) fits the viewport minus nav and margins. */
+.home-collage-desktop {
+  width: min(100%, calc((100dvh - 180px) * 1.6));
+  margin-inline: auto;
+}
+
 .home-collage-tile {
   opacity: 0;
   cursor: pointer;
@@ -140,9 +147,10 @@
 .home-collage-caption-cta {
   fill: #fff;
   font-family: 'Archivo', sans-serif;
-  font-size: 24px;
+  /* Real on-screen size: the parent group counter-scales by --collage-label-scale. */
+  font-size: 15px;
   font-weight: 800;
-  letter-spacing: 5px;
+  letter-spacing: 3px;
 }
 
 @media (hover: hover) {

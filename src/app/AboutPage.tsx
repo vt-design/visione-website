@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
+import { BeforeAfterSection } from "./components/BeforeAfterSection";
 
 
 const STEPS = [
@@ -23,34 +24,6 @@ const STEPS = [
     num: "04",
     title: "Instalación y garantía",
     desc: "Realizamos la colocación en obra de cada proyecto, incluyendo instalaciones en altura y trabajos de gran escala. Respaldamos nuestros trabajos con garantía",
-  },
-];
-
-const TIMELINE = [
-  {
-    year: "2010",
-    title: "Fundación de Visione",
-    desc: "Comenzamos como un taller artesanal de gráfica publicitaria en Buenos Aires con una visión clara: elevar el estándar industrial del rubro.",
-  },
-  {
-    year: "2015",
-    title: "Inauguración de Planta Industrial",
-    desc: "Adquisición de maquinaria CNC de gran formato e incorporación de departamento propio de ingeniería de fachadas y revestimientos.",
-  },
-  {
-    year: "2019",
-    title: "Expansión Corporativa Nacional",
-    desc: "Llegada a proyectos monumentales para entidades bancarias, aeropuertos y torres corporativas a lo largo de todo el país.",
-  },
-  {
-    year: "2023",
-    title: "Innovación Sostenible & Iluminación LED",
-    desc: "Certificación de procesos de pintura eco-amigables y actualización total de matrices de LED a alta eficiencia energética.",
-  },
-  {
-    year: "ACTUALIDAD",
-    title: "Líderes en Señalética & Fachadas",
-    desc: "Más de 1.200 proyectos completados con éxito y un equipo interdisciplinario que une diseño, ingeniería y montaje extremo.",
   },
 ];
 
@@ -108,6 +81,8 @@ export default function AboutPage() {
           </div>
         </section>
 
+        {/* ANTES Y DESPUÉS */}
+        <BeforeAfterSection />
 
         {/* NUESTROS PROYECTOS */}
         <section className="py-20 border-b border-black/5 max-w-7xl mx-auto px-6 md:px-12">
@@ -145,38 +120,6 @@ export default function AboutPage() {
                 Cada punto representa un proyecto realizado por Visione en Argentina.
               </p>
             </div>
-          </div>
-        </section>
-
-        {/* TIMELINE SECTION */}
-        <section className="py-20 max-w-7xl bg-white mx-auto px-6 md:px-12 space-y-12">
-          <div className="text-center max-w-2xl mx-auto space-y-2">
-            <h2 className="ff-display font-['Audiowide'] text-2xl md:text-4xl font-bold tracking-tight text-[#1a1c18] uppercase">
-              Línea de Tiempo
-            </h2>
-            <div className="w-12 h-1 bg-primary mx-auto"></div>
-          </div>
-
-          <div className="relative border-l-2 border-[#637f1d]/30 ml-4 md:ml-32 space-y-8 py-2">
-            {TIMELINE.map((item, idx) => (
-              <div key={idx} className="relative pl-6 md:pl-10 group">
-                <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-primary border-4 border-[#F8F9FA] group-hover:scale-125 transition-transform duration-300"></div>
-
-                <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6 bg-white p-6 rounded-sm border border-black/10 shadow-sm">
-                  <span className="ff-display font-['Audiowide'] text-xl font-bold text-primary min-w-[110px]">
-                    {item.year}
-                  </span>
-                  <div className="space-y-1">
-                    <h3 className="ff-display font-['Audiowide'] text-lg font-bold text-[#1a1c18] uppercase">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs md:text-sm text-[#1a1c18]/80 leading-relaxed">
-                      {item.desc}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
         </section>
 
