@@ -110,15 +110,41 @@ export default function AboutPage() {
 
 
         {/* NUESTROS PROYECTOS */}
-        <section className="py-20 h-fit  border-b border-black/5 max-w-7xl mx-auto px-12 space-y-12">
-          <div className="w-full h-80 md:h-96 bg-card p-2 border border-border rounded-sm shadow-lg overflow-hidden relative">
-            <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1MP0qcM-3oQDCOtZi3wZlhjfeA3FFf1g&ehbc=2E312F&noprof=1"
-              width="100%"  
-              height="100%"
-              loading="lazy"
-              className="-mt-[70px] h-[calc(100%+70px)] w-full border-0"
-            >
-            </iframe>
+        <section className="py-20 border-b border-black/5 max-w-7xl mx-auto px-6 md:px-12">
+          <div className="flex flex-col md:flex-row md:items-center gap-12 md:gap-16">
+            <div className="w-full md:w-1/2 space-y-5">
+              <h2 className="ff-display font-['Audiowide'] text-2xl md:text-4xl font-bold tracking-tight text-[#1a1c18] uppercase leading-snug">
+                Fabricamos, enviamos e instalamos
+              </h2>
+              <div className="w-12 h-1 bg-[#a5cd38]"></div>
+              <p className="text-lg md:text-xl text-[#1a1c18] italic font-light">
+                Llegamos a todo el país.
+              </p>
+              <p className="text-base text-[#1a1c18]/80 leading-relaxed">
+                Realizamos trabajos y colocaciones en cualquier punto de Argentina, coordinando cada proyecto desde su fabricación hasta su instalación.
+              </p>
+              <p className="text-base text-[#1a1c18]/80 leading-relaxed">
+                También fabricamos piezas y estructuras para enviar a destino mediante el transporte elegido por el cliente, ampliando nuestro alcance a empresas de todo el territorio nacional.
+              </p>
+            </div>
+
+            <div className="w-full md:w-1/2 space-y-3">
+              <div className="w-full h-80 md:h-[450px] bg-card p-2 border border-border rounded-sm shadow-lg">
+                <div className="h-full w-full overflow-hidden">
+                  <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1MP0qcM-3oQDCOtZi3wZlhjfeA3FFf1g&ehbc=2E312F&noprof=1"
+                    width="100%"
+                    height="100%"
+                    loading="lazy"
+                    title="Mapa de proyectos realizados por Visione en Argentina"
+                    className="-mt-[70px] h-[calc(100%+70px)] w-full border-0"
+                  >
+                  </iframe>
+                </div>
+              </div>
+              <p className="text-xs md:text-sm text-[#1a1c18]/60 italic text-center">
+                Cada punto representa un proyecto realizado por Visione en Argentina.
+              </p>
+            </div>
           </div>
         </section>
 
