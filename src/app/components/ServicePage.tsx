@@ -1,15 +1,92 @@
-import React from "react";
-import { Navbar } from "./Navbar";
-import { Footer } from "./Footer";
-import { ArrowRight } from "lucide-react";
-import { useNavigate, useParams } from "react-router-dom";
-import servicePageData from '@/data/servicios.json'
+import React, { useState } from "react"
+import { Navbar } from "./Navbar"
+import { Footer } from "./Footer"
+import { ArrowLeft, ArrowRight } from "lucide-react"
+import { useNavigate, useParams } from "react-router-dom"
+import servicePageData from "@/data/servicios.json"
+
+type PhotoCarouselProps = {
+  images: string[]
+  initialImage: string
+  title: string
+}
+
+function PhotoCarousel({ images, initialImage, title }: PhotoCarouselProps) {
+  const initialIndex = Math.max(images.indexOf(initialImage), 0)
+  const [currentIndex, setCurrentIndex] = useState(initialIndex)
+  const hasMultipleImages = images.length > 1
+
+  const showPrevious = () => {
+    setCurrentIndex((index) => (index - 1 + images.length) % images.length)
+  }
+
+  const showNext = () => {
+    setCurrentIndex((index) => (index + 1) % images.length)
+  }
+
+  return (
+    <div className="group relative h-[350px] w-full overflow-hidden rounded-sm bg-[#1a1c18] md:h-[450px]">
+      <button
+        type="button"
+        onClick={showNext}
+        className="h-full w-full cursor-pointer"
+        aria-label={`Ver siguiente foto de ${title}`}
+      >
+        <img
+          key={images[currentIndex]}
+          src={images[currentIndex]}
+          alt={`${title}, foto ${currentIndex + 1} de ${images.length}`}
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+        />
+      </button>
+
+      {hasMultipleImages && (
+        <>
+          <button
+            type="button"
+            onClick={showPrevious}
+            aria-label={`Ver foto anterior de ${title}`}
+            className="absolute left-4 top-1/2 flex size-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-sm transition-colors hover:bg-[#a5cd38] hover:text-[#1a1c18] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#a5cd38]"
+          >
+            <ArrowLeft size={18} />
+          </button>
+          <button
+            type="button"
+            onClick={showNext}
+            aria-label={`Ver siguiente foto de ${title}`}
+            className="absolute right-4 top-1/2 flex size-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-sm transition-colors hover:bg-[#a5cd38] hover:text-[#1a1c18] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#a5cd38]"
+          >
+            <ArrowRight size={18} />
+          </button>
+          <div className="absolute bottom-4 right-4 z-20 flex items-center gap-2">
+            {images.map((image, index) => (
+              <button
+                key={image}
+                type="button"
+                onClick={() => setCurrentIndex(index)}
+                className={`h-2 cursor-pointer rounded-full transition-all ${
+                  currentIndex === index
+                    ? "w-8 bg-[#a5cd38]"
+                    : "w-2 bg-white/40 hover:bg-white/70"
+                }`}
+                aria-label={`Ver foto ${index + 1} de ${title}`}
+                aria-current={currentIndex === index ? "true" : undefined}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  )
+}
 
 export function ServicePage() {
-
-  const navigate = useNavigate();
-  const { servicio } = useParams() || { servicio: "revestimientos"};
-  const { title, subtitle, heroImg, features } = servicePageData[servicio];
+  const navigate = useNavigate()
+  const { servicio } = useParams() || { servicio: "revestimientos" }
+  const { title, subtitle, heroImg, features } = servicePageData[servicio]
+  const serviceImages = Array.from(
+    new Set([heroImg, ...features.map((feature) => feature.image)]),
+  )
 
   return (
     <div className="min-h-screen bg-[#F8F9FA] text-[#1a1c18] ff-body flex flex-col justify-between">
@@ -37,7 +114,9 @@ export function ServicePage() {
                 onClick={() => navigate("/contacto")}
                 className="btn-wipe btn-wipe-primary px-8 py-4 bg-[#a5cd38] text-[#1a1c18] font-bold text-sm tracking-wider uppercase rounded-xs shadow-lg inline-flex items-center gap-3 cursor-pointer"
               >
-                <span className="hidden md:block">Solicitar Presupuesto para este Servicio</span>
+                <span className="hidden md:block">
+                  Solicitar Presupuesto para este Servicio
+                </span>
                 <span className="block md:hidden">Contactanos</span>
                 <ArrowRight size={18} />
               </button>
@@ -53,13 +132,14 @@ export function ServicePage() {
             </h2>
             <div className="w-16 h-1 bg-[#a5cd38] mx-auto"></div>
             <p className="text-[#1a1c18]/70 text-base">
-              Conocé en detalle la tecnología, materiales y estándares de ejecución que aplicamos en cada proyecto.
+              Conocé en detalle la tecnología, materiales y estándares de
+              ejecución que aplicamos en cada proyecto.
             </p>
           </div>
 
           <div className="space-y-20 md:space-y-32">
             {features.map((item, idx) => {
-              const isEven = idx % 2 === 0;
+              const isEven = idx % 2 === 0
               return (
                 <div
                   key={idx}
@@ -67,15 +147,14 @@ export function ServicePage() {
                     isEven ? "" : "md:flex-row-reverse"
                   }`}
                 >
-                  <div className="w-full md:w-1/2 group overflow-hidden rounded-sm border border-black/10 shadow-lg bg-white">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-[350px] md:h-[450px] object-cover group-hover:scale-105 transition-transform duration-500"
+                  <div className="w-full md:w-1/2 overflow-hidden rounded-sm border border-black/10 shadow-lg bg-white">
+                    <PhotoCarousel
+                      images={serviceImages}
+                      initialImage={item.image}
+                      title={item.title}
                     />
                   </div>
                   <div className="w-full md:w-1/2 space-y-5">
-                    
                     <h3 className="ff-display font-['Audiowide'] text-2xl md:text-3xl font-bold text-[#1a1c18] uppercase leading-snug">
                       {item.title}
                     </h3>
@@ -93,7 +172,7 @@ export function ServicePage() {
                     </div>
                   </div>
                 </div>
-              );
+              )
             })}
           </div>
         </section>
@@ -106,7 +185,8 @@ export function ServicePage() {
                 ¿Tenés un proyecto en mente?
               </h3>
               <p className="text-white/70 text-sm max-w-xl">
-                Nuestro equipo técnico asesora desde el plano inicial hasta el montaje final en cualquier punto del país.
+                Nuestro equipo técnico asesora desde el plano inicial hasta el
+                montaje final en cualquier punto del país.
               </p>
             </div>
             <button
@@ -121,5 +201,5 @@ export function ServicePage() {
 
       <Footer />
     </div>
-  );
+  )
 }
