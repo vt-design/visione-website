@@ -11,10 +11,9 @@
         "images": [
           "/images/soluciones/carteleria/carteleria-foto1.webp",
           "/images/soluciones/carteleria/carteleria-foto2.webp",
-          "/images/soluciones/carteleria/carteleria-foto3.webp",
-          "/images/soluciones/carteleria/carteleria-foto4.webp"
+          "/images/soluciones/carteleria/carteleria-foto3.webp"
         ],
-        "tag": "GRAN FORMATO"
+        "tag": "LETRAS Y LOGOS CORPORATIVOS"
       },
       {
         "title": "MARQUESINAS, CARTELES Y SALIENTES",
@@ -26,13 +25,21 @@
         "title": "GRAN FORMATO Y TOTEMS",
         "description": "Tótems revestidos en aluminio compuesto (ACM), con letras y elementos corpóreos aplicados o diseños calados. Diferentes formatos, terminaciones y opciones de iluminación permiten  lograr una identificación visible y destacada. Desarrollamos letras y logos de grandes dimensiones en chapa, acrílico y acero inoxidable, combinando materiales y terminaciones según las características de cada proyecto. Incorporamos iluminación LED para instalaciones interiores y exteriores.",
         "image": "https://images.unsplash.com/photo-1779614800682-0c0cea8e0cd5?w=900&h=700&fit=crop&auto=format",
-        "tag": "GRAN FORMATO"
+        "images": [
+          "/images/soluciones/carteleria/carteleria-gran-formato1.webp",
+          "/images/soluciones/carteleria/carteleria-gran-formato2.webp",
+          "/images/soluciones/carteleria/carteleria-gran-formato3.webp",
+          "/images/soluciones/carteleria/carteleria-totem1.webp",
+          "/images/soluciones/carteleria/carteleria-totem2.webp",
+          "/images/soluciones/carteleria/carteleria-totem3.webp"
+        ],
+        "tag": "GRAN FORMATO Y TOTEMS"
       },
       {
         "title": "ILUMINACIÓN LED",
         "description": "Incorporamos sistemas de iluminación LED de calidad, seleccionados por su eficiencia, durabilidad, intensidad y definición visual. Ofrecemos distintas alternativas, desde puntos de luz hasta iluminación difusa, o iluminacion frontal y/o lateral en piezas de acrílico, logrando diferentes efectos y terminaciones.",
-        "image": "https://images.unsplash.com/photo-1779614800682-0c0cea8e0cd5?w=900&h=700&fit=crop&auto=format",
-        "tag": "GRAN FORMATO"
+        "image": "/images/soluciones/carteleria/carteleria-iluminacion1.webp",
+        "tag": "ILUMINACION"
       }
     ]
   },
