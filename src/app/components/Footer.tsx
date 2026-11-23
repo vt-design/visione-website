@@ -14,7 +14,7 @@ export function Footer() {
           <Link to="/" onClick={handleNav}
             className="ff-display font-['Audiowide'] text-2xl font-bold tracking-wider text-white hover:text-[#a5cd38] transition-colors text-left"
           >
-            <img alt="Visione Publicidad" src= "/images/logos/texto-logo-visione.png" className="w-3/4"></img>
+            <img alt="Visione Publicidad" src="/images/logos/texto-logo-visione.png" loading="lazy" decoding="async" width={640} height={78} className="w-3/4 h-auto" />
           </Link>
           <p className="text-md text-white/60 leading-normal pt-2">
             Desarrollamos soluciones integrales de revestimientos, cartelería y gráfica corporativa para empresas de todo el país.
@@ -101,7 +101,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-white/40 gap-4">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-white/60 gap-4">
         <p>© {new Date().getFullYear()} VISIONE PUBLICIDAD. Todos los derechos reservados.</p>
         <p className="font-mono">desarrollo: vt.design.contact@gmail.com</p>
       </div>

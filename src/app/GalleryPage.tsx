@@ -5,7 +5,6 @@ import { Footer } from "./components/Footer";
 import { Button } from "./components/ui/button";
 import { X } from "lucide-react";
 import { motion } from "motion/react";
-import { listItemSecondaryActionClasses } from "@mui/material/ListItemSecondaryAction";
 import { usePageMeta } from "./seo";
 
 interface GalleryImage {
@@ -147,6 +146,7 @@ export default function GalleryPage() {
     <div className="min-h-screen bg-[#F8F9FA] text-[#1a1c18] ff-body flex flex-col justify-between">
       <div>
         <Navbar activePage="galeria"/>
+        <main>
 
         <section className="relative pt-28 pb-10 bg-[#1a1c18] text-white border-b border-white/10">
           <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-3">
@@ -281,6 +281,7 @@ export default function GalleryPage() {
             </div>
           </div>
         )}
+      </main>
       </div>
 
       <Footer />

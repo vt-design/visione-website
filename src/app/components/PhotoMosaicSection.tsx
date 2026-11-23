@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useNearViewport } from "./LazyImg";
 import {
     Dialog,
     DialogContent,
@@ -527,6 +528,7 @@ function runCardFlip(origin: FlipOrigin, dialog: HTMLElement, mode: "open" | "cl
 
 export default function PhotoMosaicSection() {
     const mosaicRef = useRef<HTMLDivElement | null>(null);
+    const mosaicNear = useNearViewport(mosaicRef);
     const thumbnailRailRef = useRef<HTMLDivElement | null>(null);
     const flipOriginRef = useRef<FlipOrigin | null>(null);
     const photoTouchStartRef = useRef<{ x: number; y: number } | null>(null);
@@ -740,7 +742,7 @@ export default function PhotoMosaicSection() {
                             <g clipPath={clipPath}>
                                 <image
                                     className="home-collage-image"
-                                    href={tile.url}
+                                    href={mosaicNear ? tile.url : undefined}
                                     x={x}
                                     y={y}
                                     width={width}

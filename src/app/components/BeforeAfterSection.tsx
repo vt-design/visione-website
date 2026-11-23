@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import { useNearViewport } from "./LazyImg"
 
 interface Comparison {
   title: string
@@ -41,9 +42,11 @@ const DEFAULT_START = 50
 function CompareSlider({
   item,
   active,
+  load,
 }: {
   item: Comparison
   active: boolean
+  load: boolean
 }) {
   const frameRef = useRef<HTMLDivElement | null>(null)
   const draggingRef = useRef(false)
@@ -141,18 +144,20 @@ function CompareSlider({
     >
       {/* After: full frame underneath */}
       <img
-        src={item.after.src}
+        src={load ? item.after.src : undefined}
         alt={`${item.title}: ${item.after.label.toLowerCase()}`}
         draggable={false}
+        decoding="async"
         className="absolute inset-0 h-full w-full object-cover"
         style={{ objectPosition: item.focus }}
       />
 
       {/* Before: same image box, revealed from the left up to the divider */}
       <img
-        src={item.before.src}
+        src={load ? item.before.src : undefined}
         alt={`${item.title}: ${item.before.label.toLowerCase()}`}
         draggable={false}
+        decoding="async"
         className={`absolute inset-0 h-full w-full object-cover transition-[clip-path] ${ease}`}
         style={{
           objectPosition: item.focus,
@@ -200,13 +205,15 @@ function CompareSlider({
 }
 
 export function BeforeAfterSection() {
+  const sectionRef = useRef<HTMLElement | null>(null)
+  const near = useNearViewport(sectionRef)
   const [index, setIndex] = useState(0)
   const current = COMPARISONS[index]
   const go = (direction: -1 | 1) =>
     setIndex((i) => (i + direction + COMPARISONS.length) % COMPARISONS.length)
 
   return (
-    <section className="py-20 border-b border-black/5">
+    <section ref={sectionRef} className="py-20 border-b border-black/5">
       <div className="max-w-5xl mx-auto px-6 md:px-12 space-y-12">
         <div className="text-center max-w-2xl mx-auto space-y-2">
           <h2 className="ff-display font-['Audiowide'] text-2xl md:text-4xl font-bold tracking-tight text-[#1a1c18] uppercase">
@@ -232,7 +239,7 @@ export function BeforeAfterSection() {
                 }`}
                 aria-hidden={i !== index}
               >
-                <CompareSlider item={item} active={i === index} />
+                <CompareSlider item={item} active={i === index} load={near} />
               </div>
             ))}
           </div>
@@ -246,18 +253,20 @@ export function BeforeAfterSection() {
             </div>
 
             <div className="flex items-center justify-between gap-5 sm:justify-end">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-0">
                 {COMPARISONS.map((item, i) => (
                   <button
                     key={item.title}
                     type="button"
                     onClick={() => setIndex(i)}
-                    className={`h-2 cursor-pointer rounded-full transition-all ${
-                      i === index ? "w-8 bg-[#a5cd38]" : "w-2 bg-black/20 hover:bg-black/40"
-                    }`}
+                    className="group/dot flex h-6 min-w-6 cursor-pointer items-center justify-center px-1"
                     aria-label={`Ver proyecto ${i + 1}: ${item.title}`}
                     aria-current={i === index ? "true" : undefined}
-                  />
+                  >
+                <span aria-hidden="true" className={`block h-2 rounded-full transition-all ${
+                      i === index ? "w-8 bg-[#a5cd38]" : "w-2 bg-black/20 group-hover/dot:bg-black/40"
+                    }`} />
+              </button>
                 ))}
               </div>
               <div className="flex gap-2">

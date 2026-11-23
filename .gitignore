@@ -64,6 +64,5 @@ pnpm-debug.log*
 Thumbs.db
 # Local Netlify folder
 .netlify
-llms.txt
-robots.txt
-sitemap.xml
+# Prerender del build SSR
+/dist-ssr

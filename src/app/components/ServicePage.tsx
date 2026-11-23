@@ -4,6 +4,7 @@ import { Footer } from "./Footer"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { Link, useParams } from "react-router-dom"
 import NotFoundPage from "../NotFoundPage"
+import { LazyImg } from "./LazyImg"
 import { usePageMeta } from "../seo"
 import servicePageData from "@/data/servicios.json"
 
@@ -34,7 +35,7 @@ function PhotoCarousel({ images, initialImage, title }: PhotoCarouselProps) {
         className="h-full w-full cursor-pointer"
         aria-label={`Ver siguiente foto de ${title}`}
       >
-        <img
+        <LazyImg
           key={images[currentIndex]}
           src={images[currentIndex]}
           alt={`${title}, foto ${currentIndex + 1} de ${images.length}`}
@@ -60,26 +61,39 @@ function PhotoCarousel({ images, initialImage, title }: PhotoCarouselProps) {
           >
             <ArrowRight size={18} />
           </button>
-          <div className="absolute bottom-4 right-4 z-20 flex items-center gap-2">
+          <div className="absolute bottom-4 right-4 z-20 flex items-center gap-0">
             {images.map((image, index) => (
               <button
                 key={image}
                 type="button"
                 onClick={() => setCurrentIndex(index)}
-                className={`h-2 cursor-pointer rounded-full transition-all ${
-                  currentIndex === index
-                    ? "w-8 bg-[#a5cd38]"
-                    : "w-2 bg-white/40 hover:bg-white/70"
-                }`}
+                className="group/dot flex h-6 min-w-6 cursor-pointer items-center justify-center px-1"
                 aria-label={`Ver foto ${index + 1} de ${title}`}
                 aria-current={currentIndex === index ? "true" : undefined}
-              />
+              >
+                <span aria-hidden="true" className={`block h-2 rounded-full transition-all ${
+                  currentIndex === index
+                    ? "w-8 bg-[#a5cd38]"
+                    : "w-2 bg-white/40 group-hover/dot:bg-white/70"
+                }`} />
+              </button>
             ))}
           </div>
         </>
       )}
     </div>
   )
+}
+
+// Versiones más livianas del hero para pantallas chicas.
+function heroSrcSet(src: string) {
+  if (src.includes("images.unsplash.com")) {
+    const at = (w: number) =>
+      src.replace(/w=\d+/, `w=${w}`).replace(/h=\d+/, `h=${Math.round((w * 9) / 16)}`) + "&q=50" // se muestra al 35% de opacidad
+    return `${at(800)} 800w, ${at(1600)} 1600w`
+  }
+  if (src.endsWith(".webp")) return `${src.replace(/\.webp$/, "-800w.webp")} 800w, ${src} 1600w`
+  return undefined
 }
 
 type ServiceData = {
@@ -126,12 +140,16 @@ function ServicePageContent({
     <div className="min-h-screen bg-[#F8F9FA] text-[#1a1c18] ff-body flex flex-col justify-between">
       <div>
         <Navbar activePage={servicio} />
+        <main>
 
         {/* FULL SCREEN HERO WITH BACKGROUND PHOTO */}
         <section className="relative h-[75dvh] lg:h-screen flex items-center justify-center bg-[#1a1c18] overflow-hidden">
           <img
             src={heroImg}
+            srcSet={heroSrcSet(heroImg)}
+            sizes="100vw"
             alt={title}
+            {...{ fetchpriority: "high" } /* React 18: atributo en minúsculas */}
             className="absolute inset-0 w-full h-full object-cover opacity-35 filter brightness-90"
           />
           {/* <div className="absolute inset-0 bg-gradient-to-t from-[#1a1c18] via-[#1a1c18]/40 to-[#1a1c18]/70" /> */}
@@ -200,7 +218,7 @@ function ServicePageContent({
                       <Link
                 to="/proyectos"
                 onClick={() => window.scrollTo({ top: 0 })}
-                        className="group text-xs font-bold tracking-wider uppercase text-[#a5cd38] hover:text-[#1a1c18] inline-flex items-center gap-2 border-b-2 border-[#a5cd38] hover:border-[#1a1c18] pb-1 transition-colors cursor-pointer"
+                        className="group text-xs font-bold tracking-wider uppercase text-[#55701a] hover:text-[#1a1c18] inline-flex items-center gap-2 border-b-2 border-[#55701a] hover:border-[#1a1c18] pb-1 transition-colors cursor-pointer"
                       >
                         <span>Ver más fotos</span>
                         <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
@@ -234,6 +252,7 @@ function ServicePageContent({
             </Link>
           </div>
         </section>
+      </main>
       </div>
 
       <Footer />

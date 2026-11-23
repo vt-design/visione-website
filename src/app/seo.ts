@@ -6,7 +6,7 @@ export const SITE_URL = "https://euphonious-biscochitos-aa2e71.netlify.app";
 
 const DEFAULT_IMAGE = "/images/imagen-hero-1-uca.webp";
 
-type PageMeta = {
+export type PageMeta = {
   title: string;
   description: string;
   /** Ruta canónica, ej. "/contacto". Si se omite no se fija canonical. */
@@ -40,12 +40,28 @@ function setCanonical(href: string | null) {
   el.href = href;
 }
 
+export function absoluteImage(image?: string) {
+  const img = image ?? DEFAULT_IMAGE;
+  return img.startsWith("http") ? img : SITE_URL + img;
+}
+
+// Durante el prerender (sin `document`) la página registra acá sus metadatos,
+// para que el script de build los escriba en el <head> del HTML estático.
+let serverMeta: PageMeta | null = null;
+export function takeServerMeta() {
+  const meta = serverMeta;
+  serverMeta = null;
+  return meta;
+}
+
 /** Fija título, descripción, canonical y etiquetas Open Graph/Twitter de la página. */
-export function usePageMeta({ title, description, path, image, noindex }: PageMeta) {
+export function usePageMeta(meta: PageMeta) {
+  const { title, description, path, image, noindex } = meta;
+  if (typeof document === "undefined") serverMeta = meta;
+
   useEffect(() => {
     const url = path !== undefined ? SITE_URL + path : null;
-    const img = image ?? DEFAULT_IMAGE;
-    const imageUrl = img.startsWith("http") ? img : SITE_URL + img;
+    const imageUrl = absoluteImage(image);
 
     document.title = title;
     setMeta("name", "description", description);

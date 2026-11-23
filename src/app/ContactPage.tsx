@@ -3,6 +3,7 @@ import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Button } from "./components/ui/button";
 import { usePageMeta } from "./seo";
+import { LazyMap } from "./components/LazyMap";
 import {
   Mail,
   MapPin,
@@ -66,6 +67,7 @@ export default function ContactPage() {
     <div className="min-h-screen bg-[#F8F9FA] text-[#1a1c18] ff-body flex flex-col justify-between">
       <div>
         <Navbar activePage="contacto" />
+        <main>
 
         {/* COMPACT HERO HEADER SECTION */}
         <section className="relative pt-28 pb-10 bg-[#1a1c18] text-white border-b border-white/10">
@@ -96,10 +98,11 @@ export default function ContactPage() {
               <form onSubmit={handleWhatsApp} className="space-y-5">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div className="space-y-1.5">
-                    <label className="text-[11px] font-mono font-bold uppercase text-[#1a1c18]/80">
+                    <label htmlFor="contacto-nombre" className="text-[11px] font-mono font-bold uppercase text-[#1a1c18]/80">
                       Nombre Completo *
                     </label>
                     <input
+                      id="contacto-nombre"
                       type="text"
                       required
                       placeholder="Ej: Martín Rodríguez"
@@ -110,10 +113,11 @@ export default function ContactPage() {
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-[11px] font-mono font-bold uppercase text-[#1a1c18]/80">
+                    <label htmlFor="contacto-ubicacion" className="text-[11px] font-mono font-bold uppercase text-[#1a1c18]/80">
                       Ubicación *
                     </label>
                     <input
+                      id="contacto-ubicacion"
                       type="text"
                       required
                       placeholder="Ej: Av. Córdoba, 1600"
@@ -124,12 +128,13 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-col-1 md:grid-cols-2 gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div className="space-y-1.5">
-                    <label className="text-[11px] font-mono font-bold uppercase text-[#1a1c18]/80">
+                    <label htmlFor="contacto-servicio" className="text-[11px] font-mono font-bold uppercase text-[#1a1c18]/80">
                       Servicio Requerido *
                     </label>
                     <select
+                      id="contacto-servicio"
                       value={servicio}
                       required
                       onChange={(e) => setServicio(e.target.value)}
@@ -142,11 +147,12 @@ export default function ContactPage() {
                     </select>
                   </div>
 
-                  <div className="spave-y-1.5">
-                    <label className="text-[11px] font-mono font-bold uppercase text-[#1a1c18]/80">
+                  <div className="space-y-1.5">
+                    <label htmlFor="contacto-iluminacion" className="text-[11px] font-mono font-bold uppercase text-[#1a1c18]/80">
                       Lleva iluminación? *
                     </label>
                     <select
+                      id="contacto-iluminacion"
                       value={iluminado}
                       onChange={(e) => setIluminado(e.target.value)}
                       className="w-full px-4 py-2.5 bg-[#F8F9FA] border border-black/15 rounded-xs text-sm focus:outline-none focus:border-primary transition-colors cursor-pointer"
@@ -175,10 +181,11 @@ export default function ContactPage() {
                 
 
                 <div className="space-y-1.5">
-                  <label className="text-[11px] font-mono font-bold uppercase text-[#1a1c18]/80">
+                  <label htmlFor="contacto-consulta" className="text-[11px] font-mono font-bold uppercase text-[#1a1c18]/80">
                     Medidas y Detalles de la Consulta *
                   </label>
                   <textarea
+                      id="contacto-consulta"
                     rows={3}
                     placeholder="Contanos sobre la ubicación o especificaciones del trabajo..."
                     value={consulta}
@@ -264,13 +271,10 @@ export default function ContactPage() {
           </div>
 
           <div className="w-full h-80 md:h-96 bg-card p-2 border border-border rounded-sm shadow-lg overflow-hidden">
-            <iframe
+            <LazyMap
               title="Ubicación Visione Buenos Aires"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.874776774225!2d-58.47590652409925!3d-34.58203495635373!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb6728626288b%3A0xbadc5a9c36254ab4!2sVisione%20Publicidad!5e0!3m2!1sen!2sar!4v1790878845736!5m2!1sen!2sar"
               className="block w-full h-full border-0"
-              allowFullScreen={false}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
             />
           </div>
 
@@ -297,8 +301,9 @@ export default function ContactPage() {
               />
             </div>
           </div> */}
-        </section >
-      </div >
+        </section>
+        </main>
+      </div>
 
     <Footer />
     </div >

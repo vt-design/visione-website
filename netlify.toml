@@ -6,9 +6,6 @@
 [functions]
   node_bundler = "esbuild"
 
-# SPA: servir index.html en cualquier ruta (los archivos existentes, como
-# robots.txt y sitemap.xml, se sirven primero).
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# Cada ruta se prerenderiza a su propio HTML (scripts/prerender.mjs), así que no
+# hace falta redirigir todo a index.html: las rutas inexistentes reciben
+# dist/404.html con estado 404.

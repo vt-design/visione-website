@@ -10,6 +10,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "./components/ui/avatar";
 import { Link } from "react-router-dom";
 import PhotoMosaicSection from "./components/PhotoMosaicSection";
 import { usePageMeta } from "./seo";
+import { LazyImg, PLACEHOLDER, useNearViewport } from "./components/LazyImg";
 
 // ─── DATA & CONSTANTS ────────────────────────────────────────────────────────
 
@@ -127,6 +128,10 @@ const REVIEWS = [
 ];
 
 
+// Cada imagen del hero tiene una versión de 800px para pantallas chicas.
+const heroSrcSet = (src: string) =>
+  `${src.replace(/\.webp$/, "-800w.webp")} 800w, ${src} 1600w`;
+
 function HeroSlideCopy({
   slide,
 }: {
@@ -187,6 +192,10 @@ export default function HomePage() {
   const [reviewIndex, setReviewIndex] = useState(0);
   const [incoming, setIncoming] = useState<{ idx: number; key: number } | null>(null);
   const heroIndexRef = useRef(0);
+  const logosRef = useRef<HTMLElement>(null);
+  const logosNear = useNearViewport(logosRef);
+  const reviewRef = useRef<HTMLDivElement>(null);
+  const reviewNear = useNearViewport(reviewRef);
 
   const handleNav = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -218,6 +227,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-[#F8F9FA] text-[#1a1c18] ff-body selection:bg-[#a5cd38] selection:text-[#1a1c18] flex flex-col justify-between">
       <div>
         <Navbar activePage="home" />
+        <main>
 
         {/* HERO SECTION */}
         <section className="relative h-[75dvh] lg:h-screen bg-[#1a1c18] overflow-hidden flex items-center">
@@ -248,7 +258,10 @@ export default function HomePage() {
             {/* Base layer — current image, stays in place */}
             <img
               src={HERO_SLIDES[heroIndex].image}
+              srcSet={heroSrcSet(HERO_SLIDES[heroIndex].image)}
+              sizes="100vw"
               alt={HERO_SLIDES[heroIndex].title}
+              {...{ fetchpriority: "high" } /* React 18: atributo en minúsculas */}
               className="absolute inset-0 w-full h-full object-cover"
             />
             {/* Incoming layer — mounts off-screen right, slides in, then unmounts */}
@@ -256,6 +269,8 @@ export default function HomePage() {
               <img
                 key={incoming.key}
                 src={HERO_SLIDES[incoming.idx].image}
+                srcSet={heroSrcSet(HERO_SLIDES[incoming.idx].image)}
+                sizes="100vw"
                 alt={HERO_SLIDES[incoming.idx].title}
                 className="absolute inset-0 w-full h-full object-cover hero-wipe-in"
               />
@@ -298,7 +313,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="absolute bottom-8 right-8 z-20 flex items-center gap-2">
+          <div className="absolute bottom-8 right-8 z-20 flex items-center gap-0">
             {HERO_SLIDES.map((_, i) => (
               <button
                 key={i}
@@ -307,16 +322,18 @@ export default function HomePage() {
                   setHeroIndex(i);
                   setIncoming(null);
                 }}
-                className={`h-2 transition-all rounded-full ${heroIndex === i ? "w-8 bg-[#a5cd38]" : "w-2 bg-white/40 hover:bg-white/70"
-                  }`}
-                aria-label={`Slide ${i + 1}`}
-              />
+                className="group/dot flex h-6 min-w-6 cursor-pointer items-center justify-center px-1"
+                aria-label={`Ver imagen ${i + 1}`}
+              >
+                <span aria-hidden="true" className={`block h-2 rounded-full transition-all ${heroIndex === i ? "w-8 bg-[#a5cd38]" : "w-2 bg-white/40 group-hover/dot:bg-white/70"
+                  }`} />
+              </button>
             ))}
           </div>
         </section>
 
         {/* TRUST BAR */}
-        <section className="bg-white border-y border-black/10 py-8 shadow-sm overflow-hidden">
+        <section ref={logosRef} className="bg-white border-y border-black/10 py-8 shadow-sm overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 md:px-12 mb-4 text-center">
             {/*<span className="text-[11px] font-mono font-bold text-[#637f1d] uppercase tracking-widest">
               CONFIAN EN NUESTRA INGENIERÍA VISUAL
@@ -332,8 +349,9 @@ export default function HomePage() {
                   className="flex items-center justify-center p-3 bg-[#F8F9FA] border border-black/10 rounded-sm cursor-pointer max-w-[180px] max-h-[90px] h-20 w-44"
                 >
                   <img
-                    src={logo.src}
+                    src={logosNear ? logo.src : PLACEHOLDER}
                     alt={logo.name}
+                    decoding="async"
                     className="max-w-[150px] max-h-[60px] w-auto h-auto object-contain"
                   />
                 </div>
@@ -367,7 +385,7 @@ export default function HomePage() {
               >
                 <div>
                   <div className="relative h-60 overflow-hidden bg-black">
-                    <img
+                    <LazyImg
                       src={card.photo}
                       alt={card.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -420,13 +438,13 @@ export default function HomePage() {
             <div className="w-16 h-1 bg-[#a5cd38] mx-auto"></div>
           </div>
 
-          <div className="max-w-5xl mx-auto bg-card p-5 md:p-8 border border-border rounded-sm shadow-lg relative flex flex-col md:flex-row items-stretch md:items-center gap-6 md:gap-8">
+          <div ref={reviewRef} className="max-w-5xl mx-auto bg-card p-5 md:p-8 border border-border rounded-sm shadow-lg relative flex flex-col md:flex-row items-stretch md:items-center gap-6 md:gap-8">
             <Avatar
               key={reviewIndex}
               className="w-full h-56 sm:h-72 md:w-[46%] md:h-72 lg:h-80 rounded-sm border border-border"
             >
               <AvatarImage
-                src={REVIEWS[reviewIndex].photo}
+                src={reviewNear ? REVIEWS[reviewIndex].photo : undefined}
                 alt="Retrato ilustrativo de cliente"
                 className="object-cover"
               />
@@ -491,6 +509,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+      </main>
       </div>
 
       <Footer />

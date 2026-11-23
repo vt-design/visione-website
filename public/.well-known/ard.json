@@ -1,0 +1,17 @@
+{
+  "entries": [
+    {
+      "identifier": "urn:air:euphonious-biscochitos-aa2e71.netlify.app:skills:pedir-presupuesto",
+      "displayName": "Pedir presupuesto a Visione Publicidad",
+      "type": "application/agent-skills+md",
+      "url": "https://euphonious-biscochitos-aa2e71.netlify.app/skills/pedir-presupuesto/SKILL.md",
+      "description": "Skill para agentes: qué datos reunir y cómo enviar una consulta de presupuesto de cartelería, letras corpóreas, marquesinas, revestimientos de frentes o gráfica corporativa a Visione Publicidad (CABA, Argentina).",
+      "tags": ["cartelería", "letras corpóreas", "revestimientos", "gráfica corporativa", "presupuesto", "Buenos Aires"],
+      "representativeQueries": [
+        "pedir presupuesto de cartelería y letras corpóreas en Buenos Aires",
+        "cotizar revestimiento de frente en ACM para un local",
+        "contactar a Visione Publicidad por WhatsApp"
+      ]
+    }
+  ]
+}

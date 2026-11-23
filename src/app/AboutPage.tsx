@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
+import { LazyMap } from "./components/LazyMap";
 import { BeforeAfterSection } from "./components/BeforeAfterSection";
 import { usePageMeta } from "./seo";
 
@@ -40,6 +41,7 @@ export default function AboutPage() {
     <div className="min-h-screen bg-[#F8F9FA] text-[#1a1c18] ff-body flex flex-col justify-between">
       <div>
         <Navbar activePage="nosotros" />
+        <main>
 
         {/* COMPACT HERO HEADER SECTION */}
         <section className="relative pt-28 pb-10 bg-[#1a1c18] text-white border-b border-white/10">
@@ -73,7 +75,7 @@ export default function AboutPage() {
                   key={idx}
                   className="bg-[#F8F9FA] p-6 border border-black/10 rounded-sm relative group hover:border-[#637f1d] transition-all duration-300 shadow-sm hover:shadow-md"
                 >
-                  <span className="ff-display font-['Audiowide'] text-3xl font-bold text-[#a5cd38] opacity-80 block mb-3">
+                  <span className="ff-display font-['Audiowide'] text-3xl font-bold text-[#637f1d] block mb-3">
                     {s.num}
                   </span>
                   <h3 className="ff-display font-['Audiowide'] text-base font-bold uppercase text-[#1a1c18] mb-2">
@@ -113,14 +115,11 @@ export default function AboutPage() {
             <div className="w-full md:w-1/2 space-y-3">
               <div className="w-full h-80 md:h-[450px] bg-card p-2 border border-border rounded-sm shadow-lg">
                 <div className="h-full w-full overflow-hidden">
-                  <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1MP0qcM-3oQDCOtZi3wZlhjfeA3FFf1g&ehbc=2E312F&noprof=1"
-                    width="100%"
-                    height="100%"
-                    loading="lazy"
+                  <LazyMap
+                    src="https://www.google.com/maps/d/u/0/embed?mid=1MP0qcM-3oQDCOtZi3wZlhjfeA3FFf1g&ehbc=2E312F&noprof=1"
                     title="Mapa de proyectos realizados por Visione en Argentina"
                     className="-mt-[70px] h-[calc(100%+70px)] w-full border-0"
-                  >
-                  </iframe>
+                  />
                 </div>
               </div>
               <p className="text-xs md:text-sm text-[#1a1c18]/60 italic text-center">
@@ -135,29 +134,30 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div className="space-y-2">
               <span className="ff-display font-['Audiowide'] text-4xl font-bold text-[#a5cd38] block">+1200</span>
-              <h4 className="ff-display font-['Audiowide'] text-xs font-bold uppercase tracking-wider text-white">
+              <h3 className="ff-display font-['Audiowide'] text-xs font-bold uppercase tracking-wider text-white">
                 Obras Entregadas
-              </h4>
+              </h3>
               <p className="text-xs text-white/60">Cartelería y fachadas en todo el país.</p>
             </div>
             <div className="space-y-2">
               <span className="ff-display font-['Audiowide'] text-4xl font-bold text-[#a5cd38] block">100%</span>
-              <h4 className="ff-display font-['Audiowide'] text-xs font-bold uppercase tracking-wider text-white">
+              <h3 className="ff-display font-['Audiowide'] text-xs font-bold uppercase tracking-wider text-white">
                 Fabricación Propia
-              </h4>
+              </h3>
               <p className="text-xs text-white/60">Corte, soldadura, pintura y armado sin intermediarios.</p>
             </div>
             <div className="space-y-2">
               <span className="ff-display font-['Audiowide'] text-4xl font-bold text-[#a5cd38] block">25+</span>
-              <h4 className="ff-display font-['Audiowide'] text-xs font-bold uppercase tracking-wider text-white">
+              <h3 className="ff-display font-['Audiowide'] text-xs font-bold uppercase tracking-wider text-white">
                 Años de Experiencia
-              </h4>
+              </h3>
               <p className="text-xs text-white/60">Compromiso contínuo con la calidad visual.</p>
             </div>
           </div>
         </section>
 
 
+      </main>
       </div>
 
       <Footer />

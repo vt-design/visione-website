@@ -17,6 +17,7 @@ export default function NotFoundPage() {
     <div className="min-h-screen bg-[#F8F9FA] text-[#1a1c18] ff-body flex flex-col justify-between">
       <div>
         <Navbar activePage=""  />
+        <main>
 
         {/* MAIN 404 HERO CONTENT */}
         <section className="relative pt-36 pb-24 bg-[#1a1c18] text-white border-b border-white/10 min-h-[70vh] flex items-center justify-center">
@@ -48,6 +49,7 @@ export default function NotFoundPage() {
             </div>
           </div>
         </section>
+      </main>
       </div>
 
       <Footer />
