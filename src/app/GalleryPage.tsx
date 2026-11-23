@@ -6,6 +6,7 @@ import { Button } from "./components/ui/button";
 import { X } from "lucide-react";
 import { motion } from "motion/react";
 import { usePageMeta } from "./seo";
+import { LazyImg } from "./components/LazyImg";
 
 interface GalleryImage {
   id: string;
@@ -21,7 +22,22 @@ interface GalleryResponse {
 
 type GalleryCategory = (typeof FILTERS)[number]["value"];
 
+// Primeras imágenes incluidas en el HTML prerenderizado (scripts/prerender.mjs
+// las deja en window.__GALLERY__). La página igual las vuelve a pedir al cargar,
+// así que lo que se suba a Cloudinary aparece sin tener que volver a publicar.
+function getInitialGallery(): GalleryResponse | null {
+  const data = (globalThis as { __GALLERY__?: GalleryResponse }).__GALLERY__;
+  return data && Array.isArray(data.images) ? data : null;
+}
+
 const TILES_PER_CYCLE = 10;
+
+// Cloudinary: pedir la imagen redimensionada y en el mejor formato (AVIF/WebP)
+// en lugar del original.
+const cld = (url: string, width: number) =>
+  url.replace("/image/upload/", `/image/upload/f_auto,q_auto,c_limit,w_${width}/`);
+const tileSrcSet = (url: string) =>
+  [400, 600, 800, 1200].map((w) => `${cld(url, w)} ${w}w`).join(", ");
 
 const FILTERS = [
   { label: "Todos los trabajos", value: "all" },
@@ -37,12 +53,13 @@ export default function GalleryPage() {
     path: "/proyectos",
   });
 
-  const [images, setImages] = useState<GalleryImage[]>([]);
-  const [nextCursor, setNextCursor] = useState<string | null>(null);
+  const [initialGallery] = useState(getInitialGallery);
+  const [images, setImages] = useState<GalleryImage[]>(initialGallery?.images ?? []);
+  const [nextCursor, setNextCursor] = useState<string | null>(initialGallery?.nextCursor ?? null);
   const [selectedImg, setSelectedImg] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(initialGallery ? Boolean(initialGallery.nextCursor) : true);
 
   const loadMoreRef = useRef<HTMLDivElement>(null);
   const loadingRef = useRef(false);
@@ -61,7 +78,9 @@ export default function GalleryPage() {
     if (cursor === null && images.length > 0) return;
 
     loadingRef.current = true;
-    setLoading(true);
+    // El refresco inicial de imágenes ya mostradas no muestra "Cargando…"
+    // (evita que el pie de página salte).
+    setLoading(Boolean(cursor) || images.length === 0);
     setError(null);
 
     try {
@@ -84,7 +103,6 @@ export default function GalleryPage() {
       }
 
       const data: GalleryResponse = await response.json();
-      console.log(data.images)
       setImages((previous) => {
         // La primera solicitud reemplaza las imágenes;
         // las siguientes agregan otras 10.
@@ -138,7 +156,6 @@ export default function GalleryPage() {
 
     observer.observe(sentinel);
 
-    console.log(images)
     return () => observer.disconnect();
   }, [images.length, nextCursor, hasMore, loading]);
 
@@ -195,22 +212,36 @@ export default function GalleryPage() {
 
         <section className="py-12 max-w-7xl mx-auto px-6 md:px-12">
           <div className="gallery-mosaic">
+            {/* Mientras llegan las imágenes, se reservan los mismos casilleros
+                para que el resto de la página no salte al cargarlas. */}
+            {images.length === 0 && hasMore && !error &&
+              Array.from({ length: TILES_PER_CYCLE }, (_, index) => (
+                <div
+                  key={index}
+                  aria-hidden="true"
+                  className={`gallery-mosaic-tile gallery-mosaic-t${index + 1} animate-pulse bg-black/5`}
+                  style={{ "--gallery-cycle": 0 } as React.CSSProperties}
+                />
+              ))}
             {images.filter((item, index) => activeFilter.toLowerCase() === "all" ? true : item.tags.includes(activeFilter.toLowerCase()) ).map((item, index) => (
               <Button
                 key={item.id}
                 variant="ghost"
                 aria-label={`Ampliar obra ${index + 1}`}
-                onClick={() => setSelectedImg(item.url)}
+                onClick={() => setSelectedImg(cld(item.url, 1800))}
                 className={`gallery-mosaic-tile gallery-mosaic-t${(index % TILES_PER_CYCLE) + 1} group block h-auto w-full min-w-0 overflow-hidden rounded-none p-0 bg-transparent hover:bg-transparent`}
                 style={{
                   "--gallery-cycle": Math.floor(index / TILES_PER_CYCLE),
                 } as React.CSSProperties}
               >
-                <img
-                  src={item.url}
+                <LazyImg
+                  src={cld(item.url, 800)}
+                  srcSet={tileSrcSet(item.url)}
+                  sizes="(max-width: 767px) 50vw, (max-width: 1023px) 38vw, 34vw"
                   alt={item.alt || `Obra ${index + 1}`}
                   className="block w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-focus-visible:scale-105"
-                  loading="lazy"
+                  eager={index < 2}
+                  {...(index < 2 ? { fetchpriority: "high" } : {})}
                   draggable={false}
                 />
               </Button>
@@ -223,7 +254,7 @@ export default function GalleryPage() {
             aria-hidden="true"
           />
 
-          {loading && (
+          {loading && images.length > 0 && (
             <p className="py-6 text-center text-sm text-gray-500">
               Cargando imágenes...
             </p>

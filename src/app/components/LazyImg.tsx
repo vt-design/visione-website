@@ -36,9 +36,17 @@ export function useNearViewport(ref: RefObject<Element | null>, rootMargin = "30
 }
 
 /** `<img>` que pide la imagen recién cuando está por entrar en pantalla. */
-export function LazyImg({ src, srcSet, ...props }: ImgHTMLAttributes<HTMLImageElement>) {
+export function LazyImg({
+  src,
+  srcSet,
+  eager = false,
+  ...props
+}: ImgHTMLAttributes<HTMLImageElement> & {
+  /** Cargar de inmediato (por ejemplo, la primera imagen visible). */
+  eager?: boolean;
+}) {
   const ref = useRef<HTMLImageElement>(null);
-  const near = useNearViewport(ref);
+  const near = useNearViewport(ref) || eager;
   return (
     <img
       ref={ref}

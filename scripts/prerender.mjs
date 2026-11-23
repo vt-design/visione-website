@@ -59,10 +59,56 @@ function applyMeta(html, meta, site) {
 const site = (template.match(/<link rel="canonical" href="([^"]+?)\/?">/) || [])[1];
 if (!site) throw new Error("No se encontró el canonical base en index.html");
 
+// Primeras imágenes de la galería para incluir en el HTML de /proyectos.
+// Usa la misma función de Netlify (credenciales de Cloudinary del build) y, si no
+// están disponibles, la versión publicada del sitio. Si nada responde, la galería
+// se carga como antes, desde el navegador.
+async function loadGallery() {
+  try {
+    const { handler } = await import(pathToFileURL(path.join(root, "netlify", "functions", "galeria.cjs")).href);
+    if (process.env.CLOUDINARY_CLOUD_NAME) {
+      const res = await handler({ queryStringParameters: {} });
+      if (res.statusCode === 200) return JSON.parse(res.body);
+    }
+  } catch (error) {
+    console.warn("prerender: Cloudinary no disponible en el build:", error.message);
+  }
+  try {
+    const res = await fetch(`${site}/.netlify/functions/galeria?`, { signal: AbortSignal.timeout(15000) });
+    if (res.ok) return await res.json();
+  } catch (error) {
+    console.warn("prerender: no se pudo leer la galería publicada:", error.message);
+  }
+  return null;
+}
+
+const scriptJson = (data) => JSON.stringify(data).replace(/</g, "\\u003c");
+
 async function writeRoute(route, file) {
+  let gallery = null;
+  if (route === "/proyectos") {
+    gallery = await loadGallery();
+    globalThis.__GALLERY__ = gallery ?? undefined;
+    console.log(`prerender: galería con ${gallery?.images?.length ?? 0} imágenes`);
+  }
   const { html, meta } = await render(route);
+  delete globalThis.__GALLERY__;
   let page = setTag(template, /<div id="root"><\/div>/, `<div id="root">${html}</div>`);
   page = applyMeta(page, meta, site);
+  if (route === "/proyectos") {
+    // La galería pide sus imágenes a la función de Netlify: se adelanta ese pedido
+    // (misma URL que el primer fetch de GalleryPage) y la conexión a Cloudinary.
+    page = page.replace(
+      "</title>",
+      `</title>
+  <link rel="preload" href="/.netlify/functions/galeria?" as="fetch" crossorigin />
+  <link rel="preconnect" href="https://res.cloudinary.com" />`,
+    );
+    if (gallery) {
+      page = page.replace("</title>", `</title>
+  <script>window.__GALLERY__=${scriptJson(gallery)}</script>`);
+    }
+  }
   const out = path.join(dist, file);
   fs.mkdirSync(path.dirname(out), { recursive: true });
   fs.writeFileSync(out, page);
