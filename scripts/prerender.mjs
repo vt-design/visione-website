@@ -70,7 +70,9 @@ async function writeRoute(route, file) {
 }
 
 for (const route of ROUTES) {
-  await writeRoute(route, route === "/" ? "index.html" : `${route.slice(1)}/index.html`);
+  // "/contacto" -> dist/contacto.html: Netlify la sirve en /contacto sin redirigir
+  // (con contacto/index.html redirige con 301 a /contacto/).
+  await writeRoute(route, route === "/" ? "index.html" : `${route.slice(1)}.html`);
 }
 // Netlify sirve dist/404.html (con estado 404) para cualquier ruta inexistente.
 await writeRoute("/404", "404.html");
