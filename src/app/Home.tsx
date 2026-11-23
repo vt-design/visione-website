@@ -182,7 +182,7 @@ function HeroSlideCopy({
 
 export default function HomePage() {
   usePageMeta({
-    title: "Visione Publicidad | Cartelería, Corpóreos y Revestimientos en CABA",
+    title: "Visione Publicidad | Cartelería y Revestimientos en CABA",
     description: "Fabricamos cartelería, letras corpóreas, marquesinas, revestimientos y gráfica corporativa en CABA. Diseño, fabricación e instalación en todo el país.",
     path: "/",
   });

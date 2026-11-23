@@ -174,6 +174,13 @@ export default function GalleryPage() {
             <p className="text-sm md:text-base text-white/80 max-w-2xl font-light leading-relaxed">
               En esta página mostramos los resultados de nuestros trabajos.
             </p>
+            <p className="text-sm md:text-base text-white/70 max-w-3xl font-light leading-relaxed">
+              Proyectos de revestimientos de frentes en ACM y chapa, letras y logos
+              corpóreos, marquesinas, carteles salientes, tótems con iluminación LED,
+              gráfica corporativa y vinilos que diseñamos, fabricamos e instalamos para
+              empresas, comercios y locales en CABA y en todo el país. Filtrá por tipo de
+              trabajo y tocá cualquier foto para verla ampliada.
+            </p>
           </div>
         </section>
 
