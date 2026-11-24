@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from "./app/App"
 import { FloatingWhatsApp } from "./app/components/FloatingWhatsApp"
+import { WebMcpTools } from "./app/webmcp/WebMcpTools"
 import './styles/index.css'
 
 const container = document.getElementById('root')!
@@ -11,6 +12,7 @@ const app = (
     <BrowserRouter>
       <App />
       <FloatingWhatsApp />
+      <WebMcpTools />
     </BrowserRouter>
   </React.StrictMode>
 )

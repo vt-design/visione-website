@@ -130,7 +130,8 @@ function ServicePageContent({
     title: seoTitle,
     description: seoDescription,
     path: `/soluciones/${servicio}`,
-    image: features.find((f) => f.image.startsWith("/"))?.image,
+    image: `/og/${servicio}.jpg`, // ver scripts/og-images.mjs
+    imageAlt: title,
   })
   const serviceImages = Array.from(
     new Set([heroImg, ...features.map((feature) => feature.image)]),

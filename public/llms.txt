@@ -21,3 +21,8 @@
 - WhatsApp: +54 9 11 4889 7180
 - Email: info@visione.com.ar
 - Horario: lunes a viernes, 10:00 a 17:00 hs
+
+## Optional
+
+- [Contenido completo del sitio](https://euphonious-biscochitos-aa2e71.netlify.app/llms-full.txt): el texto de todas las páginas en un solo archivo Markdown.
+- [Skill: pedir presupuesto](https://euphonious-biscochitos-aa2e71.netlify.app/skills/pedir-presupuesto/SKILL.md): cómo reunir los datos y enviar una consulta.

@@ -4,6 +4,7 @@ import { Footer } from "./components/Footer";
 import { Button } from "./components/ui/button";
 import { usePageMeta } from "./seo";
 import { LazyMap } from "./components/LazyMap";
+import { buildWhatsAppQuoteUrl } from "./contacto";
 import {
   Mail,
   MapPin,
@@ -51,14 +52,7 @@ export default function ContactPage() {
   const handleWhatsApp = (e: React.FormEvent) => {
     e.preventDefault();
     if (!nombre.trim()) return;
-    const msg = [
-      `Hola Visione, soy *${nombre.trim()}`,
-      `\nInterés: *${servicio}*`,
-      `\nUbicación: *${ubicacion}*`,
-      `\nEs iluminado?: *${iluminado}*`,
-      consulta.trim() ? `\n\nConsulta: ${consulta.trim()}` : "",
-    ].join("");
-    window.open(`https://wa.me/5491148897180?text=${encodeURIComponent(msg)}`, "_blank");
+    window.open(buildWhatsAppQuoteUrl({ nombre, ubicacion, servicio, iluminado, consulta }), "_blank");
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 4000);
   };

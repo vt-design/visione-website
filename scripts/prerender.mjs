@@ -4,6 +4,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { buildLlmsFull } from "./llms-full.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dist = path.join(root, "dist");
@@ -39,15 +40,25 @@ function applyMeta(html, meta, site) {
   html = setTag(html, /<meta property="og:description" content="[^"]*" \/>/, `<meta property="og:description" content="${escapeAttr(meta.description)}" />`);
   html = setTag(html, /<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${escapeAttr(meta.title)}" />`);
   html = setTag(html, /<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${escapeAttr(meta.description)}" />`);
-  if (image) {
-    html = setTag(html, /<meta property="og:image" content="[^"]*" \/>/, `<meta property="og:image" content="${escapeAttr(image)}" />`);
-    html = setTag(html, /<meta name="twitter:image" content="[^"]*" \/>/, `<meta name="twitter:image" content="${escapeAttr(image)}" />`);
+  // Imagen para redes: la de la página o la general (1200x630, scripts/og-images.mjs).
+  const ogImage = image ?? site + DEFAULT_IMAGE;
+  const ogAlt = meta.imageAlt ?? (meta.image ? meta.title : null);
+  for (const [re, tag] of [
+    [/<meta property="og:image" content="[^"]*" \/>/, `<meta property="og:image" content="${escapeAttr(ogImage)}" />`],
+    [/<meta property="og:image:secure_url" content="[^"]*" \/>/, `<meta property="og:image:secure_url" content="${escapeAttr(ogImage)}" />`],
+    [/<meta name="twitter:image" content="[^"]*" \/>/, `<meta name="twitter:image" content="${escapeAttr(ogImage)}" />`],
+  ]) html = setTag(html, re, tag);
+  if (ogAlt) {
+    html = setTag(html, /<meta property="og:image:alt" content="[^"]*" \/>/, `<meta property="og:image:alt" content="${escapeAttr(ogAlt)}" />`);
+    html = setTag(html, /<meta name="twitter:image:alt" content="[^"]*" \/>/, `<meta name="twitter:image:alt" content="${escapeAttr(ogAlt)}" />`);
   }
   if (url) {
     html = setTag(html, /<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${escapeAttr(url)}">`);
+    html = html.replace(/<link rel="alternate" hreflang="(es-AR|x-default)" href="[^"]*">/g, (_, lang) => `<link rel="alternate" hreflang="${lang}" href="${escapeAttr(url)}">`);
     html = setTag(html, /<meta property="og:url" content="[^"]*" \/>/, `<meta property="og:url" content="${escapeAttr(url)}" />`);
   } else {
     html = setTag(html, /\s*<link rel="canonical" href="[^"]*">/, "");
+    html = html.replace(/\s*<link rel="alternate" hreflang="[^"]*" href="[^"]*">/g, "");
     html = setTag(html, /\s*<meta property="og:url" content="[^"]*" \/>/, "");
   }
   if (meta.noindex) {
@@ -56,6 +67,7 @@ function applyMeta(html, meta, site) {
   return html;
 }
 
+const DEFAULT_IMAGE = "/og/visione.jpg";
 const site = (template.match(/<link rel="canonical" href="([^"]+?)\/?">/) || [])[1];
 if (!site) throw new Error("No se encontró el canonical base en index.html");
 
@@ -113,12 +125,24 @@ async function writeRoute(route, file) {
   fs.mkdirSync(path.dirname(out), { recursive: true });
   fs.writeFileSync(out, page);
   console.log(`prerender ${route.padEnd(28)} -> dist/${file}`);
+  return { html, meta };
 }
 
+const rendered = [];
 for (const route of ROUTES) {
   // "/contacto" -> dist/contacto.html: Netlify la sirve en /contacto sin redirigir
   // (con contacto/index.html redirige con 301 a /contacto/).
-  await writeRoute(route, route === "/" ? "index.html" : `${route.slice(1)}.html`);
+  const { html, meta } = await writeRoute(route, route === "/" ? "index.html" : `${route.slice(1)}.html`);
+  rendered.push({ url: site + route, title: meta?.title ?? route, description: meta?.description ?? "", html });
 }
 // Netlify sirve dist/404.html (con estado 404) para cualquier ruta inexistente.
 await writeRoute("/404", "404.html");
+
+// llms-full.txt: el índice de public/llms.txt seguido del texto completo de cada página.
+const llmsFull = buildLlmsFull({
+  site,
+  intro: fs.readFileSync(path.join(root, "public", "llms.txt"), "utf8"),
+  pages: rendered,
+});
+fs.writeFileSync(path.join(dist, "llms-full.txt"), llmsFull);
+console.log(`prerender llms-full.txt (${llmsFull.length} caracteres) -> dist/llms-full.txt`);
