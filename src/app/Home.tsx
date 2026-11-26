@@ -14,9 +14,20 @@ import { LazyImg, PLACEHOLDER, useNearViewport } from "./components/LazyImg";
 
 // ─── DATA & CONSTANTS ────────────────────────────────────────────────────────
 
-const HERO_SLIDES = [
+type HeroSlide = {
+  image: string;
+  title: string;
+  titleLines: { text: string; accent?: boolean }[][];
+  subtitle: string;
+  align?: "left" | "right";
+  focus?: string; // object-position de la imagen
+};
+
+const HERO_SLIDES: HeroSlide[] = [
   {
     image: "/images/imagen-hero-1-uca.webp",
+    // En celulares el logo UCA queda contra el borde derecho: correr el recorte hacia él.
+    focus: "78% center",
     title: "MÁS DE 25 AÑOS DE EXPERIENCIA",
     titleLines: [
       [{ text: "MÁS DE" }],
@@ -28,10 +39,14 @@ const HERO_SLIDES = [
   },
   {
     image: "/images/imagen-hero-2-ivess.webp",
-    title: "TRANSFORMAMOS ESPACIOS. POTENCIAMOS MARCAS",
+    // El cartel está a la izquierda de la foto: el texto va del lado derecho.
+    align: "right",
+    // En pantallas angostas el recorte centrado corta el logo: lo corremos hacia la izquierda.
+    focus: "18% center",
+    title: "TRANSFORMAMOS ESPACIOS POTENCIAMOS MARCAS",
     titleLines: [
       [{ text: "TRANS-" }],
-      [{ text: "FORMAMOS.", accent: true}],
+      [{ text: "FORMAMOS", accent: true}],
       [{ text: "POTENCIAMOS" }],
     ],
     subtitle:
@@ -135,14 +150,19 @@ const heroSrcSet = (src: string) =>
 function HeroSlideCopy({
   slide,
 }: {
-  slide: (typeof HERO_SLIDES)[number];
+  slide: HeroSlide;
 }) {
   const handleNav = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+  const right = slide.align === "right";
 
   return (
-    <>
+    <div
+      className={`flex w-full max-w-3xl flex-col ${
+        right ? "md:ml-auto md:items-end md:text-right" : ""
+      }`}
+    >
       <div className="h-[11rem] sm:h-[12rem] lg:h-[18rem] flex items-center">
         <h1 className="ff-display text-[clamp(1.4rem,6vw,4.5rem)] font-bold tracking-tight text-white uppercase leading-[1.05] font-audiowide">
           {slide.titleLines.map((line, lineIndex) => (
@@ -174,7 +194,7 @@ function HeroSlideCopy({
           <ArrowRight size={16} />
         </Link>
       </div>
-    </>
+    </div>
   );
 }
 
@@ -203,16 +223,33 @@ export default function HomePage() {
 
   useEffect(() => {
     // if (activePage !== "home") return;
+    let cancelled = false;
+    const decodeNext = (idx: number) => {
+      // Decode the next photo before its wipe starts: decoding a full-screen image
+      // on the first frame of the animation made the slide stutter on phones.
+      const img = new Image();
+      img.sizes = "100vw";
+      img.srcset = heroSrcSet(HERO_SLIDES[idx].image);
+      img.src = HERO_SLIDES[idx].image;
+      return img.decode().catch(() => undefined);
+    };
     const interval = setInterval(() => {
       const next = (heroIndexRef.current + 1) % HERO_SLIDES.length;
-      setIncoming({ idx: next, key: Date.now() });
-      setTimeout(() => {
-        heroIndexRef.current = next;
-        setHeroIndex(next);
-        setIncoming(null);
-      }, 850);
+      decodeNext(next).then(() => {
+        if (cancelled) return;
+        setIncoming({ idx: next, key: Date.now() });
+        setTimeout(() => {
+          if (cancelled) return;
+          heroIndexRef.current = next;
+          setHeroIndex(next);
+          setIncoming(null);
+        }, 850);
+      });
     }, 3800);
-    return () => clearInterval(interval);
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
   }, []);
 
   
@@ -262,6 +299,7 @@ export default function HomePage() {
               sizes="100vw"
               alt={HERO_SLIDES[heroIndex].title}
               {...{ fetchpriority: "high" } /* React 18: atributo en minúsculas */}
+              style={{ objectPosition: HERO_SLIDES[heroIndex].focus }}
               className="absolute inset-0 w-full h-full object-cover"
             />
             {/* Incoming layer — mounts off-screen right, slides in, then unmounts */}
@@ -272,17 +310,28 @@ export default function HomePage() {
                 srcSet={heroSrcSet(HERO_SLIDES[incoming.idx].image)}
                 sizes="100vw"
                 alt={HERO_SLIDES[incoming.idx].title}
+                style={{ objectPosition: HERO_SLIDES[incoming.idx].focus }}
                 className="absolute inset-0 w-full h-full object-cover hero-wipe-in"
               />
             )}
           </div>
 
           { /* acá iba el gradiente */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/10 to-transparent" />
+          {/* El gradiente sigue al lado del texto: se cruza al derecho en los slides con align "right". */}
+          <div
+            className={`absolute inset-0 bg-gradient-to-r from-black/45 via-black/10 to-transparent transition-opacity duration-700 ${
+              HERO_SLIDES[incoming?.idx ?? heroIndex].align === "right" ? "md:opacity-0" : ""
+            }`}
+          />
+          <div
+            className={`absolute inset-0 hidden bg-gradient-to-l from-black/45 via-black/10 to-transparent transition-opacity duration-700 md:block ${
+              HERO_SLIDES[incoming?.idx ?? heroIndex].align === "right" ? "opacity-100" : "opacity-0"
+            }`}
+          />
 
 
           <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full pt-16">
-            <div className="max-w-3xl space-y-6">
+            <div className="w-full">
               { /*<span className="inline-block px-3.5 py-1.5 bg-[#a5cd38]/20 border border-[#a5cd38]/50 text-[#a5cd38] text-xs font-mono font-bold tracking-widest uppercase rounded">
                 FABRICANTE INDUSTRIAL EN BUENOS AIRES
               </span> */}

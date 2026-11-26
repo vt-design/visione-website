@@ -167,7 +167,7 @@ function CompareSlider({
 
       {/* Labels */}
       <span
-        className="pointer-events-none absolute left-4 top-4 rounded-xs bg-black/55 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-white backdrop-blur-sm transition-opacity duration-300"
+        className="pointer-events-none absolute left-4 top-4 rounded-xs bg-black/65 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-white transition-opacity duration-300"
         style={{ opacity: pos < 12 ? 0 : 1 }}
       >
         {item.before.label}
@@ -179,10 +179,10 @@ function CompareSlider({
         {item.after.label}
       </span>
 
-      {/* Divider + handle */}
+      {/* Divider + handle: a full-width layer moved with transform (no layout per frame) */}
       <div
-        className={`pointer-events-none absolute inset-y-0 w-0 transition-[left] ${ease}`}
-        style={{ left: `${pos}%` }}
+        className={`pointer-events-none absolute inset-0 will-change-transform transition-transform ${ease}`}
+        style={{ transform: `translateX(${pos}%)` }}
       >
         <div className="absolute inset-y-0 -left-px w-0.5 bg-white shadow-[0_0_12px_rgba(0,0,0,0.45)]" />
         <div
@@ -194,7 +194,7 @@ function CompareSlider({
           aria-valuenow={Math.round(pos)}
           aria-valuetext={`${Math.round(pos)}% ${item.before.label.toLowerCase()}`}
           onKeyDown={onKeyDown}
-          className="pointer-events-auto absolute left-0 top-1/2 flex size-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white bg-black/45 text-white shadow-lg backdrop-blur-sm transition-colors duration-200 group-hover:bg-[#a5cd38] group-hover:text-[#1a1c18] focus-visible:bg-[#a5cd38] focus-visible:text-[#1a1c18] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#a5cd38] focus-visible:ring-offset-2"
+          className="pointer-events-auto absolute left-0 top-1/2 flex size-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white bg-black/55 text-white shadow-lg transition-colors duration-200 group-hover:bg-[#a5cd38] group-hover:text-[#1a1c18] focus-visible:bg-[#a5cd38] focus-visible:text-[#1a1c18] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#a5cd38] focus-visible:ring-offset-2"
         >
           <ChevronLeft size={16} strokeWidth={2.5} className="-mr-0.5" />
           <ChevronRight size={16} strokeWidth={2.5} className="-ml-0.5" />

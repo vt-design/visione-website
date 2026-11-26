@@ -18,9 +18,37 @@ export function Navbar({ activePage }: NavbarProps) {
   const [servDropOpen, setServDropOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const dropRef = useRef<HTMLDivElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+
+  // Secuencia del menú móvil (los tiempos coinciden con index.css):
+  //   abrir:  la barra se vuelve sólida (150ms) → recién ahí baja el panel.
+  //   cerrar: sube el panel (240ms) → recién ahí la barra vuelve al degradé.
+  // Con la página scrolleada la barra ya es oscura, así que el panel baja sin esperar.
+  const [barSolid, setBarSolid] = useState(false);
+  const [panelOpen, setPanelOpen] = useState(false);
+  const scrolledRef = useRef(false);
+  useEffect(() => {
+    if (menuOpen) {
+      setBarSolid(true);
+      const timer = setTimeout(() => setPanelOpen(true), scrolledRef.current ? 0 : 150);
+      return () => clearTimeout(timer);
+    }
+    setPanelOpen(false);
+    const timer = setTimeout(() => setBarSolid(false), 240);
+    return () => clearTimeout(timer);
+  }, [menuOpen]);
+
+  // Menú cerrado: fuera del foco y de los lectores de pantalla (sigue montado para poder animarse).
+  useEffect(() => {
+    if (mobileMenuRef.current) mobileMenuRef.current.inert = !panelOpen;
+  }, [panelOpen]);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 30);
+    const handleScroll = () => {
+      scrolledRef.current = window.scrollY > 30;
+      setScrolled(scrolledRef.current);
+    };
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -43,13 +71,21 @@ export function Navbar({ activePage }: NavbarProps) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-[padding,background-color,box-shadow] duration-300 ${
         scrolled
-          ? "bg-[#1a1c18]/95 backdrop-blur-md py-3 shadow-xl"
+          ? "bg-[#1a1c18]/95 md:backdrop-blur-md py-3 shadow-xl"
           : "bg-gradient-to-b from-black/80 via-black/40 to-transparent py-5"
-      }`}
+      } ${barSolid ? "max-md:shadow-none" : ""}`}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+      {/* Menú móvil abierto: una capa del mismo color que el panel aparece (con fundido)
+          sobre el degradé de la barra, así barra y menú se leen como un solo bloque. */}
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-0 bg-[#1a1c18] transition-opacity duration-150 ease-out md:hidden ${
+          barSolid ? "opacity-100" : "opacity-0"
+        }`}
+      />
+      <div className="relative max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
         {/* LOGO + COMPANY NAME (AUDIOWIDE) */}
         <Link
           to="/"
@@ -153,17 +189,25 @@ export function Navbar({ activePage }: NavbarProps) {
         {/* MOBILE MENU TOGGLE */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-white hover:text-[#a5cd38] p-2 transition-colors"
+          className="md:hidden relative size-[42px] text-white hover:text-[#a5cd38] transition-colors"
           aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
         >
-          {menuOpen ? <X size={26} /> : <Menu size={26} />}
+          {/* Los dos íconos se cruzan con un giro corto en vez de cambiar de golpe. */}
+          <Menu size={26} className={`mobile-menu-icon ${menuOpen ? "mobile-menu-icon-out" : ""}`} />
+          <X size={26} className={`mobile-menu-icon ${menuOpen ? "" : "mobile-menu-icon-out mobile-menu-icon-x"}`} />
         </button>
       </div>
 
       {/* MOBILE DROPDOWN MENU */}
-      {menuOpen && (
-        <div className="md:hidden bg-[#1a1c18] px-6 py-6 space-y-4 shadow-2xl animate-fadeIn">
+      {/* Siempre montado: el panel baja desde abajo del navbar con transform (fluido en celulares)
+          y el contenedor recorta lo que queda por encima del borde del header. */}
+      <div
+        className={`mobile-menu md:hidden ${panelOpen ? "mobile-menu-open" : ""}`}
+        ref={mobileMenuRef}
+      >
+        <div id="mobile-menu" className="mobile-menu-panel bg-[#1a1c18] border-t border-white/10 px-6 py-6 space-y-4 shadow-2xl">
           <Link
           to="/"
           onClick={handleNavClick}
@@ -218,7 +262,7 @@ export function Navbar({ activePage }: NavbarProps) {
             Contacto
           </Link>
         </div>
-      )}
+      </div>
     </header>
   );
 }

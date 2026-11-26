@@ -184,7 +184,7 @@ export default function GalleryPage() {
           </div>
         </section>
 
-        <div className="sticky top-16 z-40 border-b border-border/70 bg-background/90 backdrop-blur-xl">
+        <div className="sticky top-16 z-40 border-b border-border/70 bg-background/95 md:bg-background/90 md:backdrop-blur-xl">
           <nav
             aria-label="Filtrar trabajos"
             className="mx-auto flex max-w-7xl gap-1 overflow-x-auto px-6 py-3 md:justify-center md:px-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
@@ -294,7 +294,7 @@ export default function GalleryPage() {
 
         {selectedImg && (
           <div
-            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 md:p-12"
+            className="fixed inset-0 z-50 bg-black/90 md:backdrop-blur-md flex items-center justify-center p-4 md:p-12"
             onClick={() => setSelectedImg(null)}
           >
             <div

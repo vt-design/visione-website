@@ -402,10 +402,11 @@ const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2
 function tileScreenRect(origin: FlipOrigin): Rect {
     const svg = origin.tile.ownerSVGElement!;
     const svgRect = svg.getBoundingClientRect();
-    const s = svgRect.width / svg.viewBox.baseVal.width;
+    const viewBox = svg.viewBox.baseVal;
+    const s = svgRect.width / viewBox.width;
     return {
-        left: svgRect.left + origin.frame.x * s,
-        top: svgRect.top + origin.frame.y * s,
+        left: svgRect.left + (origin.frame.x - viewBox.x) * s,
+        top: svgRect.top + (origin.frame.y - viewBox.y) * s,
         width: origin.frame.width * s,
         height: origin.frame.height * s,
     };
@@ -572,20 +573,20 @@ export default function PhotoMosaicSection() {
     // The collage SVG scales with its width, which would scale the hover label too.
     // Expose the SVG's scale so the label can counter-scale to a constant on-screen size.
     useEffect(() => {
-        const svgs = mosaicRef.current?.querySelectorAll<SVGSVGElement>(".home-collage");
-        if (!svgs?.length) return;
+        const collages = mosaicRef.current?.querySelectorAll<HTMLElement>(".home-collage");
+        if (!collages?.length) return;
         const observer = new ResizeObserver((entries) => {
             for (const { target } of entries) {
-                const svg = target as SVGSVGElement;
-                const width = svg.getBoundingClientRect().width;
+                const collage = target as HTMLElement;
+                const width = collage.getBoundingClientRect().width;
                 if (!width) continue;
-                svg.style.setProperty(
+                collage.style.setProperty(
                     "--collage-label-scale",
-                    String(svg.viewBox.baseVal.width / width),
+                    String(Number(collage.dataset.viewboxWidth) / width),
                 );
             }
         });
-        svgs.forEach((svg) => observer.observe(svg));
+        collages.forEach((collage) => observer.observe(collage));
         return () => observer.disconnect();
     }, []);
 
@@ -683,33 +684,26 @@ export default function PhotoMosaicSection() {
 
     const activePhoto = selectedProject?.photos[activePhotoIndex];
 
+    // Each tile is its own small <svg> (viewBox = the tile's frame, in the same
+    // coordinates as the whole collage) absolutely placed in an HTML wrapper.
+    // The slide-in animates those HTML-level elements, which the browser can move
+    // on the GPU; animating <g> elements inside one big SVG repainted the whole
+    // collage every frame, which stuttered on phones.
     const renderMosaic = (variant: "desktop" | "mobile") => {
         const isMobile = variant === "mobile";
         const clipPrefix = `home-collage-${variant}-clip`;
+        const viewBoxWidth = isMobile ? 600 : 1600;
+        const viewBoxHeight = isMobile ? 1800 : 1000;
+        const pct = (value: number, total: number) => `${(value / total) * 100}%`;
 
         return (
-            <svg
+            <div
                 className={`home-collage home-collage-${variant}`}
-                viewBox={isMobile ? "0 0 600 1800" : "0 0 1600 1000"}
+                style={{ aspectRatio: `${viewBoxWidth} / ${viewBoxHeight}` }}
+                data-viewbox-width={viewBoxWidth}
                 role="group"
                 aria-label="Selección de obras realizadas"
-                preserveAspectRatio="xMidYMid meet"
             >
-                <defs>
-                    {MOSAIC_TILES.map((tile, index) => {
-                        const layout = isMobile ? MOBILE_MOSAIC_LAYOUT[index] : tile;
-                        return (
-                            <clipPath
-                                key={tile.id}
-                                id={`${clipPrefix}-${tile.id}`}
-                                clipPathUnits="userSpaceOnUse"
-                            >
-                                <polygon points={layout.points} />
-                            </clipPath>
-                        );
-                    })}
-                </defs>
-
                 {MOSAIC_TILES.map((tile, i) => {
                     const layout = isMobile ? MOBILE_MOSAIC_LAYOUT[i] : tile;
                     const clipPath = `url(#${clipPrefix}-${tile.id})`;
@@ -720,8 +714,29 @@ export default function PhotoMosaicSection() {
                     const labelY = vertices.reduce((sum, [, py]) => sum + py, 0) / vertices.length;
 
                     return (
-                        <g
+                        <svg
                             key={tile.id}
+                            className={`home-collage-layer home-collage-enter ${visible[i]
+                                ? "home-collage-visible"
+                                : i % 2 === 0
+                                    ? "home-collage-enter-left"
+                                    : "home-collage-enter-right"
+                                }`}
+                            viewBox={`${x} ${y} ${width} ${height}`}
+                            preserveAspectRatio="none"
+                            style={{
+                                left: pct(x, viewBoxWidth),
+                                top: pct(y, viewBoxHeight),
+                                width: pct(width, viewBoxWidth),
+                                height: pct(height, viewBoxHeight),
+                            }}
+                        >
+                        <defs>
+                            <clipPath id={`${clipPrefix}-${tile.id}`} clipPathUnits="userSpaceOnUse">
+                                <polygon points={layout.points} />
+                            </clipPath>
+                        </defs>
+                        <g
                             role="button"
                             tabIndex={0}
                             aria-label={`Abrir proyecto: ${tile.title}`}
@@ -732,12 +747,7 @@ export default function PhotoMosaicSection() {
                                     openProject(tile, event.currentTarget, layout);
                                 }
                             }}
-                            className={`home-collage-tile ${visible[i]
-                                ? "home-collage-visible"
-                                : i % 2 === 0
-                                    ? "home-collage-enter-left"
-                                    : "home-collage-enter-right"
-                                }`}
+                            className="home-collage-tile"
                         >
                             <g clipPath={clipPath}>
                                 <image
@@ -797,9 +807,10 @@ export default function PhotoMosaicSection() {
                                 <path d="M-13-4v-9h9 M4-13h9v9 M13 4v9H4 M-4 13h-9V4" />
                             </g> */}
                         </g>
+                        </svg>
                     );
                 })}
-            </svg>
+            </div>
         );
     };
 

@@ -27,8 +27,9 @@ function PhotoCarousel({ images, initialImage, title }: PhotoCarouselProps) {
     setCurrentIndex((index) => (index + 1) % images.length)
   }
 
+  // En celulares el marco es 5:4 (como la mayoría de las fotos) para no cortar los carteles a los costados.
   return (
-    <div className="group relative h-[350px] w-full overflow-hidden rounded-sm bg-[#1a1c18] md:h-[450px]">
+    <div className="group relative aspect-[5/4] w-full overflow-hidden rounded-sm bg-[#1a1c18] md:aspect-auto md:h-[450px]">
       <button
         type="button"
         onClick={showNext}
@@ -102,6 +103,7 @@ type ServiceData = {
   seoTitle: string
   seoDescription: string
   heroImg: string
+  heroFocus?: string // object-position del hero (en celulares se ve sólo una franja de la foto)
   features: {
     title: string
     description: string
@@ -125,7 +127,7 @@ function ServicePageContent({
   servicio: string
   data: ServiceData
 }) {
-  const { title, subtitle, heroImg, features, seoTitle, seoDescription } = data
+  const { title, subtitle, heroImg, heroFocus, features, seoTitle, seoDescription } = data
   usePageMeta({
     title: seoTitle,
     description: seoDescription,
@@ -151,6 +153,7 @@ function ServicePageContent({
             sizes="100vw"
             alt={title}
             {...{ fetchpriority: "high" } /* React 18: atributo en minúsculas */}
+            style={{ objectPosition: heroFocus }}
             className="absolute inset-0 w-full h-full object-cover opacity-35 filter brightness-90"
           />
           {/* <div className="absolute inset-0 bg-gradient-to-t from-[#1a1c18] via-[#1a1c18]/40 to-[#1a1c18]/70" /> */}
