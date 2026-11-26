@@ -7,6 +7,7 @@ import { X } from "lucide-react";
 import { motion } from "motion/react";
 import { usePageMeta } from "./seo";
 import { LazyImg } from "./components/LazyImg";
+import { useSearchParams } from "react-router-dom";
 
 interface GalleryImage {
   id: string;
@@ -66,8 +67,19 @@ export default function GalleryPage() {
 
   const [activeFilter, setActiveFilter] =  useState<GalleryCategory>("all");
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // "Ver más fotos" en cada servicio llega con ?filtro=<servicio>. Se aplica
+  // después de hidratar porque el HTML prerenderizado muestra "Todos".
+  const filterParam = searchParams.get("filtro");
+  useEffect(() => {
+    const match = FILTERS.find((f) => f.value === filterParam);
+    setActiveFilter(match ? match.value : "all");
+  }, [filterParam]);
+
   const selectFilter = (filter: GalleryCategory) => {
     setActiveFilter(filter)
+    setSearchParams(filter === "all" ? {} : { filtro: filter }, { replace: true });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 

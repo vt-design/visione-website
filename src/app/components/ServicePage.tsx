@@ -220,9 +220,9 @@ function ServicePageContent({
                     </p>
                     <div className="pt-2">
                       <Link
-                to="/proyectos"
-                onClick={() => window.scrollTo({ top: 0 })}
-                        className="group text-xs font-bold tracking-wider uppercase text-[#55701a] hover:text-[#1a1c18] inline-flex items-center gap-2 border-b-2 border-[#55701a] hover:border-[#1a1c18] pb-1 transition-colors cursor-pointer"
+                        to={`/proyectos?filtro=${servicio}`}
+                        onClick={() => window.scrollTo({ top: 0 })}
+                        className="group text-xs font-bold tracking-wider uppercase text-[#637f1d] hover:text-[#1a1c18] inline-flex items-center gap-2 border-b-2 border-[#637f1d] hover:border-[#1a1c18] pb-1 transition-colors cursor-pointer"
                       >
                         <span>Ver más fotos</span>
                         <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
