@@ -4,7 +4,7 @@
     "subtitle": "Diseño, materiales e iluminación para darle identidad a cada espacio.",
     "seoTitle": "Cartelería y Letras Corpóreas en CABA | Visione Publicidad",
     "seoDescription": "Fabricamos letras corpóreas, marquesinas, carteles salientes y tótems con iluminación LED. Diseño, fabricación e instalación en CABA y todo el país.",
-    "heroImg": "https://images.unsplash.com/photo-1780385187604-4663a1d7c6e6?w=1920&h=1080&fit=crop&auto=format",
+    "heroImg": "/images/soluciones/carteleria/carteleria-foto-principal.webp",
     "features": [
       {
         "title": "LETRAS Y LOGOS CORPOREOS",
@@ -67,19 +67,28 @@
       {
         "title": "Rotulación & Ploteo de Flotas",
         "description": "Transformamos vehículos corporativos e industriales en vehículos publicitarios con vinilos autoadhesivos de alta durabilidad y resistencia UV.",
-        "image": "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?w=900&h=700&fit=crop&auto=format",
+        "image": "/images/soluciones/grafica/foto-grafica-1.webp",
+        "images": [
+          "/images/soluciones/grafica/foto-grafica-1.webp"
+        ],
         "tag": "FLOTAS & VEHÍCULOS"
       },
       {
         "title": "Vinilos Decorativos & Esmerilados",
         "description": "Privacidad y diseño para oficinas, salas de reunión y vidrieras comerciales mediante vinilos de corte, esmerilados y microperforados.",
-        "image": "https://images.unsplash.com/photo-1608126841830-53832c4b326f?w=900&h=700&fit=crop&auto=format",
+        "image": "/images/soluciones/grafica/foto-grafica-2.webp",
+        "images": [
+          "/images/soluciones/grafica/foto-grafica-2.webp"
+        ],
         "tag": "OFICINAS & VIDRIERAS"
       },
       {
         "title": "Impresión Gigantografía Gran Formato",
         "description": "Lonas de alta resistencia para frentes de obra, banners publicitarios y vallas con tintas ecológicas de secado UV.",
-        "image": "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=900&h=700&fit=crop&auto=format",
+        "image": "/images/soluciones/grafica/foto-grafica-3.webp",
+        "images": [
+          "/images/soluciones/grafica/foto-grafica-3.webp"
+        ],
         "tag": "IMPRESIÓN GIGANTE"
       }
     ]

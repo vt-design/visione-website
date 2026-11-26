@@ -27,7 +27,7 @@ const HERO_SLIDES = [
       "Soluciones combinando conocimiento, calidad y compromiso en cada proyecto.",
   },
   {
-    image: "/images/imagen-hero-2-cronica.webp",
+    image: "/images/imagen-hero-2-ivess.webp",
     title: "TRANSFORMAMOS ESPACIOS. POTENCIAMOS MARCAS",
     titleLines: [
       [{ text: "TRANS-" }],
