@@ -63,14 +63,15 @@
     "subtitle": "Soluciones de impresión digital de alta fidelidad, vinilos decorativos y rotulación de vehículos.",
     "seoTitle": "Gráfica Corporativa y Vinilos | Visione Publicidad",
     "seoDescription": "Impresión digital de alta calidad, vinilos decorativos, rotulación de vehículos y gráfica corporativa para empresas y locales. Pedí tu presupuesto.",
-    "heroImg": "https://images.unsplash.com/photo-1608126841830-53832c4b326f?w=1920&h=1080&fit=crop&auto=format",
+    "heroImg": "/images/soluciones/grafica/grafica-foto-principal.webp",
     "features": [
       {
         "title": "Rotulación & Ploteo de Flotas",
         "description": "Transformamos vehículos corporativos e industriales en vehículos publicitarios con vinilos autoadhesivos de alta durabilidad y resistencia UV.",
         "image": "/images/soluciones/grafica/foto-grafica-1.webp",
         "images": [
-          "/images/soluciones/grafica/foto-grafica-1.webp"
+          "/images/soluciones/grafica/foto-grafica-1.webp",
+          "/images/soluciones/grafica/foto-grafica-6.webp"
         ],
         "tag": "FLOTAS & VEHÍCULOS"
       },
@@ -79,7 +80,9 @@
         "description": "Privacidad y diseño para oficinas, salas de reunión y vidrieras comerciales mediante vinilos de corte, esmerilados y microperforados.",
         "image": "/images/soluciones/grafica/foto-grafica-2.webp",
         "images": [
-          "/images/soluciones/grafica/foto-grafica-2.webp"
+          "/images/soluciones/grafica/foto-grafica-2.webp",
+          "/images/soluciones/grafica/foto-grafica-4.webp",
+          "/images/soluciones/grafica/foto-grafica-8.webp"
         ],
         "tag": "OFICINAS & VIDRIERAS"
       },
@@ -88,7 +91,9 @@
         "description": "Lonas de alta resistencia para frentes de obra, banners publicitarios y vallas con tintas ecológicas de secado UV.",
         "image": "/images/soluciones/grafica/foto-grafica-3.webp",
         "images": [
-          "/images/soluciones/grafica/foto-grafica-3.webp"
+          "/images/soluciones/grafica/foto-grafica-3.webp",
+          "/images/soluciones/grafica/foto-grafica-5.webp",
+          "/images/soluciones/grafica/foto-grafica-7.webp"
         ],
         "tag": "IMPRESIÓN GIGANTE"
       }
