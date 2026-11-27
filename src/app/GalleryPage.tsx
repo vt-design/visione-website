@@ -340,6 +340,7 @@ export default function GalleryPage() {
                   height={item.height}
                   className="block h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-focus-visible:scale-105"
                   eager={index < 4}
+                  fade
                   {...(index < 2 ? { fetchpriority: "high" } : {})}
                   draggable={false}
                 />

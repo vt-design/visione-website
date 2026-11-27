@@ -40,17 +40,38 @@ export function LazyImg({
   src,
   srcSet,
   eager = false,
+  fade = false,
+  className,
+  onLoad,
   ...props
 }: ImgHTMLAttributes<HTMLImageElement> & {
   /** Cargar de inmediato (por ejemplo, la primera imagen visible). */
   eager?: boolean;
+  /** Aparecer con un fundido al terminar de cargar (no aplica a las `eager`,
+   *  que ya vienen visibles en el HTML prerenderizado). */
+  fade?: boolean;
 }) {
   const ref = useRef<HTMLImageElement>(null);
   const near = useNearViewport(ref) || eager;
+  const [loaded, setLoaded] = useState(false);
+  const fading = fade && !eager;
+
+  // Si la imagen ya estaba en caché, puede terminar antes de que React escuche onLoad.
+  useEffect(() => {
+    const img = ref.current;
+    if (fading && near && img?.complete && img.naturalWidth > 1) setLoaded(true);
+  }, [fading, near]);
+
   return (
     <img
       ref={ref}
       {...props}
+      className={fading ? `${className ?? ""} lazy-fade` : className}
+      data-loaded={fading && loaded ? "" : undefined}
+      onLoad={(event) => {
+        if (near && event.currentTarget.naturalWidth > 1) setLoaded(true);
+        onLoad?.(event);
+      }}
       src={near ? src : PLACEHOLDER}
       srcSet={near ? srcSet : undefined}
       decoding="async"
