@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Button } from "./components/ui/button";
@@ -8,13 +8,38 @@ import { motion } from "motion/react";
 import { usePageMeta } from "./seo";
 import { LazyImg } from "./components/LazyImg";
 import { useSearchParams } from "react-router-dom";
+import { LAYOUT_COLUMNS, layoutMosaic, type Placement } from "./galleryMosaic";
+
+// Variables CSS con la ubicación de una foto en cada tamaño de pantalla
+// (index.css elige cuál usar según el ancho).
+function placementStyle(layouts: Placement[][], index: number) {
+  const style: Record<string, number> = {};
+  LAYOUT_COLUMNS.forEach((columns, layout) => {
+    const p = layouts[layout][index];
+    style[`--c${columns}`] = p.col;
+    style[`--w${columns}`] = p.cols;
+    style[`--r${columns}`] = p.row;
+    style[`--h${columns}`] = p.rows;
+  });
+  return style as React.CSSProperties;
+}
+
+const mosaicLayouts = (ratios: number[]) =>
+  LAYOUT_COLUMNS.map((columns) => layoutMosaic(ratios, columns));
+const SKELETON_LAYOUTS = mosaicLayouts([1.5, 0.75, 1.33, 1, 1.78, 0.8, 1.5, 1.25, 0.67, 1.5]);
 
 interface GalleryImage {
   id: string;
   url: string;
   alt: string;
   tags: string[];
+  width?: number;
+  height?: number;
 }
+
+// Relación de aspecto real de la foto (si falta, una apaisada típica).
+const aspectOf = (image: GalleryImage) =>
+  image.width && image.height ? image.width / image.height : 1.5;
 
 interface GalleryResponse {
   images: GalleryImage[];
@@ -31,7 +56,6 @@ function getInitialGallery(): GalleryResponse | null {
   return data && Array.isArray(data.images) ? data : null;
 }
 
-const TILES_PER_CYCLE = 10;
 
 // Cloudinary: pedir la imagen redimensionada y en el mejor formato (AVIF/WebP)
 // en lugar del original.
@@ -39,6 +63,22 @@ const cld = (url: string, width: number) =>
   url.replace("/image/upload/", `/image/upload/f_auto,q_auto,c_limit,w_${width}/`);
 const tileSrcSet = (url: string) =>
   [400, 600, 800, 1200].map((w) => `${cld(url, w)} ${w}w`).join(", ");
+const LIGHTBOX_WIDTH = 1600;
+const lightboxSrc = (url: string) => cld(url, LIGHTBOX_WIDTH);
+
+// Pide la versión grande apenas el visitante apunta a una foto, para que al
+// abrirla ya esté (o casi) descargada.
+const prefetched = new Set<string>();
+function prefetchLightbox(url: string) {
+  const src = lightboxSrc(url);
+  if (prefetched.has(src)) return;
+  prefetched.add(src);
+  const img = new Image();
+  img.decoding = "async";
+  img.src = src;
+}
+
+type Selected = { image: GalleryImage; previewSrc: string };
 
 const FILTERS = [
   { label: "Todos los trabajos", value: "all" },
@@ -57,7 +97,8 @@ export default function GalleryPage() {
   const [initialGallery] = useState(getInitialGallery);
   const [images, setImages] = useState<GalleryImage[]>(initialGallery?.images ?? []);
   const [nextCursor, setNextCursor] = useState<string | null>(initialGallery?.nextCursor ?? null);
-  const [selectedImg, setSelectedImg] = useState<string | null>(null);
+  const [selected, setSelected] = useState<Selected | null>(null);
+  const [fullLoaded, setFullLoaded] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [hasMore, setHasMore] = useState(initialGallery ? Boolean(initialGallery.nextCursor) : true);
@@ -76,6 +117,33 @@ export default function GalleryPage() {
     const match = FILTERS.find((f) => f.value === filterParam);
     setActiveFilter(match ? match.value : "all");
   }, [filterParam]);
+
+  const openImage = (image: GalleryImage, tile: HTMLElement) => {
+    // Se muestra al instante la miniatura que ya está en pantalla y encima
+    // aparece la versión grande cuando termina de llegar.
+    const thumb = tile.querySelector("img");
+    const previewSrc = thumb?.currentSrc && !thumb.currentSrc.startsWith("data:")
+      ? thumb.currentSrc
+      : cld(image.url, 800);
+    prefetchLightbox(image.url);
+    setFullLoaded(false);
+    setSelected({ image, previewSrc });
+  };
+
+  useEffect(() => {
+    if (!selected) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelected(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [selected]);
+
+  const visibleImages = useMemo(
+    () => images.filter((item) => activeFilter === "all" || item.tags.includes(activeFilter)),
+    [images, activeFilter],
+  );
+  const layouts = useMemo(() => mosaicLayouts(visibleImages.map(aspectOf)), [visibleImages]);
 
   const selectFilter = (filter: GalleryCategory) => {
     setActiveFilter(filter)
@@ -230,41 +298,50 @@ export default function GalleryPage() {
 
 
         <section className="py-12 max-w-7xl mx-auto px-6 md:px-12">
+          <div className="gallery-mosaic-wrap">
           <div className="gallery-mosaic">
-            {/* Mientras llegan las imágenes, se reservan los mismos casilleros
+            {/* Mientras llegan las imágenes, se reservan casilleros parecidos
                 para que el resto de la página no salte al cargarlas. */}
             {images.length === 0 && hasMore && !error &&
-              Array.from({ length: TILES_PER_CYCLE }, (_, index) => (
+              SKELETON_LAYOUTS[0].map((_, index) => (
                 <div
                   key={index}
                   aria-hidden="true"
-                  className={`gallery-mosaic-tile gallery-mosaic-t${index + 1} animate-pulse bg-black/5`}
-                  style={{ "--gallery-cycle": 0 } as React.CSSProperties}
+                  className="gallery-mosaic-tile animate-pulse bg-black/5"
+                  style={placementStyle(SKELETON_LAYOUTS, index)}
                 />
               ))}
-            {images.filter((item, index) => activeFilter.toLowerCase() === "all" ? true : item.tags.includes(activeFilter.toLowerCase()) ).map((item, index) => (
-              <Button
+            {visibleImages.map((item, index) => {
+              const featured = layouts.some((layout) => layout[index].cols > 1);
+              return (
+              <button
                 key={item.id}
-                variant="ghost"
+                type="button"
                 aria-label={`Ampliar obra ${index + 1}`}
-                onClick={() => setSelectedImg(cld(item.url, 1800))}
-                className={`gallery-mosaic-tile gallery-mosaic-t${(index % TILES_PER_CYCLE) + 1} group block h-auto w-full min-w-0 overflow-hidden rounded-none p-0 bg-transparent hover:bg-transparent`}
-                style={{
-                  "--gallery-cycle": Math.floor(index / TILES_PER_CYCLE),
-                } as React.CSSProperties}
+                onPointerEnter={() => prefetchLightbox(item.url)}
+                onPointerDown={() => prefetchLightbox(item.url)}
+                onClick={(event) => openImage(item, event.currentTarget)}
+                className="gallery-mosaic-tile group relative block cursor-pointer overflow-hidden bg-black/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#a5cd38] focus-visible:ring-offset-2"
+                style={placementStyle(layouts, index)}
               >
                 <LazyImg
                   src={cld(item.url, 800)}
                   srcSet={tileSrcSet(item.url)}
-                  sizes="(max-width: 767px) 50vw, (max-width: 1023px) 38vw, 34vw"
+                  sizes={featured
+                    ? "(max-width: 767px) 100vw, (max-width: 1023px) 66vw, 50vw"
+                    : "(max-width: 767px) 50vw, (max-width: 1023px) 33vw, 25vw"}
                   alt={item.alt || `Obra ${index + 1}`}
-                  className="block w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-focus-visible:scale-105"
-                  eager={index < 2}
+                  width={item.width}
+                  height={item.height}
+                  className="block h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-focus-visible:scale-105"
+                  eager={index < 4}
                   {...(index < 2 ? { fetchpriority: "high" } : {})}
                   draggable={false}
                 />
-              </Button>
-            ))}
+              </button>
+              );
+            })}
+          </div>
           </div>
 
           <div
@@ -304,30 +381,45 @@ export default function GalleryPage() {
           )}
         </section>
 
-        {selectedImg && (
+        {selected && (
           <div
-            className="fixed inset-0 z-50 bg-black/90 md:backdrop-blur-md flex items-center justify-center p-4 md:p-12"
-            onClick={() => setSelectedImg(null)}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Vista ampliada"
+            className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 md:p-12"
+            onClick={() => setSelected(null)}
           >
             <div
-              className="relative max-w-5xl w-full bg-[#1a1c18] border border-white/20 rounded-sm overflow-hidden"
+              className="relative overflow-hidden rounded-sm bg-black shadow-2xl"
+              style={{
+                aspectRatio: aspectOf(selected.image),
+                // Lo más grande posible sin pasar el 100% del ancho ni el 85% del alto.
+                width: `min(100%, ${aspectOf(selected.image) * 85}vh)`,
+              }}
               onClick={(event) => event.stopPropagation()}
             >
+              <img
+                src={selected.previewSrc}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 h-full w-full object-contain"
+              />
+              <img
+                key={selected.image.id}
+                src={lightboxSrc(selected.image.url)}
+                alt={selected.image.alt || "Vista ampliada"}
+                onLoad={() => setFullLoaded(true)}
+                className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-300 ${fullLoaded ? "opacity-100" : "opacity-0"}`}
+              />
               <Button
                 variant="ghost"
                 size="icon"
                 aria-label="Cerrar vista ampliada"
-                onClick={() => setSelectedImg(null)}
-                className="absolute top-4 right-4 z-10 bg-foreground/60 hover:bg-primary hover:text-primary-foreground text-white rounded-full transition-colors"
+                onClick={() => setSelected(null)}
+                className="absolute top-3 right-3 z-10 bg-black/55 hover:bg-primary hover:text-primary-foreground text-white rounded-full transition-colors"
               >
                 <X size={20} />
               </Button>
-
-              <img
-                src={selectedImg}
-                alt="Vista ampliada"
-                className="w-full max-h-[82vh] object-contain bg-black"
-              />
             </div>
           </div>
         )}

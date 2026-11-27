@@ -42,6 +42,8 @@ exports.handler = async (event) => {
         images: result.resources.map((image) => ({
           id: image.public_id,
           url: image.secure_url,
+          width: image.width,
+          height: image.height,
           alt: image.context?.custom?.alt || image.public_id,
           tags: image.tags || []
         })),
