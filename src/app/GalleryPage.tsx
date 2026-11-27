@@ -105,6 +105,10 @@ export default function GalleryPage() {
 
   const loadMoreRef = useRef<HTMLDivElement>(null);
   const loadingRef = useRef(false);
+  // Sube cada vez que termina una carga, para volver a mirar si el final de
+  // la galería está a la vista (si lo estaba mientras otra carga seguía en
+  // curso, el pedido se descartó y el observador no vuelve a avisar solo).
+  const [loadsFinished, setLoadsFinished] = useState(0);
 
   const [activeFilter, setActiveFilter] =  useState<GalleryCategory>("all");
 
@@ -207,6 +211,7 @@ export default function GalleryPage() {
       );
     } finally {
       loadingRef.current = false;
+      setLoadsFinished((count) => count + 1);
       setLoading(false);
     }
   }
@@ -237,7 +242,7 @@ export default function GalleryPage() {
     observer.observe(sentinel);
 
     return () => observer.disconnect();
-  }, [images.length, nextCursor, hasMore, loading]);
+  }, [images.length, nextCursor, hasMore, loading, loadsFinished]);
 
   return (
     <div className="min-h-screen bg-[#F8F9FA] text-[#1a1c18] ff-body flex flex-col justify-between">
