@@ -80,6 +80,26 @@ function prefetchLightbox(url: string) {
 
 type Selected = { image: GalleryImage; previewSrc: string };
 
+type FeedStatus = "idle" | "loading" | "refreshing" | "error";
+type Feed = {
+  images: GalleryImage[];
+  cursor: string | null; // posición para pedir la página siguiente
+  done: boolean; // ya llegaron todas las fotos de este filtro
+  status: FeedStatus;
+};
+
+const EMPTY_FEED: Feed = { images: [], cursor: null, done: false, status: "idle" };
+
+// "Todos" arranca con las fotos incluidas en el HTML prerenderizado.
+function initialFeeds(): Record<GalleryCategory, Feed> {
+  const initial = getInitialGallery();
+  const feeds = Object.fromEntries(FILTERS.map((f) => [f.value, EMPTY_FEED])) as Record<GalleryCategory, Feed>;
+  if (initial) {
+    feeds.all = { images: initial.images, cursor: initial.nextCursor, done: !initial.nextCursor, status: "idle" };
+  }
+  return feeds;
+}
+
 const FILTERS = [
   { label: "Todos los trabajos", value: "all" },
   { label: "Revestimientos", value: "revestimientos" },
@@ -94,21 +114,16 @@ export default function GalleryPage() {
     path: "/proyectos",
   });
 
-  const [initialGallery] = useState(getInitialGallery);
-  const [images, setImages] = useState<GalleryImage[]>(initialGallery?.images ?? []);
-  const [nextCursor, setNextCursor] = useState<string | null>(initialGallery?.nextCursor ?? null);
+  // Una lista por filtro, pedida a Cloudinary con su etiqueta y paginada con
+  // su propio cursor: cambiar de filtro nunca mezcla fotos ni cursores.
+  const [feeds, setFeeds] = useState(initialFeeds);
+  const feedsRef = useRef(feeds);
+  feedsRef.current = feeds;
+  const inFlight = useRef(new Set<GalleryCategory>());
   const [selected, setSelected] = useState<Selected | null>(null);
   const [fullLoaded, setFullLoaded] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [hasMore, setHasMore] = useState(initialGallery ? Boolean(initialGallery.nextCursor) : true);
 
   const loadMoreRef = useRef<HTMLDivElement>(null);
-  const loadingRef = useRef(false);
-  // Sube cada vez que termina una carga, para volver a mirar si el final de
-  // la galería está a la vista (si lo estaba mientras otra carga seguía en
-  // curso, el pedido se descartó y el observador no vuelve a avisar solo).
-  const [loadsFinished, setLoadsFinished] = useState(0);
 
   const [activeFilter, setActiveFilter] =  useState<GalleryCategory>("all");
 
@@ -143,10 +158,8 @@ export default function GalleryPage() {
     return () => window.removeEventListener("keydown", onKey);
   }, [selected]);
 
-  const visibleImages = useMemo(
-    () => images.filter((item) => activeFilter === "all" || item.tags.includes(activeFilter)),
-    [images, activeFilter],
-  );
+  const feed = feeds[activeFilter];
+  const visibleImages = feed.images;
   const layouts = useMemo(() => mosaicLayouts(visibleImages.map(aspectOf)), [visibleImages]);
 
   const selectFilter = (filter: GalleryCategory) => {
@@ -156,93 +169,73 @@ export default function GalleryPage() {
   };
 
 
-  async function loadImages(cursor?: string | null) {
-    // Evita solicitudes duplicadas simultáneas.
-    if (loadingRef.current) return;
-    if (cursor === null && images.length > 0) return;
+  // Pide la página siguiente de un filtro (o la primera de nuevo, con `reset`).
+  // La respuesta siempre se guarda en la lista de ese filtro, aunque mientras
+  // tanto el visitante haya cambiado a otro.
+  async function loadPage(filter: GalleryCategory, reset = false) {
+    if (inFlight.current.has(filter)) return;
+    const current = feedsRef.current[filter];
+    if (!reset && current.done) return;
+    inFlight.current.add(filter);
 
-    loadingRef.current = true;
-    // El refresco inicial de imágenes ya mostradas no muestra "Cargando…"
-    // (evita que el pie de página salte).
-    setLoading(Boolean(cursor) || images.length === 0);
-    setError(null);
+    const status: FeedStatus = reset && current.images.length > 0 ? "refreshing" : "loading";
+    updateFeed(filter, (f) => ({ ...f, status }));
 
     try {
       const params = new URLSearchParams();
+      if (filter !== "all") params.set("tag", filter);
+      if (!reset && current.cursor) params.set("cursor", current.cursor);
 
-      if (cursor) {
-        params.set("cursor", cursor);
-      }
-
-      if (activeFilter !== "all") {
-        params.set('tag', activeFilter)
-      }
-
-      const response = await fetch(
-        `/.netlify/functions/galeria?${params.toString()}`
-      );
-
-      if (!response.ok) {
-        throw new Error("No se pudieron cargar las imágenes.");
-      }
-
+      const response = await fetch(`/.netlify/functions/galeria?${params.toString()}`);
+      if (!response.ok) throw new Error("No se pudieron cargar las imágenes.");
       const data: GalleryResponse = await response.json();
-      setImages((previous) => {
-        // La primera solicitud reemplaza las imágenes;
-        // las siguientes agregan otras 10.
-        if (!cursor) return data.images;
 
-        // Evita duplicados si la API devuelve algún recurso repetido.
-        const existingIds = new Set(previous.map((image) => image.id));
-        const newImages = data.images.filter(
-          (image) => !existingIds.has(image.id)
-        );
-
-        return [...previous, ...newImages];
+      updateFeed(filter, (f) => {
+        const base = reset ? [] : f.images;
+        const seen = new Set(base.map((image) => image.id));
+        return {
+          images: [...base, ...data.images.filter((image) => !seen.has(image.id))],
+          cursor: data.nextCursor,
+          done: !data.nextCursor,
+          status: "idle",
+        };
       });
-
-      setNextCursor(data.nextCursor);
-      setHasMore(Boolean(data.nextCursor));
-    } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : "Ocurrió un error inesperado."
-      );
+    } catch {
+      updateFeed(filter, (f) => ({ ...f, status: "error" }));
     } finally {
-      loadingRef.current = false;
-      setLoadsFinished((count) => count + 1);
-      setLoading(false);
+      inFlight.current.delete(filter);
     }
   }
 
-  // Carga las primeras 10 imágenes al abrir la página.
+  function updateFeed(filter: GalleryCategory, change: (feed: Feed) => Feed) {
+    setFeeds((previous) => ({ ...previous, [filter]: change(previous[filter]) }));
+  }
+
+  // Al abrir la página se vuelven a pedir las primeras fotos de "Todos", así
+  // aparece lo último que se subió a Cloudinary sin tener que volver a publicar.
   useEffect(() => {
-    void loadImages();
+    void loadPage("all", true);
   }, []);
 
-  // Carga otras 10 cuando el visitante se acerca al final.
+  // Carga la página siguiente del filtro activo cuando el final de la galería
+  // está cerca. Se vuelve a armar cada vez que cambia el filtro o termina una
+  // carga, así nunca queda esperando un aviso que ya pasó.
   useEffect(() => {
     const sentinel = loadMoreRef.current;
+    if (!sentinel || feed.done || feed.status !== "idle") return;
 
-    if (!sentinel || !images.length || !hasMore || loading) {
-      return;
-    }
-
+    const filter = activeFilter;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return;
-
         observer.disconnect();
-        void loadImages(nextCursor);
+        void loadPage(filter);
       },
-      { rootMargin: "600px" }
+      { rootMargin: "600px" },
     );
-
     observer.observe(sentinel);
-
     return () => observer.disconnect();
-  }, [images.length, nextCursor, hasMore, loading, loadsFinished]);
+  }, [activeFilter, feed.images.length, feed.done, feed.status]);
 
   return (
     <div className="min-h-screen bg-[#F8F9FA] text-[#1a1c18] ff-body flex flex-col justify-between">
@@ -307,7 +300,7 @@ export default function GalleryPage() {
           <div className="gallery-mosaic">
             {/* Mientras llegan las imágenes, se reservan casilleros parecidos
                 para que el resto de la página no salte al cargarlas. */}
-            {images.length === 0 && hasMore && !error &&
+            {visibleImages.length === 0 && !feed.done && feed.status !== "error" &&
               SKELETON_LAYOUTS[0].map((_, index) => (
                 <div
                   key={index}
@@ -356,31 +349,31 @@ export default function GalleryPage() {
             aria-hidden="true"
           />
 
-          {loading && images.length > 0 && (
+          {feed.status === "loading" && visibleImages.length > 0 && (
             <p className="py-6 text-center text-sm text-gray-500">
               Cargando imágenes...
             </p>
           )}
 
-          {error && (
+          {feed.status === "error" && (
             <div className="py-6 text-center" role="alert">
-              <p className="text-red-600 mb-3">Error al cargas las imágenes</p>
+              <p className="text-red-600 mb-3">Error al cargar las imágenes</p>
               <Button
                 variant="ghost"
-                onClick={() => void loadImages(nextCursor)}
+                onClick={() => void loadPage(activeFilter)}
               >
                 Reintentar
               </Button>
             </div>
           )}
 
-          {!loading && images.length === 0 && !error && (
+          {feed.done && visibleImages.length === 0 && (
             <p className="py-6 text-center text-gray-500">
               Todavía no hay imágenes disponibles.
             </p>
           )}
 
-          {!hasMore && images.length > 0 && (
+          {feed.done && visibleImages.length > 0 && (
             <p className="py-6 text-center text-sm text-gray-500">
               Ya viste todas las imágenes.
             </p>
